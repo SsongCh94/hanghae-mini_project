@@ -41,39 +41,39 @@ export const ButtonSmall = styled.button`
     padding : 5px 10px;
     width: 40px;
     height: 15px;
-    color : #${COLOR_4};
-    border : 1px solid #${COLOR_4};
-    background-color : gray;
+    color : #${COLOR_THEME.COLOR_4};
+    border : 1px solid #${COLOR_THEME.COLOR_4};
+    background-color : #${COLOR_THEME.COLOR_1};
     &:hover{
-        color : #${COLOR_4};
-        border : 1px solid #${COLOR_4};
-        background-color : #${COLOR_1};
+        color : #${COLOR_THEME.COLOR_3};
+        border : 1px solid #${COLOR_THEME.COLOR_3};
+        background-color : #${COLOR_THEME.COLOR_2};
     }
 `;
 export const ButtonMiddle = styled.button`
     padding : 5px 10px;
     width: 40px;
     height: 15px;
-    color : #${COLOR_4};
-    border : 1px solid #${COLOR_4};
-    background-color : gray;
+    color : #${COLOR_THEME.COLOR_4};
+    border : 1px solid #${COLOR_THEME.COLOR_4};
+    background-color : #${COLOR_THEME.COLOR_1};
     &:hover{
-        color : #${COLOR_4};
-        border : 1px solid #${COLOR_4};
-        background-color : #${COLOR_1};
+        color : #${COLOR_THEME.COLOR_3};
+        border : 1px solid #${COLOR_THEME.COLOR_3};
+        background-color : #${COLOR_THEME.COLOR_2};
     }
 `;
 export const ButtonLarge = styled.button`
     padding : 5px 10px;
     width: 40px;
     height: 15px;
-    color : #${COLOR_4};
-    border : 1px solid #${COLOR_4};
-    background-color : gray;
+    color : #${COLOR_THEME.COLOR_4};
+    border : 1px solid #${COLOR_THEME.COLOR_4};
+    background-color : #${COLOR_THEME.COLOR_1};
     &:hover{
-        color : #${COLOR_4};
-        border : 1px solid #${COLOR_4};
-        background-color : #${COLOR_1};
+        color : #${COLOR_THEME.COLOR_3};
+        border : 1px solid #${COLOR_THEME.COLOR_3};
+        background-color : #${COLOR_THEME.COLOR_2};
     }
 `;
 
