@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { PageContainer } from '../variables/styleStore'
 
-function Mypage() {
+function UserMypage() {
     return (
         <PageContainer>
             page: Mypage
@@ -10,4 +10,4 @@ function Mypage() {
     )
 }
 
-export default Mypage
+export default UserMypage
