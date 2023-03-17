@@ -1,6 +1,5 @@
 import React from 'react'
 import { PageContainer } from '../variables/styleStore';
-import { MAINPAGE_CONTENTS_WIDTH } from '../variables/uiVariables';
 
 function BbsDetail() {
   return (

@@ -29,8 +29,8 @@ export const FooterContainer = styled.div`
 export const Button = styled.button`
     background-color: ${({backgroundColor})=> backgroundColor
     ? backgroundColor 
-    : gray};
-    color : ${({color})=> color ? color : black };
+    : 'gray'};
+    color : ${({color})=> color ? color : 'black' };
     
     ${({others})=>others};
 `

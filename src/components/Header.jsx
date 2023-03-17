@@ -8,8 +8,8 @@ function Header() {
   return (
     <HeaderContainer>
       <button onClick={()=>navigation('/')}>Home</button>
-      <button onClick={()=>navigation('/detail')}>Detail</button>
-      <button onClick={()=>navigation('/mypage')}>Mypage</button>
+      <button onClick={()=>navigation('/bbs/detail')}>Detail</button>
+      <button onClick={()=>navigation('/user/mypage')}>Mypage</button>
     </HeaderContainer>
   )
 }
