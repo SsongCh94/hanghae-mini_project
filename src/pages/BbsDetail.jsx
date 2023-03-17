@@ -25,11 +25,24 @@ function BbsDetail() {
           <CommentsInput type="text" placeholder="댓글을 입력하세요" />
           <ButtonSmall>댓글 달기</ButtonSmall>
         </CommentsArea>
-        <CommentsList></CommentsList>
+        <CommentsList>
+          <CommentBox>
+            <Comment>댓글</Comment>
+            <CommentNickname>댓글 작성자 닉네임</CommentNickname>
+          </CommentBox>
+          <CommentBox>
+            <Comment>댓글</Comment>
+            <CommentNickname>댓글 작성자 닉네임</CommentNickname>
+          </CommentBox>
+          <CommentBox>
+            <Comment>댓글</Comment>
+            <CommentNickname>댓글 작성자 닉네임</CommentNickname>
+          </CommentBox>
+        </CommentsList>
         <Test>
           {" "}
-          <ButtonMiddle />
-          <ButtonMiddle />
+          <ButtonMiddle>수정하기</ButtonMiddle>
+          <ButtonMiddle>뒤로가기</ButtonMiddle>
         </Test>
       </DetailArea>
     </PageContainer>
@@ -91,16 +104,41 @@ const CommentsList = styled.div`
   background-color: beige;
   width: 60%;
   height: 699px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const CommentBox = styled.div`
+  width: 100%;
+  height: 20px;
+
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Comment = styled.div`
+  background-color: #76ff8b;
+  width: 75%;
+  height: 20px;
+`;
+
+const CommentNickname = styled.div`
+  background-color: #76ff8b;
+  width: 20%;
+  height: 20px;
 `;
 
 const Test = styled.div`
-  background-color: black;
-  width: 200px;
-  height: 200px;
+  gap: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   position: fixed;
 
-  right: 0;
+  right: 50px;
   bottom: 100px;
 `;
 
