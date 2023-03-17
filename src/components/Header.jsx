@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components';
 import { ButtonSmall, FlexHorizontal, FlexVertical, HeaderContainer } from '../variables/styleStore';
 import { COLOR_THEME } from '../variables/uiVariables';
-import useLoginInput from '../variables/useInput';
+import useLoginInput from '../variables/useLoginInput';
 import Logo from './Logo';
 
 function Header() {
