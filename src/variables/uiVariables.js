@@ -5,10 +5,10 @@ export const FOOTER_HEIGHT = '10vh';
 export const MIN_PAGE_HEIGHT = '85vh';
 export const MAINPAGE_CONTENTS_WIDTH = '1100px';
 
-const color1 ='F6F1F1';
-const color2 = '19A7CE';
-const color3 = '146C94';
-const color4 = '000000';
+const color1 ='37306B';
+const color2 = '66347F';
+const color3 = '9E4784';
+const color4 = 'D27685';
 
 export const S_BUTTON = `
     padding : 5px 10px;
