@@ -1,9 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { DateInputs, LocationInputs, TextInputs } from "../components/Inputs";
 import { ButtonMiddle, PageContainer } from "../variables/styleStore";
 
 function BbsCreate() {
+  const navigate = useNavigate();
+
   return (
     <PageContainer>
       <InputArea>
@@ -32,7 +35,7 @@ function BbsCreate() {
         </CommentArea>
         <ButtonArea>
           <ButtonMiddle>글 등록</ButtonMiddle>
-          <ButtonMiddle>뒤로가기</ButtonMiddle>
+          <ButtonMiddle onClick={() => navigate("/")}>뒤로가기</ButtonMiddle>
         </ButtonArea>
       </InputArea>
     </PageContainer>
