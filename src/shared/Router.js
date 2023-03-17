@@ -1,10 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Detail from "../pages/Detail";
 import Home from "../pages/Home";
 import styled from "styled-components";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Mypage from "../pages/Mypage";
+import UserMypage from "../pages/UserMypage";
+import UserJoin from "../pages/UserJoin"
+import BbsDetail from "../pages/BbsDetail";
+import BbsModify from "../pages/BbsModify";
+import BbsCreate from "../pages/BbsCreate";
 
 const Router = () => {
     const containerWidth = window.innerWidth;
@@ -15,8 +18,11 @@ const Router = () => {
                 <Header />
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/detail" element={<Detail />} />
-                    <Route path="/mypage" element={<Mypage />} />
+                    <Route path="/user/join" element={<UserJoin />} />
+                    <Route path="/user/mypage" element={<UserMypage />} />
+                    <Route path="/bbs/detail" element={<BbsDetail />} />
+                    <Route path="/bbs/modify" element={<BbsModify />} />
+                    <Route path="/bbs/create" element={<BbsCreate />} />
                     {/* 아이디로 페이지를 들어가야 하지만 임시로 일단 그냥 id없이 페이지 링크 확인 */}
                     {/* <Route path="/mypage:id" element={<Mypage />} /> */}
                 </Routes>
