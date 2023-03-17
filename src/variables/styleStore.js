@@ -8,6 +8,7 @@ import { MIN_PAGE_HEIGHT, HEADER_HEIGHT, FOOTER_HEIGHT } from "./uiVariables";
     각 동적 페이지의 최상위요소는 PageContainer로 한다.
     페이지 크기 통일화 하기 위한 목적
 */
+
 export const PageContainer = styled.div`
     min-height: ${MIN_PAGE_HEIGHT};
 
