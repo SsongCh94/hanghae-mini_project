@@ -1,14 +1,13 @@
 import React from 'react'
 import { PageContainer } from '../variables/styleStore'
-import { BUTTON } from '../variables/uiVariables'
+import styled from 'styled-components'
 
 function Home() {
     return (
         <PageContainer>
-            page: Home
-            <BUTTON></BUTTON>
+            홈
         </PageContainer>
     )
 }
 
-export default Home
+export default Home;
