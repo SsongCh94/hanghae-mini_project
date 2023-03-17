@@ -1,51 +1,18 @@
-// 전역 상수
+// 전역 상수COLOR_1
 
 export const HEADER_HEIGHT = '5vh';
 export const FOOTER_HEIGHT = '10vh';
 export const MIN_PAGE_HEIGHT = '85vh';
 export const MAINPAGE_CONTENTS_WIDTH = '1100px';
 
-const color1 ='F6F1F1';
-const color2 = '19A7CE';
-const color3 = '146C94';
-const color4 = '000000';
+const COLOR_1 ='37306B';
+const COLOR_2 = '66347F';
+const COLOR_3 = '9E4784';
+const COLOR_4 = 'D27685';
 
-export const S_BUTTON = `
-    padding : 5px 10px;
-    width: 40px;
-    height: 15px;
-    color : #${color4};
-    border : 1px solid #${color4};
-    background-color : gray;
-    &:hover{
-        color : #${color4};
-        border : 1px solid #${color4};
-        background-color : #${color1};
-    }
-`;
-export const M_BUTTON = `
-padding : 5px 10px;
-width: 40px;
-height: 15px;
-color : #${color4};
-border : 1px solid #${color4};
-background-color : gray;
-&:hover{
-    color : #${color4};
-    border : 1px solid #${color4};
-    background-color : #${color1};
+export const COLOR_THEME = {
+    COLOR_1,
+    COLOR_2,
+    COLOR_3,
+    COLOR_4,
 }
-`;
-export const L_BUTTON = `
-padding : 5px 10px;
-width: 40px;
-height: 15px;
-color : #${color4};
-border : 1px solid #${color4};
-background-color : gray;
-&:hover{
-    color : #${color4};
-    border : 1px solid #${color4};
-    background-color : #${color1};
-}
-`;
