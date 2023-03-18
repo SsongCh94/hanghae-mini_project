@@ -1,7 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { DateInputs, LocationInputs, TextInputs } from "../components/Inputs";
+import {
+  DateInputs,
+  LocationInputs,
+  TextInputs,
+  SelectBox,
+} from "../components/Inputs";
 import { ButtonMiddle, PageContainer } from "../variables/styleStore";
 
 function BbsCreate() {
@@ -14,12 +19,7 @@ function BbsCreate() {
           {" "}
           <Span>카테고리 : </Span>
           {/* <Input type="text" placeholder="글 제목을 입력하세요" /> */}
-          <RegionSelect>
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </RegionSelect>
+          <SelectBox list={regionList} selected={"카테고리를 입력해주세요."} />
         </Label>
         <TextInputs type={"text"} placeholder={"글 제목을 입력하세요"}>
           글 제목 :{" "}
@@ -27,7 +27,7 @@ function BbsCreate() {
         <TextInputs type={"text"} placeholder={"이미지 URL을 입력하세요"}>
           이미지 URL :{" "}
         </TextInputs>
-        <LocationInputs />
+        <LocationInputs selected={"지역구를 입력해주세요."} />
         <DateInputs />
         <CommentArea>
           <Span>후기 : </Span>
@@ -57,10 +57,6 @@ const InputArea = styled.form`
   gap: 20px;
 
   padding: 50px 50px 50px 50px;
-`;
-
-const RegionSelect = styled.select`
-  width: 70%;
 `;
 
 const Label = styled.label`
@@ -98,5 +94,32 @@ const ButtonArea = styled.div`
   justify-content: flex-end;
   gap: 20px;
 `;
+const regionList = [
+  "강남구",
+  "강동구",
+  "강북구",
+  "강서구",
+  "관악구",
+  "광진구",
+  "구로구",
+  "금천구",
+  "노원구",
+  "도봉구",
+  "동대문구",
+  "동작구",
+  "마포구",
+  "서대문구",
+  "서초구",
+  "성동구",
+  "성북구",
+  "송파구",
+  "양천구",
+  "영등포구",
+  "용산구",
+  "은평구",
+  "종로구",
+  "중구",
+  "중랑구",
+];
 
 export default BbsCreate;
