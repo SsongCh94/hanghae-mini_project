@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { __postPosts } from "../redux/modules/postsSlice";
+import { __getPosts, __postPosts } from "../redux/modules/postsSlice";
 import { ButtonMiddle, PageContainer } from "../variables/styleStore";
 import { useBbsInput } from "../variables/useBbsInput";
 
 function BbsCreate() {
   const navigate = useNavigate();
   const { region, category } = useSelector((state) => state.selects);
+  const { posts } = useSelector((state) => state.posts);
   const [inputTitle, inputTitleHandler] = useBbsInput("");
   const [inputURL, inputURLHandler] = useBbsInput("");
   const [contents, contentsHandler] = useBbsInput("");
@@ -20,11 +21,16 @@ function BbsCreate() {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(__getPosts());
+  }, []);
+
   const requestPost = (payload) => {
     dispatch(__postPosts(payload));
   };
 
   const newPost = {
+    // id: posts[posts.length - 1].id + 1,
     title: inputTitle,
     image: inputURL,
     classify: selectedCategory,
