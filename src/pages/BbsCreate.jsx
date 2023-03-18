@@ -29,16 +29,16 @@ function BbsCreate() {
   const requestPost = (payload) => {
     dispatch(__postPosts(payload));
   };
-  //git test
+
   const newPost = {
     title: inputTitle,
     image: inputURL,
     classify: selectedCategory,
     region: selectedRegion,
-    location: location,
-    startDate: startDate,
-    endDate: endDate,
-    contents: contents,
+    location,
+    startDate,
+    endDate,
+    contents,
     pageUrl,
   };
 

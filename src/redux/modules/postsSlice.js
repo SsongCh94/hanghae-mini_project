@@ -3,36 +3,24 @@ import axios from "axios";
 import { apis, apis_token } from "../../axios/api";
 
 const initialState = {
-  posts: [
-    {
-      id: 1,
-      title: "",
-      image: "",
-      classify: "",
-      region: "",
-      location: "",
-      startDate: "",
-      endDate: "",
-      contents: "",
-    },
-  ],
+  posts: [],
   isLoading: false,
   isError: false,
   error: null,
 };
 
-// export const __getPosts = createAsyncThunk(
-//   "getPosts",
-//   async (payload, thunkAPI) => {
-//     try {
-//       const { data } = await apis.get("/api/board");
-//       return thunkAPI.fulfillWithValue(data);
-//     } catch (error) {
-//       console.log("error-->", error);
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   }
-// );
+export const __getPosts = createAsyncThunk(
+  "getPosts",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await apis.get("/api/board");
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      console.log("error-->", error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 export const __postPosts = createAsyncThunk(
   "postPosts",
