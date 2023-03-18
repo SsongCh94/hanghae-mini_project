@@ -20,7 +20,7 @@ export const PageContainer = styled.div`
 `;
 export const HeaderContainer = styled.div`
     height : ${HEADER_HEIGHT};
-    background-color: #${COLOR_THEME.COLOR_2};
+    background-color: ${COLOR_THEME.COLOR_1};
 `;
 export const FooterContainer = styled.div`
     height : ${FOOTER_HEIGHT};
@@ -32,13 +32,14 @@ export const ButtonSmall = styled.button`
     padding : 5px 10px;
     width: fit-content;
     height: fit-content;
-    color : #${COLOR_THEME.COLOR_4};
-    border : 1px solid #${COLOR_THEME.COLOR_4};
-    background-color : #${COLOR_THEME.COLOR_1};
+    color : ${COLOR_THEME.COLOR_4};
+    border : 1px solid ${COLOR_THEME.COLOR_4};
+    background-color : ${COLOR_THEME.COLOR_1};
     &:hover{
-        color : #${COLOR_THEME.COLOR_3};
-        border : 1px solid #${COLOR_THEME.COLOR_3};
-        background-color : #${COLOR_THEME.COLOR_2};
+        /* color : #${COLOR_THEME.COLOR_3}; */
+        color : white;
+        border : 1px solid ${COLOR_THEME.COLOR_4};
+        background-color : ${COLOR_THEME.COLOR_4};
     }
     ${({others}) => others};
 `;
@@ -48,12 +49,13 @@ export const ButtonMiddle = styled.button`
     width: fit-content;
     height: fit-content;
     color : #${COLOR_THEME.COLOR_4};
-    border : 1px solid #${COLOR_THEME.COLOR_4};
-    background-color : #${COLOR_THEME.COLOR_1};
+    border : 1px solid ${COLOR_THEME.COLOR_4};
+    background-color : ${COLOR_THEME.COLOR_1};
     &:hover{
-        color : #${COLOR_THEME.COLOR_3};
-        border : 1px solid #${COLOR_THEME.COLOR_3};
-        background-color : #${COLOR_THEME.COLOR_2};
+        /* color : #${COLOR_THEME.COLOR_3}; */
+        color : white;
+        border : 1px solid ${COLOR_THEME.COLOR_4};
+        background-color : ${COLOR_THEME.COLOR_4};
     }
     ${({others}) => others};
 `;
@@ -62,13 +64,14 @@ export const ButtonLarge = styled.button`
     padding : 15px 30px;
     width: fit-content;
     height: fit-content;
-    color : #${COLOR_THEME.COLOR_4};
-    border : 1px solid #${COLOR_THEME.COLOR_4};
-    background-color : #${COLOR_THEME.COLOR_1};
+    color : ${COLOR_THEME.COLOR_4};
+    border : 1px solid ${COLOR_THEME.COLOR_4};
+    background-color : ${COLOR_THEME.COLOR_1};
     &:hover{
-        color : #${COLOR_THEME.COLOR_3};
-        border : 1px solid #${COLOR_THEME.COLOR_3};
-        background-color : #${COLOR_THEME.COLOR_2};
+        /* color : ${COLOR_THEME.COLOR_3}; */
+        color : white;
+        border : 1px solid ${COLOR_THEME.COLOR_4};
+        background-color : ${COLOR_THEME.COLOR_4};
     }
     ${({others}) => others};
 `;
@@ -84,10 +87,11 @@ export const FlexHorizontal = styled.div`
     justify-content: ${({justifyContent})=>justifyContent? justifyContent : null};
     width: ${({width}) => width ? width : '100%'};
     height: ${({height}) => height ? height : '100%'};
-    ${({others}) => others}
+    ${({others}) => others};
 `;
 
 export const FlexVertical = styled.div`
+justify-content: sp;
     display: flex;
     flex-direction: column;
     gap : ${({gap})=>gap? gap : null};
@@ -103,7 +107,7 @@ border-radius: 25px;
 padding : 0px 15px;
 height : 33px;
 border : none;
-box-shadow: 0px 0px 5px #${COLOR_THEME.COLOR_2};
+box-shadow: 0px 0px 5px ${COLOR_THEME.COLOR_2};
 ${({others}) => others};
 `
 
