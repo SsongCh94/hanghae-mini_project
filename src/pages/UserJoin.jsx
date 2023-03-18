@@ -1,18 +1,32 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { __Join } from '../redux/modules/userSlice';
 import { ButtonSmall, FlexHorizontal, FlexVertical, PageContainer, StInput } from '../variables/styleStore'
 import useLoginInput from '../variables/useLoginInput';
 
 function UserJoin() {
   const navigation = useNavigate();
+  const dispatch = useDispatch();
   const [id,onIdChangeHandler] = useLoginInput('');
   const [password,onPasswordChangeHandler] = useLoginInput('');
   const [nickname,onNickNameChangeHandler] = useLoginInput('');
+  
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    const newUser = {
+      loginid : id,
+      password : password,
+      nickname : nickname,
+    }
+    dispatch(__Join(newUser));
+    // console.log(newUser);
+  }
 
   return (
     <PageContainer>
-      <StForm>
+      <StForm onSubmit={onSubmitHandler}>
         <FlexVertical alignItems="center" width='auto' justifyContent="center" gap="30px">
           <Warp>
             <FlexHorizontal width='350px;' justifyContent='space-between' height="auto">
@@ -20,8 +34,8 @@ function UserJoin() {
                 placeholder="ID를 입력하세요"
                 value={id}
                 onChange={onIdChangeHandler}
-                minLength={6}
-                maxLength={12}
+                minLength={4}
+                maxLength={10}
                 required
               />
               <ButtonSmall type="button" onClick={()=>{}}>아이디 중복조회</ButtonSmall>
@@ -35,7 +49,7 @@ function UserJoin() {
               value={password}
               onChange={onPasswordChangeHandler}
               minLength={8}
-              maxLength={13}
+              maxLength={15}
               required
               />
             </FlexHorizontal>

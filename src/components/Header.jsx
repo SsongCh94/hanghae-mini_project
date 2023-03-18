@@ -38,6 +38,7 @@ function Header() {
           justifyContent="space-between"
           others='width:100%;'>
           <Logo />
+          <button onClick={()=>navigation('/user/mypage')}>마이페이지</button>
           {
             isLogin
               ? <FlexHorizontal gap="5px" alignItems="center">
