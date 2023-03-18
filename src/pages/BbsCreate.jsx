@@ -12,12 +12,12 @@ function BbsCreate() {
   const { posts } = useSelector((state) => state.posts);
   const [inputTitle, inputTitleHandler] = useBbsInput("");
   const [inputURL, inputURLHandler] = useBbsInput("");
-  const [contents, contentsHandler] = useBbsInput("");
   const [selectedCategory, selectedCategoryHandler] = useBbsInput("");
   const [selectedRegion, selectedRegionHandler] = useBbsInput("");
   const [location, locationHandler] = useBbsInput("");
   const [startDate, startDateHandler] = useBbsInput("");
   const [endDate, endDateHandler] = useBbsInput("");
+  const [contents, contentsHandler] = useBbsInput("");
 
   const dispatch = useDispatch();
 
