@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import apis from "../../axios/api";
+import { apis, apis_token } from "../../axios/api";
+import { setCookie } from "../../axios/cookies";
 
 const initialState = {
   user: {

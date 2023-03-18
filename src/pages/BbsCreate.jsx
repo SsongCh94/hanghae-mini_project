@@ -18,7 +18,7 @@ function BbsCreate() {
   const [startDate, startDateHandler] = useBbsInput("");
   const [endDate, endDateHandler] = useBbsInput("");
   const [contents, contentsHandler] = useBbsInput("");
-  const [pageURL, pageURLHandler] = useBbsInput("");
+  const [pageUrl, pageUrlHandler] = useBbsInput("");
 
   const dispatch = useDispatch();
 
@@ -39,7 +39,7 @@ function BbsCreate() {
     startDate: startDate,
     endDate: endDate,
     contents: contents,
-    pageURL,
+    pageUrl,
   };
 
   return (
@@ -84,8 +84,8 @@ function BbsCreate() {
           <Input
             type={"text"}
             placeholder={"행사 홈 URL을 입력하세요"}
-            defaultValue={pageURL}
-            onChange={pageURLHandler}
+            defaultValue={pageUrl}
+            onChange={pageUrlHandler}
           />
         </Label>
         <LocationDiv>

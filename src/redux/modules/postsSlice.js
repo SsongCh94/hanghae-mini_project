@@ -39,9 +39,8 @@ export const __postPosts = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log("payload", payload);
-      // const { data } = await apis_token.post("/api/board", payload);
-      // console.log("data-->123123123123123123", data);
-      // return thunkAPI.fulfillWithValue(data);
+      const { data } = await apis_token.post("/api/board/", payload);
+      return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       console.log("error-->", error);
       return thunkAPI.rejectWithValue(error);
