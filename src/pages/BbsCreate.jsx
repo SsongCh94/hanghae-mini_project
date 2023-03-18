@@ -1,13 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-// import {
-//   DateInputs,
-//   LocationInputs,
-//   TextInputs,
-//   SelectBox,
-// } from "../components/Inputs";
+import { __postPosts } from "../redux/modules/postsSlice";
 import { ButtonMiddle, PageContainer } from "../variables/styleStore";
 import { useBbsInput } from "../variables/useBbsInput";
 
@@ -16,116 +11,129 @@ function BbsCreate() {
   const { region, category } = useSelector((state) => state.selects);
   const [inputTitle, inputTitleHandler] = useBbsInput("");
   const [inputURL, inputURLHandler] = useBbsInput("");
+  const [contents, contentsHandler] = useBbsInput("");
+  const [selectedCategory, selectedCategoryHandler] = useBbsInput("");
+  const [selectedRegion, selectedRegionHandler] = useBbsInput("");
+  const [location, locationHandler] = useBbsInput("");
+  const [startDate, startDateHandler] = useBbsInput("");
+  const [endDate, endDateHandler] = useBbsInput("");
 
-  // console.log("region", region);
-  // console.log("category", category);
+  const dispatch = useDispatch();
+
+  const requestPost = (payload) => {
+    dispatch(__postPosts(payload));
+  };
+
+  const newPost = {
+    title: inputTitle,
+    image: inputURL,
+    classify: selectedCategory,
+    region: selectedRegion,
+    location: location,
+    startDate: startDate,
+    endDate: endDate,
+    contents: contents,
+  };
+
   return (
     <PageContainer>
       <InputArea>
         <Label>
           {" "}
           <Span>카테고리 : </Span>
-          {/* <Input type="text" placeholder="글 제목을 입력하세요" /> */}
-          <SelectList list={category} selected={"카테고리를 입력해주세요."} />
+          <RegionSelect
+            defaultValue={selectedCategory}
+            onChange={selectedCategoryHandler}
+          >
+            {category.map((item, idx) => {
+              return (
+                <option defaultValue={item} key={idx}>
+                  {item}
+                </option>
+              );
+            })}
+          </RegionSelect>
         </Label>
-        <TextInputs
-          type={"text"}
-          placeholder={"글 제목을 입력하세요"}
-          span={"글 제목 : "}
-        >
+        <Label>
+          <Span>제목 : </Span>
           <Input
             type={"text"}
-            placeholder={"글 제목을 입력하세요"}
-            value={inputTitle}
+            placeholder={"제목을 입력하세요"}
+            defaultValue={inputTitle}
             onChange={inputTitleHandler}
           />
-        </TextInputs>
-        <TextInputs
-          span={"URL : "}
-          type={"text"}
-          placeholder={"이미지 URL을 입력하세요"}
-        >
+        </Label>
+        <Label>
+          <Span>URL : </Span>
           <Input
             type={"text"}
             placeholder={"URL을 입력하세요"}
-            value={inputURL}
+            defaultValue={inputURL}
             onChange={inputURLHandler}
           />
-        </TextInputs>
-        <LocationInputs selected={"지역구를 선택해주세요."} list={region} />
-        <DateInputs />
+        </Label>
+        <LocationDiv>
+          <LocationLabel>
+            <Span>구 : </Span>
+            <RegionSelect
+              defaultValue={selectedRegion}
+              onChange={selectedRegionHandler}
+            >
+              {/* <option selected>"지역구를 선택해주세요."</option> */}
+              {region.map((item, idx) => {
+                return (
+                  <option defaultValue={item} key={idx}>
+                    {item}
+                  </option>
+                );
+              })}
+            </RegionSelect>
+          </LocationLabel>
+          <LocationLabel>
+            <Span>장소 : </Span>
+            <LocationInput
+              type="text"
+              placeholder="장소를 입력하세요"
+              defaultValue={location}
+              onChange={locationHandler}
+            />
+          </LocationLabel>
+        </LocationDiv>
+        <LocationDiv>
+          <LocationLabel>
+            <Span>시작 날짜 : </Span>
+            <LocationInput
+              type="date"
+              defaultValue={startDate}
+              onChange={startDateHandler}
+            />
+          </LocationLabel>
+          <LocationLabel>
+            <Span>끝나는 날짜 : </Span>
+            <LocationInput
+              type="date"
+              defaultValue={endDate}
+              onChange={endDateHandler}
+            />
+          </LocationLabel>
+        </LocationDiv>
         <CommentArea>
           <Span>후기 : </Span>
-          <TextArea type="text" placeholder="후기를 입력하세요" />
+          <TextArea
+            type="text"
+            placeholder="후기를 입력하세요"
+            defaultValue={contents}
+            onChange={contentsHandler}
+          />
         </CommentArea>
         <ButtonArea>
-          <ButtonMiddle>글 등록</ButtonMiddle>
+          <ButtonMiddle type="button" onClick={() => requestPost(newPost)}>
+            글 등록
+          </ButtonMiddle>
           <ButtonMiddle onClick={() => navigate("/")}>뒤로가기</ButtonMiddle>
         </ButtonArea>
       </InputArea>
     </PageContainer>
-  );
-}
-function TextInputs({ span, children, placeholder, type }) {
-  return (
-    <Label>
-      <Span>{span}</Span>
-      {children}
-    </Label>
-  );
-}
-
-function DateInputs() {
-  return (
-    <LocationDiv>
-      <LocationLabel>
-        <Span>시작 날짜 : </Span>
-        <LocationInput type="date" />
-      </LocationLabel>
-      <LocationLabel>
-        <Span>끝나는 날짜 : </Span>
-        <LocationInput type="date" />
-      </LocationLabel>
-    </LocationDiv>
-  );
-}
-
-function LocationInputs({ list, selected }) {
-  return (
-    <LocationDiv>
-      <LocationLabel>
-        <Span>구 : </Span>
-        <RegionSelect>
-          <option selected>{selected}</option>
-          {list.map((item, idx) => {
-            return (
-              <option value={item} key={idx}>
-                {item}
-              </option>
-            );
-          })}
-        </RegionSelect>
-      </LocationLabel>
-      <LocationLabel>
-        <Span>장소 : </Span>
-        <LocationInput type="text" placeholder="장소를 입력하세요" />
-      </LocationLabel>
-    </LocationDiv>
-  );
-}
-
-function SelectList({ list, selected }) {
-  return (
-    <RegionSelect>
-      <option selected>{selected}</option>
-      {list.map((item, idx) => {
-        return (
-          <option value={item} key={idx}>
-            {item}
-          </option>
-        );
-      })}
-    </RegionSelect>
   );
 }
 
