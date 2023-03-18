@@ -1,10 +1,12 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { COLOR_THEME } from '../variables/uiVariables';
 
 function Logo() {
+  const navigation = useNavigate();
     return (
-        <div style={{cursor:'pointer'}}>
+        <div style={{cursor:'pointer'}} onClick={()=>navigation('/')}>
             <LogoSpan>S</LogoSpan>
             <LogoSmall>EOUL</LogoSmall>
             <LogoSpan>C</LogoSpan>
