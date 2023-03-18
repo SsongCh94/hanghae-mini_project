@@ -25,7 +25,7 @@ export const __getPosts = createAsyncThunk(
   "getPosts",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/todos1");
+      const { data } = await apis.get("/api/board");
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       console.log("error-->", error);
