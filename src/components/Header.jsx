@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components';
-import { ButtonSmall, FlexHorizontal, FlexVertical, HeaderContainer } from '../variables/styleStore';
+import { ButtonSmall, FlexHorizontal, FlexVertical, HeaderContainer, StInput } from '../variables/styleStore';
 import { COLOR_THEME } from '../variables/uiVariables';
 import useLoginInput from '../variables/useLoginInput';
 import Logo from './Logo';
@@ -11,6 +11,17 @@ function Header() {
   const [isLogin, setIsLogin] = useState(false);
   const [id, onIdChangeHandler] = useLoginInput('');
   const [password, onPasswordChangeHandler] = useLoginInput('');
+  const buttonOtherStyles = `
+  border:2px solid #${COLOR_THEME.COLOR_4};
+  border-radius: 25px;
+  font-weight : 700;
+  &:hover{
+    font-weight : 700;
+    border:2px solid white;
+    color: white;
+    border-radius: 25px;
+  }
+  `
 
   const toggleIsLogin = () => {
     setIsLogin((prev) => !prev);
@@ -26,8 +37,8 @@ function Header() {
           alignItems="center"
           justifyContent="space-between"
           others='width:100%;'>
-            <Logo />
-          {/* <span onClick={() => navigation('/')}>로고</span> */}
+          <Logo />
+          <button onClick={()=>navigation('/user/mypage')}>마이페이지</button>
           {
             isLogin
               ? <FlexHorizontal gap="5px" alignItems="center">
@@ -49,30 +60,12 @@ function Header() {
                   />
                   <ButtonSmall
                     type="submit"
-                    others={`
-                border:2px solid #${COLOR_THEME.COLOR_4};
-                border-radius: 25px;
-                font-weight : 700;
-                &:hover{
-                  font-weight : 700;
-                  border:2px solid white;
-                  color: white;
-                  border-radius: 25px;
-                }
-                `}>로그인</ButtonSmall>
+                    others={buttonOtherStyles}
+                    >로그인</ButtonSmall>
                   <ButtonSmall
                     type="button"
-                    others={`
-                border:2px solid #${COLOR_THEME.COLOR_4};
-                border-radius: 25px;
-                font-weight : 700;
-                &:hover{
-                  font-weight : 700;
-                  border:2px solid white;
-                  color: white;
-                  border-radius: 25px;
-                }
-                `}
+                    others={buttonOtherStyles}
+                    onClick={()=>navigation("/user/join")}
                   >회원가입</ButtonSmall>
                 </FlexHorizontal>
               </form>
@@ -89,10 +82,4 @@ const WelcomeText = styled.span`
   /* color: #${COLOR_THEME.COLOR_4}; */
   color:white;
   font-weight: 500;
-`
-
-const StInput = styled.input`
-  border-radius: 25px;
-  padding : 0px 15px;
-  border : none;
 `
