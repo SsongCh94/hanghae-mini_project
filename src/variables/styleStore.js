@@ -12,7 +12,7 @@ import { MIN_PAGE_HEIGHT, HEADER_HEIGHT, FOOTER_HEIGHT, COLOR_THEME } from "./ui
 
 export const PageContainer = styled.div`
     min-height: ${MIN_PAGE_HEIGHT};
-    height:${MIN_PAGE_HEIGHT};
+    height: fit-content;
 
     /*  배경색을 특정해야할 경우, backgroundColor라는 이름의 prop을 넘겨준다.
         사용예시 : <PageContainer backgroundColor='black' />                */
@@ -91,7 +91,6 @@ export const FlexHorizontal = styled.div`
 `;
 
 export const FlexVertical = styled.div`
-justify-content: sp;
     display: flex;
     flex-direction: column;
     gap : ${({gap})=>gap? gap : null};
