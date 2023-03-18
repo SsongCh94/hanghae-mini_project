@@ -13,7 +13,7 @@ export const __getPosts = createAsyncThunk(
   "getPosts",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await apis.get("/api/board");
+      const { data } = await apis.get("/api/board/list");
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       console.log("error-->", error);
@@ -44,7 +44,6 @@ export const postslice = createSlice({
     [__postPosts.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isError = false;
-      // state.posts = [...state, action.payload.data];
       console.log("action.payload", action.payload);
     },
     [__postPosts.pending]: (state, action) => {
@@ -56,21 +55,20 @@ export const postslice = createSlice({
       state.isError = true;
       state.error = action.payload;
     },
-    // [__getPosts.fulfilled]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.isError = false;
-    //   state.posts = action.payload;
-    //   console.log("action.payload", action.payload);
-    // },
-    // [__getPosts.pending]: (state, action) => {
-    //   state.isLoading = true;
-    //   state.isError = false;
-    // },
-    // [__getPosts.rejected]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.isError = true;
-    //   state.error = action.payload;
-    // },
+    [__getPosts.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.posts = action.payload;
+    },
+    [__getPosts.pending]: (state, action) => {
+      state.isLoading = true;
+      state.isError = false;
+    },
+    [__getPosts.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.error = action.payload;
+    },
   },
 });
 

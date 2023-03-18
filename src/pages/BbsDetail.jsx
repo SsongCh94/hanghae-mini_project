@@ -103,7 +103,7 @@ const CommentsInput = styled.input`
 const CommentsList = styled.div`
   background-color: beige;
   width: 60%;
-  height: 699px;
+  height: 20000px;
   display: flex;
   flex-direction: column;
 `;

@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ButtonMiddle, PageContainer } from "../variables/styleStore";
 import styled, { css } from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { __getPosts } from "../redux/modules/postsSlice";
 
 function Home() {
+  const dispatch = useDispatch();
+  const { posts } = useSelector((state) => state.posts);
+  console.log("posts=======================", posts);
+  console.log("posts@@@@@@@@", posts[1]);
+
+  // const image = posts[7];
+  // console.log("image!!@!@!@!@!@!@!@!@!@!@!", image);
+  // console.log("type==================", typeof image);
+  useEffect(() => {
+    dispatch(__getPosts());
+  }, []);
   return (
     <PageContainer
       style={{
@@ -16,14 +29,26 @@ function Home() {
           <ButtonMiddle>검색</ButtonMiddle>
           <ButtonMiddle>글쓰기</ButtonMiddle>
         </SearchArea>
-        <Card>
+        {posts?.map((item) => {
+          return (
+            <Card key={item.id}>
+              <CardImg src="item.image" />
+              <CardInfo>
+                <h1>item.title</h1>
+                <h2>item.loaction</h2>
+                <h2>item.startDate, item.endDate</h2>
+              </CardInfo>
+            </Card>
+          );
+        })}
+        {/* <Card>
           <CardImg src="https://i.pinimg.com/236x/c3/61/83/c361835e4881cc83d5b7928728fdcd3f.jpg" />
           <CardInfo>
             <h1>글 제목 자리</h1>
             <h2>장소 자리</h2>
             <h2>날짜 자리</h2>
           </CardInfo>
-        </Card>
+        </Card> */}
       </MainArea>
     </PageContainer>
   );
@@ -33,7 +58,7 @@ export default Home;
 
 const MainArea = styled.div`
   background-color: azure;
-  width: 70%;
+  width: 80%;
   height: auto;
   margin: 20px auto 0 auto;
 `;
