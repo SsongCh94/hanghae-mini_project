@@ -1,8 +1,6 @@
 import React, { useRef, useState } from 'react'
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components';
-import { __login } from '../redux/modules/userSlice';
 import { ButtonSmall, FlexHorizontal, FlexVertical, HeaderContainer, StInput } from '../variables/styleStore';
 import { COLOR_THEME } from '../variables/uiVariables';
 import useLoginInput from '../variables/useLoginInput';
@@ -10,32 +8,23 @@ import Logo from './Logo';
 
 function Header() {
   const navigation = useNavigate();
-  const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(false);
   const [id, onIdChangeHandler] = useLoginInput('');
   const [password, onPasswordChangeHandler] = useLoginInput('');
   const buttonOtherStyles = `
-    border: 1px solid ${COLOR_THEME.COLOR_4};
-    border-radius: 17px;
+  border:2px solid #${COLOR_THEME.COLOR_4};
+  border-radius: 25px;
+  font-weight : 700;
+  &:hover{
     font-weight : 700;
-    &:hover{
-      font-weight : 700;
-      border-color: white;
-      color: white;
+    border:2px solid white;
+    color: white;
+    border-radius: 25px;
   }
   `
 
   const toggleIsLogin = () => {
     setIsLogin((prev) => !prev);
-  }
-  const loginClickHandler = (e) => {
-    e.preventDefault();
-    const logInUser = {
-      loginid: id,
-      password: password,
-    }
-    console.log("logInUser :",logInUser);
-    dispatch(__login(logInUser));
   }
 
   return (
@@ -57,7 +46,7 @@ function Header() {
                 <ButtonSmall onClick={toggleIsLogin}>로그아웃</ButtonSmall>
                 <ButtonSmall>마이페이지</ButtonSmall>
               </FlexHorizontal>
-              : <form onSubmit={e=>loginClickHandler(e)}>
+              : <form onSubmit={toggleIsLogin}>
                 <FlexHorizontal gap="5px">
                   <StInput
                     value={id}

@@ -30,5 +30,5 @@ const LogoSpan = styled.span`
 const LogoSmall = styled.span`
     font-weight: 600;
     font-size: 18px;
-    color:${COLOR_THEME.COLOR_4};
+    color:#${COLOR_THEME.COLOR_4};
 `;
