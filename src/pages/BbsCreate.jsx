@@ -28,7 +28,7 @@ function BbsCreate() {
   const requestPost = (payload) => {
     dispatch(__postPosts(payload));
   };
-
+  //git test
   const newPost = {
     // id: posts[posts.length - 1].id + 1,
     title: inputTitle,
