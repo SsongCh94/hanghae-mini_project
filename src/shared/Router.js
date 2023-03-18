@@ -38,5 +38,6 @@ export default Router;
 const AppContainer = styled.div`
     margin: 0px;
     width: ${({ width }) => width? width: '100vw'};
+    height: fit-content;
     min-height: 100vh;
 `
