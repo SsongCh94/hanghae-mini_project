@@ -1,17 +1,24 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import {
-  DateInputs,
-  LocationInputs,
-  TextInputs,
-  SelectBox,
-} from "../components/Inputs";
+// import {
+//   DateInputs,
+//   LocationInputs,
+//   TextInputs,
+//   SelectBox,
+// } from "../components/Inputs";
 import { ButtonMiddle, PageContainer } from "../variables/styleStore";
+import { useBbsInput } from "../variables/useBbsInput";
 
 function BbsCreate() {
   const navigate = useNavigate();
+  const { region, category } = useSelector((state) => state.selects);
+  const [inputTitle, inputTitleHandler] = useBbsInput("");
+  const [inputURL, inputURLHandler] = useBbsInput("");
 
+  // console.log("region", region);
+  // console.log("category", category);
   return (
     <PageContainer>
       <InputArea>
@@ -19,15 +26,33 @@ function BbsCreate() {
           {" "}
           <Span>카테고리 : </Span>
           {/* <Input type="text" placeholder="글 제목을 입력하세요" /> */}
-          <SelectBox list={regionList} selected={"카테고리를 입력해주세요."} />
+          <SelectList list={category} selected={"카테고리를 입력해주세요."} />
         </Label>
-        <TextInputs type={"text"} placeholder={"글 제목을 입력하세요"}>
-          글 제목 :{" "}
+        <TextInputs
+          type={"text"}
+          placeholder={"글 제목을 입력하세요"}
+          span={"글 제목 : "}
+        >
+          <Input
+            type={"text"}
+            placeholder={"글 제목을 입력하세요"}
+            value={inputTitle}
+            onChange={inputTitleHandler}
+          />
         </TextInputs>
-        <TextInputs type={"text"} placeholder={"이미지 URL을 입력하세요"}>
-          이미지 URL :{" "}
+        <TextInputs
+          span={"URL : "}
+          type={"text"}
+          placeholder={"이미지 URL을 입력하세요"}
+        >
+          <Input
+            type={"text"}
+            placeholder={"URL을 입력하세요"}
+            value={inputURL}
+            onChange={inputURLHandler}
+          />
         </TextInputs>
-        <LocationInputs selected={"지역구를 입력해주세요."} />
+        <LocationInputs selected={"지역구를 선택해주세요."} list={region} />
         <DateInputs />
         <CommentArea>
           <Span>후기 : </Span>
@@ -39,6 +64,68 @@ function BbsCreate() {
         </ButtonArea>
       </InputArea>
     </PageContainer>
+  );
+}
+function TextInputs({ span, children, placeholder, type }) {
+  return (
+    <Label>
+      <Span>{span}</Span>
+      {children}
+    </Label>
+  );
+}
+
+function DateInputs() {
+  return (
+    <LocationDiv>
+      <LocationLabel>
+        <Span>시작 날짜 : </Span>
+        <LocationInput type="date" />
+      </LocationLabel>
+      <LocationLabel>
+        <Span>끝나는 날짜 : </Span>
+        <LocationInput type="date" />
+      </LocationLabel>
+    </LocationDiv>
+  );
+}
+
+function LocationInputs({ list, selected }) {
+  return (
+    <LocationDiv>
+      <LocationLabel>
+        <Span>구 : </Span>
+        <RegionSelect>
+          <option selected>{selected}</option>
+          {list.map((item, idx) => {
+            return (
+              <option value={item} key={idx}>
+                {item}
+              </option>
+            );
+          })}
+        </RegionSelect>
+      </LocationLabel>
+      <LocationLabel>
+        <Span>장소 : </Span>
+        <LocationInput type="text" placeholder="장소를 입력하세요" />
+      </LocationLabel>
+    </LocationDiv>
+  );
+}
+
+function SelectList({ list, selected }) {
+  return (
+    <RegionSelect>
+      <option selected>{selected}</option>
+      {list.map((item, idx) => {
+        return (
+          <option value={item} key={idx}>
+            {item}
+          </option>
+        );
+      })}
+    </RegionSelect>
   );
 }
 
@@ -59,6 +146,10 @@ const InputArea = styled.form`
   padding: 50px 50px 50px 50px;
 `;
 
+const Input = styled.input`
+  width: 70%;
+`;
+
 const Label = styled.label`
   /* background-color: aqua; */
   width: 100%;
@@ -68,7 +159,7 @@ const Label = styled.label`
 `;
 
 const Span = styled.span`
-  width: 130px;
+  width: auto;
   margin-left: 10px;
   font-size: 20px;
 `;
@@ -94,32 +185,26 @@ const ButtonArea = styled.div`
   justify-content: flex-end;
   gap: 20px;
 `;
-const regionList = [
-  "강남구",
-  "강동구",
-  "강북구",
-  "강서구",
-  "관악구",
-  "광진구",
-  "구로구",
-  "금천구",
-  "노원구",
-  "도봉구",
-  "동대문구",
-  "동작구",
-  "마포구",
-  "서대문구",
-  "서초구",
-  "성동구",
-  "성북구",
-  "송파구",
-  "양천구",
-  "영등포구",
-  "용산구",
-  "은평구",
-  "종로구",
-  "중구",
-  "중랑구",
-];
+
+const RegionSelect = styled.select`
+  width: 70%;
+`;
+
+const LocationDiv = styled.div`
+  /* background-color: azure; */
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-end;
+`;
+const LocationLabel = styled.label`
+  /* background-color: aqua; */
+  width: 41%;
+  display: flex;
+  justify-content: flex-end;
+`;
+const LocationInput = styled.input`
+  width: 70%;
+`;
 
 export default BbsCreate;
