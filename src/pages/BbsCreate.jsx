@@ -9,7 +9,7 @@ import { useBbsInput } from "../variables/useBbsInput";
 function BbsCreate() {
   const navigate = useNavigate();
   const { region, category } = useSelector((state) => state.selects);
-  const { posts } = useSelector((state) => state.posts);
+  // const { posts } = useSelector((state) => state.posts);
   const [inputTitle, inputTitleHandler] = useBbsInput("");
   const [inputURL, inputURLHandler] = useBbsInput("");
   const [selectedCategory, selectedCategoryHandler] = useBbsInput("");
@@ -18,19 +18,19 @@ function BbsCreate() {
   const [startDate, startDateHandler] = useBbsInput("");
   const [endDate, endDateHandler] = useBbsInput("");
   const [contents, contentsHandler] = useBbsInput("");
+  const [pageURL, pageURLHandler] = useBbsInput("");
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(__getPosts());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(__getPosts());
+  // }, []);
 
   const requestPost = (payload) => {
     dispatch(__postPosts(payload));
   };
   //git test
   const newPost = {
-    // id: posts[posts.length - 1].id + 1,
     title: inputTitle,
     image: inputURL,
     classify: selectedCategory,
@@ -39,6 +39,7 @@ function BbsCreate() {
     startDate: startDate,
     endDate: endDate,
     contents: contents,
+    pageURL,
   };
 
   return (
@@ -70,12 +71,21 @@ function BbsCreate() {
           />
         </Label>
         <Label>
-          <Span>URL : </Span>
+          <Span>이미지 URL : </Span>
           <Input
             type={"text"}
-            placeholder={"URL을 입력하세요"}
+            placeholder={"이미지 URL을 입력하세요"}
             defaultValue={inputURL}
             onChange={inputURLHandler}
+          />
+        </Label>
+        <Label>
+          <Span>행사 홈페이지 URL : </Span>
+          <Input
+            type={"text"}
+            placeholder={"행사 홈 URL을 입력하세요"}
+            defaultValue={pageURL}
+            onChange={pageURLHandler}
           />
         </Label>
         <LocationDiv>

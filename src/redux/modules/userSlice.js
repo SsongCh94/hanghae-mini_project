@@ -52,9 +52,6 @@ const userSlice = createSlice({
       console.log(action.payload);
     },
   },
-  [__Join.rejected]: (state, action) => {
-    console.log(action.payload);
-  },
 });
 
 export const {} = userSlice.actions;
