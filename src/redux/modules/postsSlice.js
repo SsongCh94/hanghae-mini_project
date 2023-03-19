@@ -3,6 +3,7 @@ import { apis, apis_token } from "../../axios/api";
 
 const initialState = {
   posts: [],
+  postDetail: [],
   isLoading: false,
   isError: false,
   error: null,
@@ -13,6 +14,19 @@ export const __getPosts = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await apis.get("/api/board/list");
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      console.log("error-->", error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __getPostDetail = createAsyncThunk(
+  "getPostDetail",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await apis.get(`/api/board/detail/${payload}`);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       console.log("error-->", error);
@@ -64,6 +78,20 @@ export const postslice = createSlice({
       state.isError = false;
     },
     [__getPosts.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.error = action.payload;
+    },
+    [__getPostDetail.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.postDetail = action.payload;
+    },
+    [__getPostDetail.pending]: (state, action) => {
+      state.isLoading = true;
+      state.isError = false;
+    },
+    [__getPostDetail.rejected]: (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.error = action.payload;

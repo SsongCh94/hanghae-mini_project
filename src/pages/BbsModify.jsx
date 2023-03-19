@@ -1,11 +1,41 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { DateInputs, LocationInputs, TextInputs } from "../components/Inputs";
+import { __postPosts } from "../redux/modules/postsSlice";
 import { ButtonMiddle, PageContainer } from "../variables/styleStore";
+import { useBbsInput } from "../variables/useBbsInput";
 
 function BbsModify() {
   const navigate = useNavigate();
+  const { region, category } = useSelector((state) => state.selects);
+  const [inputTitle, inputTitleHandler] = useBbsInput("");
+  const [inputURL, inputURLHandler] = useBbsInput("");
+  const [selectedCategory, selectedCategoryHandler] = useBbsInput("");
+  const [selectedRegion, selectedRegionHandler] = useBbsInput("");
+  const [location, locationHandler] = useBbsInput("");
+  const [startDate, startDateHandler] = useBbsInput("");
+  const [endDate, endDateHandler] = useBbsInput("");
+  const [contents, contentsHandler] = useBbsInput("");
+  const [pageUrl, pageUrlHandler] = useBbsInput("");
+
+  const dispatch = useDispatch();
+
+  const requestPost = (payload) => {
+    dispatch(__postPosts(payload));
+  };
+
+  const newPost = {
+    title: inputTitle,
+    image: inputURL,
+    classify: selectedCategory,
+    region: selectedRegion,
+    location,
+    startDate,
+    endDate,
+    contents,
+    pageUrl,
+  };
 
   return (
     <PageContainer>
@@ -13,28 +43,104 @@ function BbsModify() {
         <Label>
           {" "}
           <Span>카테고리 : </Span>
-          {/* <Input type="text" placeholder="글 제목을 입력하세요" /> */}
-          <RegionSelect>
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+          <RegionSelect
+            defaultValue={selectedCategory}
+            onChange={selectedCategoryHandler}
+          >
+            {category.map((item, idx) => {
+              return (
+                <option defaultValue={item} key={idx}>
+                  {item}
+                </option>
+              );
+            })}
           </RegionSelect>
         </Label>
-        <TextInputs type={"text"} placeholder={"글 제목을 입력하세요"}>
-          글 제목 :{" "}
-        </TextInputs>
-        <TextInputs type={"text"} placeholder={"이미지 URL을 입력하세요"}>
-          이미지 URL :{" "}
-        </TextInputs>
-        <LocationInputs />
-        <DateInputs />
+        <Label>
+          <Span>제목 : </Span>
+          <Input
+            type={"text"}
+            placeholder={"제목을 입력하세요"}
+            defaultValue={inputTitle}
+            onChange={inputTitleHandler}
+          />
+        </Label>
+        <Label>
+          <Span>이미지 URL : </Span>
+          <Input
+            type={"text"}
+            placeholder={"이미지 URL을 입력하세요"}
+            defaultValue={inputURL}
+            onChange={inputURLHandler}
+          />
+        </Label>
+        <Label>
+          <Span>행사 홈페이지 URL : </Span>
+          <Input
+            type={"text"}
+            placeholder={"행사 홈 URL을 입력하세요"}
+            defaultValue={pageUrl}
+            onChange={pageUrlHandler}
+          />
+        </Label>
+        <LocationDiv>
+          <LocationLabel>
+            <Span>구 : </Span>
+            <RegionSelect
+              defaultValue={selectedRegion}
+              onChange={selectedRegionHandler}
+            >
+              {/* <option selected>"지역구를 선택해주세요."</option> */}
+              {region.map((item, idx) => {
+                return (
+                  <option defaultValue={item} key={idx}>
+                    {item}
+                  </option>
+                );
+              })}
+            </RegionSelect>
+          </LocationLabel>
+          <LocationLabel>
+            <Span>장소 : </Span>
+            <LocationInput
+              type="text"
+              placeholder="장소를 입력하세요"
+              defaultValue={location}
+              onChange={locationHandler}
+            />
+          </LocationLabel>
+        </LocationDiv>
+        <LocationDiv>
+          <LocationLabel>
+            <Span>시작 날짜 : </Span>
+            <LocationInput
+              type="date"
+              defaultValue={startDate}
+              onChange={startDateHandler}
+            />
+          </LocationLabel>
+          <LocationLabel>
+            <Span>끝나는 날짜 : </Span>
+            <LocationInput
+              type="date"
+              defaultValue={endDate}
+              onChange={endDateHandler}
+            />
+          </LocationLabel>
+        </LocationDiv>
         <CommentArea>
           <Span>후기 : </Span>
-          <TextArea type="text" placeholder="후기를 입력하세요" />
+          <TextArea
+            type="text"
+            placeholder="후기를 입력하세요"
+            defaultValue={contents}
+            onChange={contentsHandler}
+          />
         </CommentArea>
         <ButtonArea>
-          <ButtonMiddle>수정 완료</ButtonMiddle>
+          <ButtonMiddle type="button" onClick={() => requestPost(newPost)}>
+            글 등록
+          </ButtonMiddle>
           <ButtonMiddle onClick={() => navigate("/")}>뒤로가기</ButtonMiddle>
         </ButtonArea>
       </InputArea>
@@ -59,7 +165,7 @@ const InputArea = styled.form`
   padding: 50px 50px 50px 50px;
 `;
 
-const RegionSelect = styled.select`
+const Input = styled.input`
   width: 70%;
 `;
 
@@ -72,7 +178,7 @@ const Label = styled.label`
 `;
 
 const Span = styled.span`
-  width: 130px;
+  width: auto;
   margin-left: 10px;
   font-size: 20px;
 `;
@@ -97,6 +203,27 @@ const ButtonArea = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 20px;
+`;
+
+const RegionSelect = styled.select`
+  width: 70%;
+`;
+
+const LocationDiv = styled.div`
+  /* background-color: azure; */
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-end;
+`;
+const LocationLabel = styled.label`
+  /* background-color: aqua; */
+  width: 41%;
+  display: flex;
+  justify-content: flex-end;
+`;
+const LocationInput = styled.input`
+  width: 70%;
 `;
 
 export default BbsModify;

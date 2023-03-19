@@ -9,7 +9,6 @@ import { useBbsInput } from "../variables/useBbsInput";
 function BbsCreate() {
   const navigate = useNavigate();
   const { region, category } = useSelector((state) => state.selects);
-  // const { posts } = useSelector((state) => state.posts);
   const [inputTitle, inputTitleHandler] = useBbsInput("");
   const [inputURL, inputURLHandler] = useBbsInput("");
   const [selectedCategory, selectedCategoryHandler] = useBbsInput("");
@@ -21,10 +20,6 @@ function BbsCreate() {
   const [pageUrl, pageUrlHandler] = useBbsInput("");
 
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(__getPosts());
-  // }, []);
 
   const requestPost = (payload) => {
     dispatch(__postPosts(payload));

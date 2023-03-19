@@ -1,39 +1,46 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { __getPostDetail } from "../redux/modules/postsSlice";
 import { PageContainer } from "../variables/styleStore";
 import { ButtonSmall } from "../variables/styleStore";
 
 function BbsDetail() {
-  const { posts } = useSelector((state) => state.posts);
   const navigate = useNavigate();
   const params = useParams();
-  console.log("posts========", posts);
+  const dispatch = useDispatch();
 
-  const foundPost = posts.find((item) => {
-    return item.id === parseInt(params.id);
-  });
+  useEffect(() => {
+    dispatch(__getPostDetail(params.id));
+  }, []);
 
-  console.log("foundPost============", foundPost);
+  const { postDetail } = useSelector((state) => state.posts);
+  console.log(postDetail);
 
   return (
     <PageContainer>
       <DetailArea>
         <PhotoArea />
         <InfoArea>
-          <span>{foundPost.category}</span>
-          <span>공연, 행사명</span>
+          <span>{postDetail.classify}</span>
+          <span>{postDetail.title}</span>
         </InfoArea>
         <InfoArea>
-          <span>자치구</span>
-          <span>장소</span>
+          <span>{postDetail.region}</span>
+          <span>{postDetail.location}</span>
         </InfoArea>
         <div>
-          <span>기간</span>
+          <span>
+            {postDetail.startDate} ~ {postDetail.endDate}
+          </span>
         </div>
-        <div>행사 홈페이지 url</div>
-        <Contents>글 내용</Contents>
+
+        <Contents>
+          <a href={postDetail.pageUrl} target="_blank" rel="noreferrer">
+            행사 홈페이지로 가기
+          </a>
+        </Contents>
         <CommentsArea>
           <CommentsInput type="text" placeholder="댓글을 입력하세요" />
           <ButtonSmall>댓글 달기</ButtonSmall>
