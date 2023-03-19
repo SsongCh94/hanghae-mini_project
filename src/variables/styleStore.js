@@ -12,7 +12,7 @@ import { MIN_PAGE_HEIGHT, HEADER_HEIGHT, FOOTER_HEIGHT, COLOR_THEME } from "./ui
 
 export const PageContainer = styled.div`
     min-height: ${MIN_PAGE_HEIGHT};
-    height:${MIN_PAGE_HEIGHT};
+    height: fit-content;
 
     /*  배경색을 특정해야할 경우, backgroundColor라는 이름의 prop을 넘겨준다.
         사용예시 : <PageContainer backgroundColor='black' />                */
@@ -48,7 +48,7 @@ export const ButtonMiddle = styled.button`
     padding : 10px 20px;
     width: fit-content;
     height: fit-content;
-    color : #${COLOR_THEME.COLOR_4};
+    color : ${COLOR_THEME.COLOR_4};
     border : 1px solid ${COLOR_THEME.COLOR_4};
     background-color : ${COLOR_THEME.COLOR_1};
     &:hover{
@@ -91,7 +91,6 @@ export const FlexHorizontal = styled.div`
 `;
 
 export const FlexVertical = styled.div`
-justify-content: sp;
     display: flex;
     flex-direction: column;
     gap : ${({gap})=>gap? gap : null};
@@ -109,6 +108,10 @@ height : 33px;
 border : none;
 box-shadow: 0px 0px 5px ${COLOR_THEME.COLOR_2};
 ${({others}) => others};
+`
+
+export const MinimumHeightContainer = styled.div`
+  height: ${MIN_PAGE_HEIGHT};
 `
 
 

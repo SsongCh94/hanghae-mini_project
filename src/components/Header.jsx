@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components';
-import { __login } from '../redux/modules/userSlice';
+import { removeCookie } from '../axios/cookies';
+import { logout, toggleIsLogin, __login } from '../redux/modules/userSlice';
 import { ButtonSmall, FlexHorizontal, FlexVertical, HeaderContainer, StInput } from '../variables/styleStore';
 import { COLOR_THEME } from '../variables/uiVariables';
 import useLoginInput from '../variables/useLoginInput';
@@ -11,7 +12,8 @@ import Logo from './Logo';
 function Header() {
   const navigation = useNavigate();
   const dispatch = useDispatch();
-  const [isLogin, setIsLogin] = useState(false);
+  // const [isLogin, setIsLogin] = useState(false);
+  const { user, isLogin, isLoading, error } = useSelector((state) => state.user);
   const [id, onIdChangeHandler] = useLoginInput('');
   const [password, onPasswordChangeHandler] = useLoginInput('');
   const buttonOtherStyles = `
@@ -20,13 +22,14 @@ function Header() {
     font-weight : 700;
     &:hover{
       font-weight : 700;
-      border-color: white;
+      border-color: #070505;
       color: white;
-  }
+    }
   `
 
-  const toggleIsLogin = () => {
-    setIsLogin((prev) => !prev);
+  const logoutClickHandler = () => {
+    dispatch(logout());
+    navigation('/');
   }
   const loginClickHandler = (e) => {
     e.preventDefault();
@@ -34,8 +37,11 @@ function Header() {
       loginid: id,
       password: password,
     }
-    console.log("logInUser :",logInUser);
     dispatch(__login(logInUser));
+    console.log('isLogin: ', isLogin);
+  }
+  const toggle = () => {
+    dispatch(toggleIsLogin());
   }
 
   return (
@@ -49,15 +55,17 @@ function Header() {
           justifyContent="space-between"
           others='width:100%;'>
           <Logo />
-          <button onClick={()=>navigation('/user/mypage')}>마이페이지</button>
+          <button onClick={() => removeCookie('token')}>토큰제거</button>
           {
             isLogin
-              ? <FlexHorizontal gap="5px" alignItems="center">
-                <WelcomeText>김용민 님 환영합니다.</WelcomeText>
-                <ButtonSmall onClick={toggleIsLogin}>로그아웃</ButtonSmall>
-                <ButtonSmall>마이페이지</ButtonSmall>
+              ? <div>
+                <FlexHorizontal gap="5px" alignItems="center">
+                <WelcomeText>{user?.nickname} 님 환영합니다.</WelcomeText>
+                <ButtonSmall onClick={logoutClickHandler}>로그아웃</ButtonSmall>
+                <ButtonSmall onClick={() => navigation("/user/mypage")}>마이페이지</ButtonSmall>
               </FlexHorizontal>
-              : <form onSubmit={e=>loginClickHandler(e)}>
+              </div>
+              : <form onSubmit={e => loginClickHandler(e)}>
                 <FlexHorizontal gap="5px">
                   <StInput
                     value={id}
@@ -66,17 +74,18 @@ function Header() {
                   />
                   <StInput
                     value={password}
+                    type="password"
                     placeholder="PASSWORD"
                     onChange={onPasswordChangeHandler}
                   />
                   <ButtonSmall
                     type="submit"
                     others={buttonOtherStyles}
-                    >로그인</ButtonSmall>
+                  >로그인</ButtonSmall>
                   <ButtonSmall
                     type="button"
                     others={buttonOtherStyles}
-                    onClick={()=>navigation("/user/join")}
+                    onClick={() => navigation("/user/join")}
                   >회원가입</ButtonSmall>
                 </FlexHorizontal>
               </form>
