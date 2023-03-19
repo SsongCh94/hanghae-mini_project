@@ -5,7 +5,6 @@ const useLoginInput = (parameter) => {
 
   const onChangeHandler = (e) => {
     setValue((prev) => e.target.value);
-    console.log(value);
   };
   return [value, onChangeHandler];
 };
