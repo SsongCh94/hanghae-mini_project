@@ -22,7 +22,9 @@ function BbsDetail() {
   return (
     <PageContainer>
       <DetailArea>
-        <PhotoArea />
+        <PhotoArea>
+          <img src={postDetail.image} alt="" />
+        </PhotoArea>
         <InfoArea>
           <span>{postDetail.classify}</span>
           <span>{postDetail.title}</span>
@@ -42,6 +44,9 @@ function BbsDetail() {
             행사 홈페이지로 가기
           </a>
         </Contents>
+        <CommentsArea>
+          <p>{postDetail.contents}</p>
+        </CommentsArea>
         <CommentsArea>
           <CommentsInput
             type="text"
@@ -94,7 +99,7 @@ const DetailArea = styled.div`
 const PhotoArea = styled.div`
   background-color: beige;
   width: 70%;
-  height: 400px;
+  height: 500px;
 `;
 
 const InfoArea = styled.div`

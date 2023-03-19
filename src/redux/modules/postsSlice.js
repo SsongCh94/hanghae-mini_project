@@ -53,11 +53,15 @@ export const __revisePost = createAsyncThunk(
   "revisePost",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await apis.get(
+      console.log("payload == ", payload);
+      console.log("id == ", payload.id);
+      console.log("revisedPost == ", payload.revisedPost);
+      const response = await apis_token.put(
         `/api/board/${payload.id}`,
         `${payload.revisedPost}`
       );
-      return thunkAPI.fulfillWithValue(data);
+      console.log(response);
+      // return thunkAPI.fulfillWithValue(response);
     } catch (error) {
       console.log("error-->", error);
       return thunkAPI.rejectWithValue(error);

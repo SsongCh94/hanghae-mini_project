@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { __getPostDetail, __postPosts } from "../redux/modules/postsSlice";
+import { __getPostDetail, __revisePost } from "../redux/modules/postsSlice";
 import { ButtonMiddle, PageContainer } from "../variables/styleStore";
 import { useBbsInput } from "../variables/useBbsInput";
 
@@ -22,7 +22,7 @@ function BbsModify() {
   const navigate = useNavigate();
   const { region, category } = useSelector((state) => state.selects);
   const [inputTitle, inputTitleHandler] = useBbsInput(`${postDetail.title}`);
-  const [inputURL, inputURLHandler] = useBbsInput(``);
+  const [inputURL, inputURLHandler] = useBbsInput(`${postDetail.image}`);
   const [selectedCategory, selectedCategoryHandler] = useBbsInput(
     `${postDetail.classify}`
   );
@@ -32,23 +32,27 @@ function BbsModify() {
   const [location, locationHandler] = useBbsInput(`${postDetail.location}`);
   const [startDate, startDateHandler] = useBbsInput(`${postDetail.startDate}`);
   const [endDate, endDateHandler] = useBbsInput(`${postDetail.endDate}`);
-  const [contents, contentsHandler] = useBbsInput(``);
+  const [contents, contentsHandler] = useBbsInput(`${postDetail.contents}`);
   const [pageUrl, pageUrlHandler] = useBbsInput(`${postDetail.pageUrl}`);
 
-  const requestPost = (payload) => {
-    dispatch(__postPosts(payload));
+  const revisePost = {
+    id: params.id,
+    revisedPost: {
+      title: inputTitle,
+      image: inputURL,
+      pageUrl,
+      classify: selectedCategory,
+      region: selectedRegion,
+      location,
+      startDate,
+      endDate,
+      contents,
+    },
   };
 
-  const newPost = {
-    title: inputTitle,
-    image: inputURL,
-    classify: selectedCategory,
-    region: selectedRegion,
-    location,
-    startDate,
-    endDate,
-    contents,
-    pageUrl,
+  const reviseBtnHandler = (payload) => {
+    dispatch(__revisePost(payload));
+    console.log("revisePost======>", revisePost);
   };
 
   return (
@@ -155,7 +159,10 @@ function BbsModify() {
             />
           </CommentArea>
           <ButtonArea>
-            <ButtonMiddle type="button" onClick={() => requestPost(newPost)}>
+            <ButtonMiddle
+              type="button"
+              onClick={() => reviseBtnHandler(revisePost)}
+            >
               글 등록
             </ButtonMiddle>
             <ButtonMiddle onClick={() => navigate(`/bbs/detail/${params.id}`)}>
