@@ -5,18 +5,19 @@ import styled from "styled-components";
 import { __getPostDetail } from "../redux/modules/postsSlice";
 import { PageContainer } from "../variables/styleStore";
 import { ButtonSmall } from "../variables/styleStore";
+import { useBbsInput } from "../variables/useBbsInput";
 
 function BbsDetail() {
   const navigate = useNavigate();
   const params = useParams();
   const dispatch = useDispatch();
+  const [comment, commentHandler] = useBbsInput("");
 
   useEffect(() => {
     dispatch(__getPostDetail(params.id));
   }, []);
 
   const { postDetail } = useSelector((state) => state.posts);
-  console.log(postDetail);
 
   return (
     <PageContainer>
@@ -42,7 +43,12 @@ function BbsDetail() {
           </a>
         </Contents>
         <CommentsArea>
-          <CommentsInput type="text" placeholder="댓글을 입력하세요" />
+          <CommentsInput
+            type="text"
+            placeholder="댓글을 입력하세요"
+            value={comment}
+            onChange={commentHandler}
+          />
           <ButtonSmall>댓글 달기</ButtonSmall>
         </CommentsArea>
         <CommentsList>
@@ -61,7 +67,9 @@ function BbsDetail() {
         </CommentsList>
         <Test>
           {" "}
-          <ButtonMiddle>수정하기</ButtonMiddle>
+          <ButtonMiddle onClick={() => navigate(`/bbs/modify/${params.id}`)}>
+            수정하기
+          </ButtonMiddle>
           <ButtonMiddle onClick={() => navigate("/")}>뒤로가기</ButtonMiddle>
         </Test>
       </DetailArea>

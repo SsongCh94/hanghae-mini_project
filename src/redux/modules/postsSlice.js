@@ -49,6 +49,22 @@ export const __postPosts = createAsyncThunk(
   }
 );
 
+export const __revisePost = createAsyncThunk(
+  "revisePost",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await apis.get(
+        `/api/board/${payload.id}`,
+        `${payload.revisedPost}`
+      );
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      console.log("error-->", error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const postslice = createSlice({
   name: "posts",
   initialState,

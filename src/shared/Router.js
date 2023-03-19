@@ -21,7 +21,7 @@ const Router = () => {
           <Route path="/user/join" element={<UserJoin />} />
           <Route path="/user/mypage" element={<UserMypage />} />
           <Route path="/bbs/detail/:id" element={<BbsDetail />} />
-          <Route path="/bbs/modify" element={<BbsModify />} />
+          <Route path="/bbs/modify/:id" element={<BbsModify />} />
           <Route path="/bbs/create" element={<BbsCreate />} />
           {/* 아이디로 페이지를 들어가야 하지만 임시로 일단 그냥 id없이 페이지 링크 확인 */}
           {/* <Route path="/mypage:id" element={<Mypage />} /> */}

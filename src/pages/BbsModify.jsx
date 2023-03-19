@@ -1,25 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { __postPosts } from "../redux/modules/postsSlice";
+import { __getPostDetail, __postPosts } from "../redux/modules/postsSlice";
 import { ButtonMiddle, PageContainer } from "../variables/styleStore";
 import { useBbsInput } from "../variables/useBbsInput";
 
 function BbsModify() {
-  const navigate = useNavigate();
-  const { region, category } = useSelector((state) => state.selects);
-  const [inputTitle, inputTitleHandler] = useBbsInput("");
-  const [inputURL, inputURLHandler] = useBbsInput("");
-  const [selectedCategory, selectedCategoryHandler] = useBbsInput("");
-  const [selectedRegion, selectedRegionHandler] = useBbsInput("");
-  const [location, locationHandler] = useBbsInput("");
-  const [startDate, startDateHandler] = useBbsInput("");
-  const [endDate, endDateHandler] = useBbsInput("");
-  const [contents, contentsHandler] = useBbsInput("");
-  const [pageUrl, pageUrlHandler] = useBbsInput("");
+  const { postDetail, isLoading } = useSelector((state) => state.posts);
+
+  console.log(isLoading);
 
   const dispatch = useDispatch();
+
+  const params = useParams();
+
+  useEffect(() => {
+    dispatch(__getPostDetail(params.id));
+  }, [dispatch, params.id]);
+
+  const navigate = useNavigate();
+  const { region, category } = useSelector((state) => state.selects);
+  const [inputTitle, inputTitleHandler] = useBbsInput(`${postDetail.title}`);
+  const [inputURL, inputURLHandler] = useBbsInput(``);
+  const [selectedCategory, selectedCategoryHandler] = useBbsInput(
+    `${postDetail.classify}`
+  );
+  const [selectedRegion, selectedRegionHandler] = useBbsInput(
+    `${postDetail.region}`
+  );
+  const [location, locationHandler] = useBbsInput(`${postDetail.location}`);
+  const [startDate, startDateHandler] = useBbsInput(`${postDetail.startDate}`);
+  const [endDate, endDateHandler] = useBbsInput(`${postDetail.endDate}`);
+  const [contents, contentsHandler] = useBbsInput(``);
+  const [pageUrl, pageUrlHandler] = useBbsInput(`${postDetail.pageUrl}`);
 
   const requestPost = (payload) => {
     dispatch(__postPosts(payload));
@@ -39,59 +53,18 @@ function BbsModify() {
 
   return (
     <PageContainer>
-      <InputArea>
-        <Label>
-          {" "}
-          <Span>카테고리 : </Span>
-          <RegionSelect
-            defaultValue={selectedCategory}
-            onChange={selectedCategoryHandler}
-          >
-            {category.map((item, idx) => {
-              return (
-                <option defaultValue={item} key={idx}>
-                  {item}
-                </option>
-              );
-            })}
-          </RegionSelect>
-        </Label>
-        <Label>
-          <Span>제목 : </Span>
-          <Input
-            type={"text"}
-            placeholder={"제목을 입력하세요"}
-            defaultValue={inputTitle}
-            onChange={inputTitleHandler}
-          />
-        </Label>
-        <Label>
-          <Span>이미지 URL : </Span>
-          <Input
-            type={"text"}
-            placeholder={"이미지 URL을 입력하세요"}
-            defaultValue={inputURL}
-            onChange={inputURLHandler}
-          />
-        </Label>
-        <Label>
-          <Span>행사 홈페이지 URL : </Span>
-          <Input
-            type={"text"}
-            placeholder={"행사 홈 URL을 입력하세요"}
-            defaultValue={pageUrl}
-            onChange={pageUrlHandler}
-          />
-        </Label>
-        <LocationDiv>
-          <LocationLabel>
-            <Span>구 : </Span>
+      {isLoading ? (
+        <h1> 로딩중</h1>
+      ) : (
+        <InputArea>
+          <Label>
+            {" "}
+            <Span>카테고리 : </Span>
             <RegionSelect
-              defaultValue={selectedRegion}
-              onChange={selectedRegionHandler}
+              defaultValue={selectedCategory}
+              onChange={selectedCategoryHandler}
             >
-              {/* <option selected>"지역구를 선택해주세요."</option> */}
-              {region.map((item, idx) => {
+              {category.map((item, idx) => {
                 return (
                   <option defaultValue={item} key={idx}>
                     {item}
@@ -99,51 +72,98 @@ function BbsModify() {
                 );
               })}
             </RegionSelect>
-          </LocationLabel>
-          <LocationLabel>
-            <Span>장소 : </Span>
-            <LocationInput
+          </Label>
+          <Label>
+            <Span>제목 : </Span>
+            <Input
+              type={"text"}
+              placeholder={"제목을 입력하세요"}
+              defaultValue={inputTitle}
+              onChange={inputTitleHandler}
+            />
+          </Label>
+          <Label>
+            <Span>이미지 URL : </Span>
+            <Input
+              type={"text"}
+              placeholder={"이미지 URL을 입력하세요"}
+              defaultValue={inputURL}
+              onChange={inputURLHandler}
+            />
+          </Label>
+          <Label>
+            <Span>행사 홈페이지 URL : </Span>
+            <Input
+              type={"text"}
+              placeholder={"행사 홈 URL을 입력하세요"}
+              defaultValue={pageUrl}
+              onChange={pageUrlHandler}
+            />
+          </Label>
+          <LocationDiv>
+            <LocationLabel>
+              <Span>구 : </Span>
+              <RegionSelect
+                defaultValue={selectedRegion}
+                onChange={selectedRegionHandler}
+              >
+                {/* <option selected>"지역구를 선택해주세요."</option> */}
+                {region.map((item, idx) => {
+                  return (
+                    <option defaultValue={item} key={idx}>
+                      {item}
+                    </option>
+                  );
+                })}
+              </RegionSelect>
+            </LocationLabel>
+            <LocationLabel>
+              <Span>장소 : </Span>
+              <LocationInput
+                type="text"
+                placeholder="장소를 입력하세요"
+                defaultValue={location}
+                onChange={locationHandler}
+              />
+            </LocationLabel>
+          </LocationDiv>
+          <LocationDiv>
+            <LocationLabel>
+              <Span>시작 날짜 : </Span>
+              <LocationInput
+                type="date"
+                defaultValue={startDate}
+                onChange={startDateHandler}
+              />
+            </LocationLabel>
+            <LocationLabel>
+              <Span>끝나는 날짜 : </Span>
+              <LocationInput
+                type="date"
+                defaultValue={endDate}
+                onChange={endDateHandler}
+              />
+            </LocationLabel>
+          </LocationDiv>
+          <CommentArea>
+            <Span>후기 : </Span>
+            <TextArea
               type="text"
-              placeholder="장소를 입력하세요"
-              defaultValue={location}
-              onChange={locationHandler}
+              placeholder="후기를 입력하세요"
+              defaultValue={contents}
+              onChange={contentsHandler}
             />
-          </LocationLabel>
-        </LocationDiv>
-        <LocationDiv>
-          <LocationLabel>
-            <Span>시작 날짜 : </Span>
-            <LocationInput
-              type="date"
-              defaultValue={startDate}
-              onChange={startDateHandler}
-            />
-          </LocationLabel>
-          <LocationLabel>
-            <Span>끝나는 날짜 : </Span>
-            <LocationInput
-              type="date"
-              defaultValue={endDate}
-              onChange={endDateHandler}
-            />
-          </LocationLabel>
-        </LocationDiv>
-        <CommentArea>
-          <Span>후기 : </Span>
-          <TextArea
-            type="text"
-            placeholder="후기를 입력하세요"
-            defaultValue={contents}
-            onChange={contentsHandler}
-          />
-        </CommentArea>
-        <ButtonArea>
-          <ButtonMiddle type="button" onClick={() => requestPost(newPost)}>
-            글 등록
-          </ButtonMiddle>
-          <ButtonMiddle onClick={() => navigate("/")}>뒤로가기</ButtonMiddle>
-        </ButtonArea>
-      </InputArea>
+          </CommentArea>
+          <ButtonArea>
+            <ButtonMiddle type="button" onClick={() => requestPost(newPost)}>
+              글 등록
+            </ButtonMiddle>
+            <ButtonMiddle onClick={() => navigate(`/bbs/detail/${params.id}`)}>
+              뒤로가기
+            </ButtonMiddle>
+          </ButtonArea>
+        </InputArea>
+      )}
     </PageContainer>
   );
 }
