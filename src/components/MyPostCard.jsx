@@ -7,9 +7,9 @@ function MyPostCard({ children }) {
   return (
     <>
       {
-        children.map((card) => {
+        children.map((card,id) => {
           return (
-            <PostingCard>
+            <PostingCard key={id}>
               <FlexVertical alignItems='center'>
                 <FlexHorizontal height="100%">
                   <FlexVertical alignItems='center' justifyContent='center'>

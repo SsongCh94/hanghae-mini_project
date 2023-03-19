@@ -48,7 +48,7 @@ export const ButtonMiddle = styled.button`
     padding : 10px 20px;
     width: fit-content;
     height: fit-content;
-    color : #${COLOR_THEME.COLOR_4};
+    color : ${COLOR_THEME.COLOR_4};
     border : 1px solid ${COLOR_THEME.COLOR_4};
     background-color : ${COLOR_THEME.COLOR_1};
     &:hover{
@@ -108,6 +108,10 @@ height : 33px;
 border : none;
 box-shadow: 0px 0px 5px ${COLOR_THEME.COLOR_2};
 ${({others}) => others};
+`
+
+export const MinimumHeightContainer = styled.div`
+  height: ${MIN_PAGE_HEIGHT};
 `
 
 
