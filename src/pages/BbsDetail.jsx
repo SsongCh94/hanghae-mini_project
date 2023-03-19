@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { PageContainer } from "../variables/styleStore";
 import { ButtonSmall } from "../variables/styleStore";
@@ -8,14 +8,21 @@ import { ButtonSmall } from "../variables/styleStore";
 function BbsDetail() {
   const { posts } = useSelector((state) => state.posts);
   const navigate = useNavigate();
-  console.log(posts);
+  const params = useParams();
+  console.log("posts========", posts);
+
+  const foundPost = posts.find((item) => {
+    return item.id === parseInt(params.id);
+  });
+
+  console.log("foundPost============", foundPost);
 
   return (
     <PageContainer>
       <DetailArea>
         <PhotoArea />
         <InfoArea>
-          <span>분류</span>
+          <span>{foundPost.category}</span>
           <span>공연, 행사명</span>
         </InfoArea>
         <InfoArea>

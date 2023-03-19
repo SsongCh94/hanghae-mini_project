@@ -35,7 +35,7 @@ function Home() {
               key={item.id}
               onClick={() => navigate(`/bbs/detail/${item.id}`)}
             >
-              <CardImg src={item.image} />
+              <CardImg src={item.image} art={"왜안되는거람"} />
               <CardInfo>
                 <h1>{item.title}</h1>
                 <h2>{item.location}</h2>
