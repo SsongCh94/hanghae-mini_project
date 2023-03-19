@@ -4,58 +4,58 @@ import styled from "styled-components";
 import ModalModify from "../components/ModalModify";
 import MyPostCard from "../components/MyPostCard";
 import {
-  ButtonLarge,
-  ButtonMiddle,
-  ButtonSmall,
-  FlexHorizontal,
-  FlexVertical,
-  PageContainer,
+    ButtonLarge,
+    ButtonMiddle,
+    ButtonSmall,
+    FlexHorizontal,
+    FlexVertical,
+    PageContainer,
 } from "../variables/styleStore";
 import { MAINPAGE_CONTENTS_WIDTH } from "../variables/uiVariables";
 import { COLOR_THEME } from "../variables/uiVariables";
 
 function UserMypage() {
-  const navigation = useNavigate();
-  const [modalSwitch, setModalSwitch] = useState(false);
+    const navigation = useNavigate();
+    const [modalSwitch, setModalSwitch] = useState(false);
 
-  const toggleModal = () => {
-    setModalSwitch((prev) => !prev);
-  };
+    const toggleModal = () => {
+        setModalSwitch((prev) => !prev);
+    };
 
-  const tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  return (
-    <PageContainer>
-      {modalSwitch ? <ModalModify call={toggleModal} /> : null}
-      <Wrap>
-        <FlexHorizontal
-          alignItems="top"
-          justifyContent="space-between"
-          height="fit-contents"
-          others={"margin-bottom:100px;"}
-        >
-          <ButtonLarge onClick={toggleModal}>개인정보 수정</ButtonLarge>
-          <ButtonSmall onClick={() => navigation("/")}>뒤로가기</ButtonSmall>
-        </FlexHorizontal>
-        <WrapGroup>
-          <BoardTitle>
-            내가 <StyledText>작성</StyledText>한 포스팅
-          </BoardTitle>
-        </WrapGroup>
-        <WrapGroup>
-          <FlexVertical>
-            <FlexHorizontal
-              alignItems="center"
-              justifyContent="space-between"
-              gap="50px"
-              others="flex-wrap : wrap"
-            >
-              <MyPostCard>{tempArray}</MyPostCard>
-            </FlexHorizontal>
-          </FlexVertical>
-        </WrapGroup>
-      </Wrap>
-    </PageContainer>
-  );
+    const tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    return (
+        <PageContainer>
+            {modalSwitch ? <ModalModify call={toggleModal} /> : null}
+            <Wrap>
+                <FlexHorizontal
+                    alignItems="top"
+                    justifyContent="space-between"
+                    height="fit-contents"
+                    others={"margin-bottom:100px;"}
+                >
+                    <ButtonLarge onClick={toggleModal}>개인정보 수정</ButtonLarge>
+                    <ButtonSmall onClick={() => navigation("/")}>뒤로가기</ButtonSmall>
+                </FlexHorizontal>
+                <WrapGroup>
+                    <BoardTitle>
+                        내가 <StyledText>작성</StyledText>한 포스팅
+                    </BoardTitle>
+                </WrapGroup>
+                <WrapGroup>
+                    <FlexVertical>
+                        <FlexHorizontal
+                            alignItems="center"
+                            justifyContent="space-between"
+                            gap="50px"
+                            others="flex-wrap : wrap"
+                        >
+                            <MyPostCard>{tempArray}</MyPostCard>
+                        </FlexHorizontal>
+                    </FlexVertical>
+                </WrapGroup>
+            </Wrap>
+        </PageContainer>
+    );
 }
 
 export default UserMypage;
