@@ -1,21 +1,21 @@
 import React, { useEffect } from "react";
 import { ButtonMiddle, PageContainer } from "../variables/styleStore";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { __getPosts } from "../redux/modules/postsSlice";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.posts);
-  console.log("posts=======================", posts);
-  console.log("posts@@@@@@@@", posts[1]);
+  const postsList = posts.data;
+  console.log(postsList);
+  const navigate = useNavigate();
 
-  // const image = posts[7];
-  // console.log("image!!@!@!@!@!@!@!@!@!@!@!", image);
-  // console.log("type==================", typeof image);
   useEffect(() => {
     dispatch(__getPosts());
   }, []);
+
   return (
     <PageContainer
       style={{
@@ -27,16 +27,23 @@ function Home() {
         <SearchArea>
           <Input type="text" />
           <ButtonMiddle>검색</ButtonMiddle>
-          <ButtonMiddle>글쓰기</ButtonMiddle>
+          <ButtonMiddle onClick={() => navigate("/bbs/create")}>
+            글쓰기
+          </ButtonMiddle>
         </SearchArea>
-        {posts?.map((item) => {
+        {postsList?.map((item) => {
           return (
-            <Card key={item.id}>
-              <CardImg src="item.image" />
+            <Card
+              key={item.id}
+              // onClick={()=>()}
+            >
+              <CardImg src={item.image} />
               <CardInfo>
-                <h1>item.title</h1>
-                <h2>item.loaction</h2>
-                <h2>item.startDate, item.endDate</h2>
+                <h1>{item.title}</h1>
+                <h2>{item.location}</h2>
+                <h2>
+                  {item.startDate}, {item.endDate}
+                </h2>
               </CardInfo>
             </Card>
           );
