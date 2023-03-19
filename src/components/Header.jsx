@@ -29,6 +29,7 @@ function Header() {
 
   const logoutClickHandler = () => {
     dispatch(logout());
+    navigation('/');
   }
   const loginClickHandler = (e) => {
     e.preventDefault();
@@ -55,7 +56,6 @@ function Header() {
           others='width:100%;'>
           <Logo />
           <button onClick={() => removeCookie('token')}>토큰제거</button>
-          <button onClick={toggle}>토글</button>
           {
             isLogin
               ? <div>
