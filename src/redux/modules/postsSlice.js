@@ -12,9 +12,7 @@ export const __getPosts = createAsyncThunk(
   "getPosts",
   async (payload, thunkAPI) => {
     try {
-      console.log("디스패치 실행여부!!!!");
-      const data = await apis.get("/api/board/list");
-      console.log("data======>>", data);
+      const { data } = await apis.get("/api/board/list");
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       console.log("error-->", error);
@@ -59,7 +57,6 @@ export const postslice = createSlice({
     [__getPosts.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isError = false;
-      console.log("action-------", action.payload);
       state.posts = action.payload;
     },
     [__getPosts.pending]: (state, action) => {

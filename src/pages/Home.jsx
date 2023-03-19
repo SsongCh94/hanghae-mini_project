@@ -8,8 +8,6 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.posts);
-  const postsList = posts.data;
-  console.log(postsList);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,11 +29,11 @@ function Home() {
             글쓰기
           </ButtonMiddle>
         </SearchArea>
-        {postsList?.map((item) => {
+        {posts?.map((item) => {
           return (
             <Card
               key={item.id}
-              // onClick={()=>()}
+              onClick={() => navigate(`/bbs/detail/${item.id}`)}
             >
               <CardImg src={item.image} />
               <CardInfo>
@@ -48,14 +46,6 @@ function Home() {
             </Card>
           );
         })}
-        {/* <Card>
-          <CardImg src="https://i.pinimg.com/236x/c3/61/83/c361835e4881cc83d5b7928728fdcd3f.jpg" />
-          <CardInfo>
-            <h1>글 제목 자리</h1>
-            <h2>장소 자리</h2>
-            <h2>날짜 자리</h2>
-          </CardInfo>
-        </Card> */}
       </MainArea>
     </PageContainer>
   );

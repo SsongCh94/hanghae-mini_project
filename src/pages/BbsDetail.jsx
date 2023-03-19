@@ -1,9 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { PageContainer } from "../variables/styleStore";
 import { ButtonSmall } from "../variables/styleStore";
 
 function BbsDetail() {
+  const { posts } = useSelector((state) => state.posts);
+  const navigate = useNavigate();
+  console.log(posts);
+
   return (
     <PageContainer>
       <DetailArea>
@@ -42,7 +48,7 @@ function BbsDetail() {
         <Test>
           {" "}
           <ButtonMiddle>수정하기</ButtonMiddle>
-          <ButtonMiddle>뒤로가기</ButtonMiddle>
+          <ButtonMiddle onClick={() => navigate("/")}>뒤로가기</ButtonMiddle>
         </Test>
       </DetailArea>
     </PageContainer>

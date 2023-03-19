@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   region: [
+    "지역구를 선택해주세요",
     "강남구",
     "강동구",
     "강북구",
@@ -30,6 +31,7 @@ const initialState = {
   ],
 
   category: [
+    "카테고리를 선택해주세요",
     "클래식",
     "콘서트",
     "축제-전통/역사",
