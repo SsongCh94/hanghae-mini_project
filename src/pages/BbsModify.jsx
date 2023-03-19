@@ -38,19 +38,18 @@ function BbsModify() {
     revisedPost: {
       title: inputTitle,
       image: inputURL,
-      pageUrl,
+      pageUrl: pageUrl,
       classify: selectedCategory,
       region: selectedRegion,
-      location,
-      startDate,
-      endDate,
-      contents,
+      location: location,
+      startDate: startDate,
+      endDate: endDate,
+      contents: contents,
     },
   };
 
   const reviseBtnHandler = (payload) => {
     dispatch(__revisePost(payload));
-    console.log("revisePost======>", revisePost);
   };
 
   return (
