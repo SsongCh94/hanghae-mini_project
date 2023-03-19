@@ -1,21 +1,27 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { __isUserIdExist, __Join } from '../redux/modules/userSlice';
-import { ButtonSmall, FlexHorizontal, FlexVertical, MinimumHeightContainer, PageContainer, StInput } from '../variables/styleStore'
-import { MIN_PAGE_HEIGHT } from '../variables/uiVariables';
-import useLoginInput from '../variables/useLoginInput';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { __isUserIdExist, __Join } from "../redux/modules/userSlice";
+import {
+  ButtonSmall,
+  FlexHorizontal,
+  FlexVertical,
+  MinimumHeightContainer,
+  PageContainer,
+  StInput,
+} from "../variables/styleStore";
+import { MIN_PAGE_HEIGHT } from "../variables/uiVariables";
+import useLoginInput from "../variables/useLoginInput";
 
 function UserJoin() {
   const navigation = useNavigate();
   const dispatch = useDispatch();
-  const [id, onIdChangeHandler] = useLoginInput('');
-  const [password, onPasswordChangeHandler] = useLoginInput('');
-  const [nickname, onNickNameChangeHandler] = useLoginInput('');
+  const [id, onIdChangeHandler] = useLoginInput("");
+  const [password, onPasswordChangeHandler] = useLoginInput("");
+  const [nickname, onNickNameChangeHandler] = useLoginInput("");
 
   const isLogin = useSelector((state) => state.user.isLogin);
-
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -23,24 +29,23 @@ function UserJoin() {
       loginid: id,
       password: password,
       nickname: nickname,
-    }
+    };
     dispatch(__Join(newUser));
-    navigation('/');
+    navigation("/");
     // console.log(newUser);
-  }
+  };
 
   const idCheckHandler = () => {
     const idPayload = {
       loginid: id,
-    }
+    };
     dispatch(__isUserIdExist(idPayload));
-
-  }
+  };
 
   useEffect(() => {
-    console.log('useEffect : ', isLogin);
+    console.log("useEffect : ", isLogin);
     if (isLogin) {
-      navigation('/');
+      navigation("/");
     }
   }, [isLogin]);
 
@@ -103,16 +108,15 @@ function UserJoin() {
         </MinimumHeightContainer>
       }
     </PageContainer>
-
-  )
+  );
 }
 
 export default UserJoin;
 
 const Warp = styled.div`
   width: fit-content;
-`
+`;
 const StForm = styled.form`
   width: 100%;
   height: 100%;
-`
+`;
