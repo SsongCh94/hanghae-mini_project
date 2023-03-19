@@ -13,6 +13,6 @@ export const apis_token = axios.create({
   baseURL: `${process.env.REACT_APP_SERVER_URL}`,
   headers: {
     "Access-Control-Allow-Origin": "*",
-    Authorization: "Bearer " + token,
+    Authorization: token,
   },
 });

@@ -9,8 +9,6 @@ import { useBbsInput } from "../variables/useBbsInput";
 function BbsModify() {
   const { postDetail, isLoading } = useSelector((state) => state.posts);
 
-  console.log(isLoading);
-
   const dispatch = useDispatch();
 
   const params = useParams();
@@ -163,7 +161,7 @@ function BbsModify() {
               type="button"
               onClick={() => reviseBtnHandler(revisePost)}
             >
-              글 등록
+              수정완료
             </ButtonMiddle>
             <ButtonMiddle onClick={() => navigate(`/bbs/detail/${params.id}`)}>
               뒤로가기

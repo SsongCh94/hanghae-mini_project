@@ -136,7 +136,7 @@ const CommentsInput = styled.input`
 const CommentsList = styled.div`
   background-color: beige;
   width: 60%;
-  height: 20000px;
+  height: 500px;
   display: flex;
   flex-direction: column;
 `;

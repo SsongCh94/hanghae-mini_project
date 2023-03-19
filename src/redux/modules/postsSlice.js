@@ -56,11 +56,12 @@ export const __revisePost = createAsyncThunk(
       console.log("payload == ", payload);
       console.log("id == ", payload.id);
       console.log("revisedPost == ", payload.revisedPost);
-      const response = await apis_token.put(
+      // const response =
+      await apis_token.put(
         `/api/board/${payload.id}`,
         `${payload.revisedPost}`
       );
-      console.log(response);
+      // console.log(response);
       // return thunkAPI.fulfillWithValue(response);
     } catch (error) {
       console.log("error-->", error);
