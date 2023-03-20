@@ -34,6 +34,7 @@ function MyPostCard({ children }) {
                         <div style={{textAlign:'center'}}>{item.title}</div>
                       </FlexHorizontal>
                       <div><span>내용: </span><span>{item.contents}</span></div>
+                      <div><span>댓글 수: </span><span>{item.cmtCount}</span></div>
                       <div>
                         <ButtonSmall onClick={()=>navigate(`/bbs/detail/${item.id}`)}>상세보기</ButtonSmall>
                         <ButtonSmall onClick={()=>onDeleteBtnClickHandler(item.id)}>삭제</ButtonSmall>

@@ -21,8 +21,9 @@ function HomeCard({children}) {
               {item.startDate} ~ {item.endDate}
             </h3>
             <h3>작성일 : {item.createdat}</h3>
+            <span>작성자 : {item.nickname}</span>
           </CardInfo>
-            <CommentCnt></CommentCnt>
+            <CommentCnt>{item.cmtCount}</CommentCnt>
         </Card>
       );
     })
@@ -58,11 +59,9 @@ const CardInfo = styled.div`
 `;
 
 const CommentCnt = styled.div`
-background-color: blue;
+background-color: beige;
 width: 100px;
-height: 100px;
-
-
+height: 150px;
 `
 
 export default HomeCard

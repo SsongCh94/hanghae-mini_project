@@ -50,7 +50,7 @@ function BbsModify() {
 
   const reviseBtnHandler = async (payload) => {
     await dispatch(__revisePost(payload));
-    navigate(`/bbs/detail/${params.id}`);
+    // navigate(`/bbs/detail/${params.id}`);
   };
 
   return (

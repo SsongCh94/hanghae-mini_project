@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -22,16 +22,12 @@ function BbsCreate() {
 
   const dispatch = useDispatch();
 
-  const requestPost = async (payload) => {
-    await dispatch(__postPosts(payload));
-    if (isError) {
-      alert(error)
-    }
-    else {
-      alert('작성이 완료되었습니다.')
-    navigate('/')
-    }    
-  };
+  const requestPost = (payload) => {
+      dispatch(__postPosts(payload));
+    };
+  
+  
+  console.log(isError);
 
   const newPost = {
     title: inputTitle,

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useNavigate } from 'react-router-dom';
 import { apis, apis_token } from "../../axios/api";
 
 const initialState = {
@@ -39,11 +40,9 @@ export const __postPosts = createAsyncThunk(
   "postPosts",
   async (payload, thunkAPI) => {
     try {
-      console.log("payload", payload);
-      const { data } = await apis_token.post("/api/board/", payload);
-      return thunkAPI.fulfillWithValue(data);
+      await apis_token.post("/api/board/", payload);
+      return thunkAPI.fulfillWithValue();
     } catch (error) {
-      console.log("error-->", error);
       alert(error.response.data.message)
       return thunkAPI.rejectWithValue(error);
     }
@@ -54,13 +53,11 @@ export const __revisePost = createAsyncThunk(
   "revisePost",
   async (payload, thunkAPI) => {
     try {
-      console.log("payload == ", payload);
-      console.log("id == ", payload.id);
-      console.log("revisedPost == ", payload.revisedPost);
       await apis_token.put(`/api/board/${payload.id}`, payload.revisedPost);
-      // console.log(response);
-      // return thunkAPI.fulfillWithValue(response);
+      return thunkAPI.fulfillWithValue();
     } catch (error) {
+      alert(error.response.data.message)
+      console.log('error======', error.response.data.message);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -74,7 +71,7 @@ export const postslice = createSlice({
     [__postPosts.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isError = false;
-      console.log("action.payload", action.payload);
+      alert('글 작성이 완료되었습니다.')
     },
     [__postPosts.pending]: (state, action) => {
       state.isLoading = true;
@@ -83,7 +80,20 @@ export const postslice = createSlice({
     [__postPosts.rejected]: (state, action) => {
       state.isLoading = false;
       state.isError = true;
-      console.log('action---------------------------------------------', action.payload.response.data.message);
+      state.error = action.payload
+    },
+    [__revisePost.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      alert('글 수정이 완료되었습니다.')
+    },
+    [__revisePost.pending]: (state, action) => {
+      state.isLoading = true;
+      state.isError = false;
+    },
+    [__revisePost.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
       state.error = action.payload
     },
     [__getPosts.fulfilled]: (state, action) => {

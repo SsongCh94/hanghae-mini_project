@@ -20,7 +20,6 @@ function Home() {
   // console.log(posts);
 
 
-
   useEffect(() => {
     dispatch(__getPosts());
   }, []);
