@@ -23,6 +23,8 @@ function BbsCreate() {
 
   const requestPost = (payload) => {
     dispatch(__postPosts(payload));
+    alert('작성이 완료되었습니다.')
+    navigate('/')
   };
 
   const newPost = {

@@ -123,14 +123,14 @@ const userSlice = createSlice({
       alert(action.payload.response.data.message);
       // console.log(action.payload.message);
     },
-    [__isUserIdExist.pending]: (state, action) => {},
+    [__isUserIdExist.pending]: (state, action) => { },
     [__isUserIdExist.fulfilled]: (state, action) => {
       alert("중복아이디가 없습니다. 사용하셔도 좋습니다!");
     },
     [__isUserIdExist.rejected]: (state, action) => {
       alert("사용중인 ID입니다.");
     },
-    [__changePassword.pending]: () => {},
+    [__changePassword.pending]: () => { },
     [__changePassword.fulfilled]: (state, action) => {
       alert("비밀번호 변경을 성공했습니다.");
     },
@@ -138,13 +138,13 @@ const userSlice = createSlice({
       // console.log(action.payload);
       alert(action.payload.response.data.message);
     },
-    [__changeNickname.pending]: () => {},
+    [__changeNickname.pending]: () => { },
     [__changeNickname.fulfilled]: (state, action) => {
       alert("닉네임 변경을 성공하였습니다.");
       console.log(action.payload);
       state.user.nickname = action.payload.nickname;
     },
-    [__changeNickname.rejected]: (state, action) => {},
+    [__changeNickname.rejected]: (state, action) => { },
   },
 });
 

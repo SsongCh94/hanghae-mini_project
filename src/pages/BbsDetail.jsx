@@ -18,6 +18,8 @@ function BbsDetail() {
     dispatch(__getPostDetail(params.id));
   }, []);
 
+  console.log(postDetail);
+
   return (
     <PageContainer>
       <DetailArea>

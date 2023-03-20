@@ -4,15 +4,26 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { __getPosts } from "../redux/modules/postsSlice";
 import { useNavigate } from "react-router-dom";
+import { useBbsInput } from '../variables/useBbsInput';
 
 function Home() {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.posts);
   const navigate = useNavigate();
+  const [searchValue, SearchValueHandler] = useBbsInput('')
 
   useEffect(() => {
     dispatch(__getPosts());
   }, []);
+
+  const searchedPosts = posts.filter((item) => {
+    item.title.includes(searchValue)
+  })
+
+  const onSearchBtnClickHandler = () => {
+    console.log(searchedPosts);
+  }
+
 
   return (
     <PageContainer
@@ -23,8 +34,8 @@ function Home() {
       <HomeImg />
       <MainArea>
         <SearchArea>
-          <Input type="text" />
-          <ButtonMiddle>검색</ButtonMiddle>
+          <Input type="text" value={searchValue} onChange={SearchValueHandler}/>
+          <ButtonMiddle onClick={onSearchBtnClickHandler}>검색</ButtonMiddle>
           <ButtonMiddle onClick={() => navigate("/bbs/create")}>
             글쓰기
           </ButtonMiddle>
