@@ -8,6 +8,7 @@ import { useBbsInput } from "../variables/useBbsInput";
 
 function BbsCreate() {
   const navigate = useNavigate();
+  const {isError, error} = useSelector((state) => state.posts)
   const { region, category } = useSelector((state) => state.selects);
   const [inputTitle, inputTitleHandler] = useBbsInput("");
   const [inputURL, inputURLHandler] = useBbsInput("");
@@ -21,10 +22,15 @@ function BbsCreate() {
 
   const dispatch = useDispatch();
 
-  const requestPost = (payload) => {
-    dispatch(__postPosts(payload));
-    alert('작성이 완료되었습니다.')
+  const requestPost = async (payload) => {
+    await dispatch(__postPosts(payload));
+    if (isError) {
+      alert(error)
+    }
+    else {
+      alert('작성이 완료되었습니다.')
     navigate('/')
+    }    
   };
 
   const newPost = {

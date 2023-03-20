@@ -44,6 +44,7 @@ export const __postPosts = createAsyncThunk(
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       console.log("error-->", error);
+      alert(error.response.data.message)
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -60,7 +61,6 @@ export const __revisePost = createAsyncThunk(
       // console.log(response);
       // return thunkAPI.fulfillWithValue(response);
     } catch (error) {
-      console.log("error-->", error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -83,7 +83,8 @@ export const postslice = createSlice({
     [__postPosts.rejected]: (state, action) => {
       state.isLoading = false;
       state.isError = true;
-      state.error = action.payload;
+      console.log('action---------------------------------------------', action.payload.response.data.message);
+      state.error = action.payload
     },
     [__getPosts.fulfilled]: (state, action) => {
       state.isLoading = false;

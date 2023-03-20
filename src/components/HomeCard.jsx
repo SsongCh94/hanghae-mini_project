@@ -21,8 +21,8 @@ function HomeCard({children}) {
               {item.startDate} ~ {item.endDate}
             </h3>
             <h3>작성일 : {item.createdat}</h3>
-            <CommentCnt></CommentCnt>
           </CardInfo>
+            <CommentCnt></CommentCnt>
         </Card>
       );
     })
@@ -63,8 +63,6 @@ width: 100px;
 height: 100px;
 
 
-  right: 0;
-  bottom: 20px;
 `
 
 export default HomeCard

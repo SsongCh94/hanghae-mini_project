@@ -31,10 +31,6 @@ function Home() {
   }
   },[searchedRegion, searchValue])
 
-  
-  // const searchedPosts = posts.filter((item) => {
-  //   return item.title.toLowerCase().includes(searchValue.toLowerCase()) || item.location.toLowerCase().includes(searchValue.toLowerCase() || item.region === searchedRegion )
-  // })
   let searchedPosts = [];
 
   if (searchedRegion && !searchValue) {
