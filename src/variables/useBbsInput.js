@@ -5,7 +5,6 @@ export function useBbsInput(initialValue) {
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
-    console.log(inputValue);
   };
 
   return [inputValue, handleChange];

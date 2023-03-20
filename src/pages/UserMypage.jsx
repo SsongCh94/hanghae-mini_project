@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ModalModify from "../components/ModalModify";
 import MyPostCard from "../components/MyPostCard";
+import { __getMyPost } from '../redux/modules/userSlice';
 import {
   ButtonLarge,
   ButtonMiddle,
@@ -17,12 +19,19 @@ import { COLOR_THEME } from "../variables/uiVariables";
 function UserMypage() {
   const navigation = useNavigate();
   const [modalSwitch, setModalSwitch] = useState(false);
+  const dispatch = useDispatch()
+
+  const {myPages} = useSelector((state) => state.user)
+  console.log('myPages====', myPages);
 
   const toggleModal = () => {
     setModalSwitch((prev) => !prev);
   };
 
-  const tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  useEffect(() => {
+    dispatch(__getMyPost())
+  },[])
+  
   return (
     <PageContainer>
       {modalSwitch ? <ModalModify call={toggleModal} /> : null}
@@ -49,7 +58,7 @@ function UserMypage() {
               gap="50px"
               others="flex-wrap : wrap"
             >
-              <MyPostCard>{tempArray}</MyPostCard>
+              <MyPostCard>{myPages}</MyPostCard>
             </FlexHorizontal>
           </FlexVertical>
         </WrapGroup>

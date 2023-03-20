@@ -1,8 +1,12 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 function HomeCard({children}) {
+  const navigate = useNavigate()
+  
   return (
-    {children?.map((item) => {
+    children.map((item) => {
       return (
         <Card
           key={item.id}
@@ -11,15 +15,56 @@ function HomeCard({children}) {
           <CardImg src={item.image} art={"왜안되는거람"} />
           <CardInfo>
             <h1>{item.title}</h1>
-            <h2>{item.location}</h2>
-            <h2>
-              {item.startDate}, {item.endDate}
-            </h2>
+            <h2>{item.region}</h2>
+            <h3>{item.location}</h3>
+            <h3>
+              {item.startDate} ~ {item.endDate}
+            </h3>
+            <h3>작성일 : {item.createdat}</h3>
+            <CommentCnt></CommentCnt>
           </CardInfo>
         </Card>
       );
-    })}
+    })
   )
 }
+
+const Card = styled.div`
+  width: 100%;
+  height: 300px;
+  margin-top: 20px;
+  display: flex;
+
+  border: 2px solid black;
+`;
+
+const CardImg = styled.img`
+  width: 250px;
+  height: 250px;
+  margin: 25px;
+`;
+
+const CardInfo = styled.div`
+  background-color: aqua;
+
+  width: 1000px;
+  height: 250px;
+
+  margin: 25px 25px 25px 0;
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+`;
+
+const CommentCnt = styled.div`
+background-color: blue;
+width: 100px;
+height: 100px;
+
+
+  right: 0;
+  bottom: 20px;
+`
 
 export default HomeCard

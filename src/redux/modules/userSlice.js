@@ -7,6 +7,7 @@ const initialState = {
     loginid: "",
     nickname: "",
   },
+  myPages: [],
   isLogin: false,
   isLoading: false,
   error: null,
@@ -74,6 +75,29 @@ export const __isUserIdExist = createAsyncThunk(
     }
   }
 );
+
+export const __getMyPost = createAsyncThunk(
+  'getMyPost',
+  async (payload, thunkApi) => {
+    try {
+      const { data } = await apis_token.get('/api/board/mylist')
+      return thunkApi.fulfillWithValue(data)
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+)
+export const __deleteMyPost = createAsyncThunk(
+  'deleteMyPost',
+  async (payload, thunkApi) => {
+    try {
+      await apis_token.delete(`/api/board/${payload}`)
+      return thunkApi.fulfillWithValue(payload)
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+)
 
 const userSlice = createSlice({
   name: "user",
@@ -145,6 +169,19 @@ const userSlice = createSlice({
       state.user.nickname = action.payload.nickname;
     },
     [__changeNickname.rejected]: (state, action) => { },
+    [__getMyPost.pending]: () => { },
+    [__getMyPost.fulfilled]: (state, action) => {
+      state.myPages = action.payload;
+    },
+    [__getMyPost.rejected]: (state, action) => { },
+    [__deleteMyPost.pending]: () => { },
+    [__deleteMyPost.fulfilled]: (state, action) => {
+      state.myPages = [...state.myPages.filter((item) => {
+        return item.id !== action.payload
+      })]
+      console.log(state.myPages);
+    },
+    [__deleteMyPost.rejected]: (state, action) => { },
   },
 });
 

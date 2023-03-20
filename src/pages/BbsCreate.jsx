@@ -143,7 +143,7 @@ function BbsCreate() {
           <ButtonMiddle type="button" onClick={() => requestPost(newPost)}>
             글 등록
           </ButtonMiddle>
-          <ButtonMiddle onClick={() => navigate("/")}>뒤로가기</ButtonMiddle>
+          <ButtonMiddle type='button' onClick={() => navigate("/")}>뒤로가기</ButtonMiddle>
         </ButtonArea>
       </InputArea>
     </PageContainer>

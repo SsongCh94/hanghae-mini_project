@@ -1,29 +1,53 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ButtonMiddle, PageContainer } from "../variables/styleStore";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { __getPosts } from "../redux/modules/postsSlice";
 import { useNavigate } from "react-router-dom";
 import { useBbsInput } from '../variables/useBbsInput';
+import HomeCard from '../components/HomeCard';
 
 function Home() {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.posts);
+  const { region, category } = useSelector((state) => state.selects);
   const navigate = useNavigate();
   const [searchValue, SearchValueHandler] = useBbsInput('')
+  const [search, setSearch] = useState(false)
+  const [searchedRegion, setSearchedRegion] = useBbsInput('')
+
+  const {user} = useSelector((state) => state.user);
+  // console.log(posts);
+
+
 
   useEffect(() => {
     dispatch(__getPosts());
   }, []);
 
+  
   const searchedPosts = posts.filter((item) => {
-    item.title.includes(searchValue)
+    return item.title.toLowerCase().includes(searchValue.toLowerCase()) || item.location.toLowerCase().includes(searchValue.toLowerCase() || item.region === searchedRegion )
   })
 
-  const onSearchBtnClickHandler = () => {
-    console.log(searchedPosts);
+  if (searchedRegion && !search) {
+    searchedPosts =
   }
 
+
+
+  const onSearchBtnClickHandler = () => {
+    console.log(searchedPosts);  
+    if (!searchedRegion && !search) {
+    alert('지역 또는 검색어를 입력해주세요')
+  } else setSearch(true)
+    
+  }
+
+  const onWriteBtnClickHandler = () => {
+    user.loginid ? navigate("/bbs/create") : alert('로그인 후 이용해주세요')
+    
+  }
 
   return (
     <PageContainer
@@ -34,29 +58,25 @@ function Home() {
       <HomeImg />
       <MainArea>
         <SearchArea>
-          <Input type="text" value={searchValue} onChange={SearchValueHandler}/>
+        <select
+              defaultValue={searchedRegion}
+              onChange={setSearchedRegion}
+            >
+              {region.map((item, idx) => {
+                return (
+                  <option defaultValue={item} key={idx}>
+                    {item}
+                  </option>
+                );
+              })}
+            </select>
+          <Input type="text" value={searchValue} onChange={SearchValueHandler} placeholder={'행사 이름 또는 지역을 입력하세요'}/>
           <ButtonMiddle onClick={onSearchBtnClickHandler}>검색</ButtonMiddle>
-          <ButtonMiddle onClick={() => navigate("/bbs/create")}>
+          <ButtonMiddle onClick={onWriteBtnClickHandler}>
             글쓰기
           </ButtonMiddle>
         </SearchArea>
-        {posts?.map((item) => {
-          return (
-            <Card
-              key={item.id}
-              onClick={() => navigate(`/bbs/detail/${item.id}`)}
-            >
-              <CardImg src={item.image} art={"왜안되는거람"} />
-              <CardInfo>
-                <h1>{item.title}</h1>
-                <h2>{item.location}</h2>
-                <h2>
-                  {item.startDate}, {item.endDate}
-                </h2>
-              </CardInfo>
-            </Card>
-          );
-        })}
+        <HomeCard>{search ? searchedPosts : posts }</HomeCard>
       </MainArea>
     </PageContainer>
   );
@@ -88,34 +108,6 @@ const SearchArea = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-`;
-
-const Card = styled.div`
-  width: 100%;
-  height: 300px;
-  margin-top: 20px;
-  display: flex;
-
-  border: 2px solid black;
-`;
-
-const CardImg = styled.img`
-  width: 250px;
-  height: 250px;
-  margin: 25px;
-`;
-
-const CardInfo = styled.div`
-  background-color: aqua;
-
-  width: 1000px;
-  height: 250px;
-
-  margin: 25px 25px 25px 0;
-  padding-left: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
 `;
 
 const Input = styled.input`
