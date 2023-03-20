@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-function HomeCard({children}) {
+function HomeCard({ children }) {
   const navigate = useNavigate()
-  
+  console.log('렌더링도미');
+
   return (
     children.map((item) => {
       return (
@@ -23,7 +24,7 @@ function HomeCard({children}) {
             <h3>작성일 : {item.createdat}</h3>
             <span>작성자 : {item.nickname}</span>
           </CardInfo>
-            <CommentCnt>{item.cmtCount}</CommentCnt>
+          <CommentCnt>{item.cmtCount}</CommentCnt>
         </Card>
       );
     })
@@ -64,4 +65,4 @@ width: 100px;
 height: 150px;
 `
 
-export default HomeCard
+export default memo(HomeCard)
