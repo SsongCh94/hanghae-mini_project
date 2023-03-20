@@ -102,7 +102,6 @@ function UserJoin() {
                   </FlexHorizontal>
                 </Warp>
               </FlexVertical>
-
             </StForm>
           </FlexVertical>
         </MinimumHeightContainer>
