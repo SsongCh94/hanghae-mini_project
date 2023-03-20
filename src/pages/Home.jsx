@@ -16,7 +16,7 @@ function Home() {
   const [search, setSearch] = useState(false)
   const [searchedRegion, setSearchedRegion] = useBbsInput('')
 
-  const {user} = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   // console.log(posts);
 
 
@@ -25,13 +25,13 @@ function Home() {
     dispatch(__getPosts());
   }, []);
 
-  useEffect(()=>{
-  if (!searchValue) {
-    setSearch(false)
-  }
-  },[searchedRegion, searchValue])
+  useEffect(() => {
+    if (!searchValue) {
+      setSearch(false)
+    }
+  }, [searchedRegion, searchValue])
 
-  
+
   // const searchedPosts = posts.filter((item) => {
   //   return item.title.toLowerCase().includes(searchValue.toLowerCase()) || item.location.toLowerCase().includes(searchValue.toLowerCase() || item.region === searchedRegion )
   // })
@@ -40,7 +40,7 @@ function Home() {
   if (searchedRegion && !searchValue) {
     searchedPosts = posts.filter((item) => {
       return item.region === searchedRegion;
-    }) 
+    })
   } else if (!searchedRegion && searchValue) {
     searchedPosts = posts.filter((item) => {
       return item.title.toLowerCase().includes(searchValue.toLowerCase()) || item.location.toLowerCase().includes(searchValue.toLowerCase())
@@ -51,53 +51,49 @@ function Home() {
     })
   }
 
-  
+
 
 
 
 
 
   const onSearchBtnClickHandler = () => {
-    console.log(searchedPosts);  
+    console.log(searchedPosts);
     if (!searchedRegion && !searchValue) {
-    alert('지역 또는 검색어를 입력해주세요')
-  } else setSearch(true)
-    
+      alert('지역 또는 검색어를 입력해주세요')
+    } else setSearch(true)
+
   }
 
   const onWriteBtnClickHandler = () => {
     user.loginid ? navigate("/bbs/create") : alert('로그인 후 이용해주세요')
-    
+
   }
 
   return (
-    <PageContainer
-      style={{
-        overflowY: "scroll",
-      }}
-    >
+    <PageContainer>
       <HomeImg />
       <MainArea>
         <SearchArea>
-        <select
-              defaultValue={searchedRegion}
-              onChange={setSearchedRegion}
-            >
-              {region.map((item, idx) => {
-                return (
-                  <option defaultValue={item} key={idx}>
-                    {item}
-                  </option>
-                );
-              })}
-            </select>
-          <Input type="text" value={searchValue} onChange={SearchValueHandler} placeholder={'행사 이름 또는 지역을 입력하세요'}/>
+          <select
+            defaultValue={searchedRegion}
+            onChange={setSearchedRegion}
+          >
+            {region.map((item, idx) => {
+              return (
+                <option defaultValue={item} key={idx}>
+                  {item}
+                </option>
+              );
+            })}
+          </select>
+          <Input type="text" value={searchValue} onChange={SearchValueHandler} placeholder={'행사 이름 또는 지역을 입력하세요'} />
           <ButtonMiddle onClick={onSearchBtnClickHandler}>검색</ButtonMiddle>
           <ButtonMiddle onClick={onWriteBtnClickHandler}>
             글쓰기
           </ButtonMiddle>
         </SearchArea>
-        <HomeCard>{search ? searchedPosts : posts }</HomeCard>
+        <HomeCard>{search ? searchedPosts : posts}</HomeCard>
       </MainArea>
     </PageContainer>
   );
@@ -114,14 +110,16 @@ const MainArea = styled.div`
 
 const HomeImg = () => {
   return (
-    <img
-      style={{
-        width: "100%",
-        height: "300px",
-      }}
-      src="img/HomeImg.jpeg"
-      alt=" 이미지가 읽어지지 않네요.. ㅠㅠ"
-    />
+    <ImageContainer>
+      <Image
+        style={{
+          width: "100%",
+          height: "600px",
+        }}
+        src="img/HomeImg.jpeg"
+        alt=" 이미지가 읽어지지 않네요.. ㅠㅠ"
+      />
+    </ImageContainer>
   );
 };
 
@@ -134,3 +132,13 @@ const SearchArea = styled.div`
 const Input = styled.input`
   width: 60%;
 `;
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+`
+
+const ImageContainer = styled.div`
+  width: 100%;
+  height: 600px;
+`

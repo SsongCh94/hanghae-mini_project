@@ -20,6 +20,8 @@ function Comments({ boardId, children }) {
 
     const dispatch = useDispatch();
     const comments = useSelector((state) => state.comment.comments);
+    const nickname = useSelector((state) => state.user.user.nickname);
+    
     
     const [newComment, newCommentChangeHandler] = useLoginInput('');
 
@@ -32,6 +34,7 @@ function Comments({ boardId, children }) {
         const payload = {
             boardId,
             comment: newComment,
+            nickname,
         }
         dispatch(__registryComment(payload));
     }
@@ -79,7 +82,7 @@ const CommentContainer = styled.div`
 
 const ButtonBox = styled.div`
     text-align: right;
-    width: fit-content;
+    width: 60px;
 `
 const StForm = styled.form`
     width: 100%;
