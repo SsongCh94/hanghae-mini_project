@@ -12,12 +12,11 @@ function BbsDetail() {
   const params = useParams();
   const dispatch = useDispatch();
   const [comment, commentHandler] = useBbsInput("");
+  const { postDetail } = useSelector((state) => state.posts);
 
   useEffect(() => {
     dispatch(__getPostDetail(params.id));
   }, []);
-
-  const { postDetail } = useSelector((state) => state.posts);
 
   return (
     <PageContainer>

@@ -48,8 +48,9 @@ function BbsModify() {
     },
   };
 
-  const reviseBtnHandler = (payload) => {
-    dispatch(__revisePost(payload));
+  const reviseBtnHandler = async (payload) => {
+    await dispatch(__revisePost(payload));
+    navigate(`/bbs/detail/${params.id}`);
   };
 
   return (
