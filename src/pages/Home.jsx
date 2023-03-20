@@ -10,7 +10,7 @@ import HomeCard from '../components/HomeCard';
 function Home() {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.posts);
-  const { region, category } = useSelector((state) => state.selects);
+  const { region } = useSelector((state) => state.selects);
   const navigate = useNavigate();
   const [searchValue, SearchValueHandler] = useBbsInput('')
   const [search, setSearch] = useState(false)
