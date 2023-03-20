@@ -25,20 +25,41 @@ function Home() {
     dispatch(__getPosts());
   }, []);
 
-  
-  const searchedPosts = posts.filter((item) => {
-    return item.title.toLowerCase().includes(searchValue.toLowerCase()) || item.location.toLowerCase().includes(searchValue.toLowerCase() || item.region === searchedRegion )
-  })
-
-  if (searchedRegion && !search) {
-    searchedPosts =
+  useEffect(()=>{
+  if (!searchValue) {
+    setSearch(false)
   }
+  },[searchedRegion, searchValue])
+
+  
+  // const searchedPosts = posts.filter((item) => {
+  //   return item.title.toLowerCase().includes(searchValue.toLowerCase()) || item.location.toLowerCase().includes(searchValue.toLowerCase() || item.region === searchedRegion )
+  // })
+  let searchedPosts = [];
+
+  if (searchedRegion && !searchValue) {
+    searchedPosts = posts.filter((item) => {
+      return item.region === searchedRegion;
+    }) 
+  } else if (!searchedRegion && searchValue) {
+    searchedPosts = posts.filter((item) => {
+      return item.title.toLowerCase().includes(searchValue.toLowerCase()) || item.location.toLowerCase().includes(searchValue.toLowerCase())
+    })
+  } else if (searchedRegion && searchValue) {
+    searchedPosts = posts.filter((item) => {
+      return (item.title.toLowerCase().includes(searchValue.toLowerCase()) || item.location.toLowerCase().includes(searchValue.toLowerCase())) && item.region === searchedRegion
+    })
+  }
+
+  
+
+
 
 
 
   const onSearchBtnClickHandler = () => {
     console.log(searchedPosts);  
-    if (!searchedRegion && !search) {
+    if (!searchedRegion && !searchValue) {
     alert('지역 또는 검색어를 입력해주세요')
   } else setSearch(true)
     
