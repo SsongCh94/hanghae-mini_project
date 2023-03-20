@@ -40,6 +40,11 @@ function MyPostCard({ children }) {
 
 export default MyPostCard;
 
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+`
+
 const Picture = styled.div`
     width: 90%;
     height: 90%;

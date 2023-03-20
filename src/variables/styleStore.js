@@ -120,4 +120,8 @@ export const MinimumHeightContainer = styled.div`
   height: ${MIN_PAGE_HEIGHT};
 `;
 
+export const BasicDiv = styled.div`
+  width : 100%;
+`
+
 /*  송철환 스타일 컴포넌트  */
