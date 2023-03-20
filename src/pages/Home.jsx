@@ -40,24 +40,31 @@ function Home() {
       return (item.title.toLowerCase().includes(searchValue.toLowerCase()) || item.location.toLowerCase().includes(searchValue.toLowerCase())) && item.region === searchedRegion
     })
   }
-  //FIXME: 여기까지 //////////
 
   const onSearchBtnClickHandler = () => {
-    console.log(searchedPosts);
     if (!searchedRegion && !searchValue) {
       alert('지역 또는 검색어를 입력해주세요')
     } else setSearch(true)
   }
+  //FIXME: 여기까지 //////////
+
+  const props = {
+    searchedRegion,
+    setSearchedRegion,
+    searchValue,
+    SearchValueHandler,
+    onSearchBtnClickHandler,
+    posts,
+    search,
+    setSearch,
+    searchedPosts,
+  }
 
   return (
-    <PageContainer
-      style={{
-        overflowY: "scroll",
-      }}
-    >
+    <PageContainer>
       <HomeImg />
       <MainArea>
-        <HomeSearch searchedRegion={searchedRegion} setSearchedRegion={setSearchedRegion} searchValue={searchValue} SearchValueHandler={SearchValueHandler} onSearchBtnClickHandler={onSearchBtnClickHandler}></HomeSearch>
+        <HomeSearch {...props} />
         <HomeCard>{search ? searchedPosts : posts}</HomeCard>
       </MainArea>
     </PageContainer>
