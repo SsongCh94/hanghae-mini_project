@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import Comments from "../components/Comments";
 import { __getPostDetail } from "../redux/modules/postsSlice";
-import { PageContainer } from "../variables/styleStore";
+import { BasicDiv, PageContainer } from "../variables/styleStore";
 import { ButtonSmall } from "../variables/styleStore";
 import { useBbsInput } from "../variables/useBbsInput";
 
@@ -19,6 +20,7 @@ function BbsDetail() {
   }, []);
 
   console.log(postDetail);
+
 
   return (
     <PageContainer>
@@ -45,6 +47,9 @@ function BbsDetail() {
             행사 홈페이지로 가기
           </a>
         </Contents>
+        <BasicDiv>
+          <Comments boardId={params.id}>{postDetail.commentList}</Comments>
+        </BasicDiv>
         <CommentsArea>
           <p>{postDetail.contents}</p>
         </CommentsArea>
@@ -57,7 +62,8 @@ function BbsDetail() {
           />
           <ButtonSmall>댓글 달기</ButtonSmall>
         </CommentsArea>
-        <CommentsList>
+
+        {/* <CommentsList>
           <CommentBox>
             <Comment>댓글</Comment>
             <CommentNickname>댓글 작성자 닉네임</CommentNickname>
@@ -70,7 +76,7 @@ function BbsDetail() {
             <Comment>댓글</Comment>
             <CommentNickname>댓글 작성자 닉네임</CommentNickname>
           </CommentBox>
-        </CommentsList>
+        </CommentsList> */}
         <Test>
           {" "}
           <ButtonMiddle onClick={() => navigate(`/bbs/modify/${params.id}`)}>

@@ -26,6 +26,7 @@ export const __Join = createAsyncThunk("join", async (payload, thunkApi) => {
 export const __login = createAsyncThunk("login", async (payload, thunkApi) => {
   try {
     const response = await apis.post("/api/user/login", payload);
+    console.log(response);
     const token = response.headers.authorization;
     console.log(token);
     setCookie("token", token);
@@ -118,6 +119,7 @@ const userSlice = createSlice({
   extraReducers: {
     [__Join.pending]: (state, action) => {
       state.isLoading = true;
+      console.log("서버와 연결 시도 중");
     },
     [__Join.fulfilled]: (state, action) => {
       state.isLoading = false;
@@ -129,14 +131,16 @@ const userSlice = createSlice({
     },
     [__login.pending]: (state, action) => {
       state.isLoading = true;
+      console.log("서버와 연결 시도 중");
     },
     [__login.fulfilled]: (state, action) => {
-      console.log("fulfilled action : ", action.payload);
+      // console.log("fulfilled action : ", action.payload);
       state.isLogin = true;
       state.isLoading = false;
+      console.log(action.payload);
       state.user = {
         loginid: action.payload.loginid,
-        nickname: action.payload.nickName,
+        nickname: action.payload.nickname,
       };
       alert(
         `${state.user.nickname}님, 서울컬쳐포트에 오신 것을 환영합니다! :D`
@@ -144,7 +148,7 @@ const userSlice = createSlice({
     },
     [__login.rejected]: (state, action) => {
       state.isLoading = false;
-      alert(action.payload.response.data.message);
+      alert(action.payload);
       // console.log(action.payload.message);
     },
     [__isUserIdExist.pending]: (state, action) => { },
@@ -168,7 +172,9 @@ const userSlice = createSlice({
       console.log(action.payload);
       state.user.nickname = action.payload.nickname;
     },
-    [__changeNickname.rejected]: (state, action) => { },
+    [__changeNickname.rejected]: (state, action) => {
+      console.log(action.payload);
+    },
     [__getMyPost.pending]: () => { },
     [__getMyPost.fulfilled]: (state, action) => {
       state.myPages = action.payload;

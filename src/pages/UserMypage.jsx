@@ -6,12 +6,12 @@ import ModalModify from "../components/ModalModify";
 import MyPostCard from "../components/MyPostCard";
 import { __getMyPost } from '../redux/modules/userSlice';
 import {
-  ButtonLarge,
-  ButtonMiddle,
-  ButtonSmall,
-  FlexHorizontal,
-  FlexVertical,
-  PageContainer,
+    ButtonLarge,
+    ButtonMiddle,
+    ButtonSmall,
+    FlexHorizontal,
+    FlexVertical,
+    PageContainer,
 } from "../variables/styleStore";
 import { MAINPAGE_CONTENTS_WIDTH } from "../variables/uiVariables";
 import { COLOR_THEME } from "../variables/uiVariables";
@@ -24,9 +24,9 @@ function UserMypage() {
   const {myPages} = useSelector((state) => state.user)
   console.log('myPages====', myPages);
 
-  const toggleModal = () => {
-    setModalSwitch((prev) => !prev);
-  };
+    const toggleModal = () => {
+        setModalSwitch((prev) => !prev);
+    };
 
   useEffect(() => {
     dispatch(__getMyPost())

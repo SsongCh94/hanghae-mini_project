@@ -51,24 +51,14 @@ function UserJoin() {
 
   return (
     <PageContainer>
-      {isLogin ? (
-        navigation("/")
-      ) : (
-        <MinimumHeightContainer>
-          <FlexVertical alignItems="center" justifyContent="center">
+      {isLogin
+        ? navigation('/')
+        : <MinimumHeightContainer>
+          <FlexVertical alignItems='center' justifyContent='center'>
             <StForm onSubmit={onSubmitHandler}>
-              <FlexVertical
-                alignItems="center"
-                width="auto"
-                justifyContent="center"
-                gap="30px"
-              >
+              <FlexVertical alignItems="center" width='auto' justifyContent="center" gap="30px">
                 <Warp>
-                  <FlexHorizontal
-                    width="350px;"
-                    justifyContent="space-between"
-                    height="auto"
-                  >
+                  <FlexHorizontal width='350px;' justifyContent='space-between' height="auto">
                     <StInput
                       placeholder="ID를 입력하세요"
                       value={id}
@@ -77,17 +67,11 @@ function UserJoin() {
                       maxLength={10}
                       required
                     />
-                    <ButtonSmall type="button" onClick={idCheckHandler}>
-                      아이디 중복조회
-                    </ButtonSmall>
+                    <ButtonSmall type="button" onClick={idCheckHandler}>아이디 중복조회</ButtonSmall>
                   </FlexHorizontal>
                 </Warp>
                 <Warp>
-                  <FlexHorizontal
-                    width="350px;"
-                    justifyContent="left"
-                    height="auto"
-                  >
+                  <FlexHorizontal width='350px;' justifyContent='left' height="auto" >
                     <StInput
                       type="password"
                       placeholder="Password를 입력하세요"
@@ -100,11 +84,7 @@ function UserJoin() {
                   </FlexHorizontal>
                 </Warp>
                 <Warp>
-                  <FlexHorizontal
-                    width="350px;"
-                    justifyContent="left"
-                    height="auto"
-                  >
+                  <FlexHorizontal width='350px;' justifyContent='left' height="auto">
                     <StInput
                       placeholder="닉네임을 입력하세요"
                       value={nickname}
@@ -116,15 +96,8 @@ function UserJoin() {
                   </FlexHorizontal>
                 </Warp>
                 <Warp>
-                  <FlexHorizontal
-                    justifyContent="center"
-                    width="350px;"
-                    height="auto"
-                    gap="20px;"
-                  >
-                    <ButtonSmall type="button" onClick={() => navigation("/")}>
-                      뒤로가기
-                    </ButtonSmall>
+                  <FlexHorizontal justifyContent="center" width='350px;' height="auto" gap="20px;">
+                    <ButtonSmall type="button" onClick={() => navigation('/')}>뒤로가기</ButtonSmall>
                     <ButtonSmall type="submit">가입하기</ButtonSmall>
                   </FlexHorizontal>
                 </Warp>
@@ -132,7 +105,7 @@ function UserJoin() {
             </StForm>
           </FlexVertical>
         </MinimumHeightContainer>
-      )}
+      }
     </PageContainer>
   );
 }
