@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { apis, apis_token } from "../../axios/api";
 import { getCookie, removeCookie, setCookie } from "../../axios/cookies";
+import jwt_decode from "jwt-decode";
 
 const initialState = {
   user: {
@@ -26,11 +27,14 @@ export const __Join = createAsyncThunk("join", async (payload, thunkApi) => {
 export const __login = createAsyncThunk("login", async (payload, thunkApi) => {
   try {
     const response = await apis.post("/api/user/login", payload);
-    console.log(response);
     const token = response.headers.authorization;
-    console.log(token);
-    setCookie("token", token);
+    setCookie("token", token, {
+      path: '/',
+      expires: Math.floor((60 * 58) * 1000), // 58분뒤에 삭제
+    });
 
+    const decodedUserInfo = jwt_decode(token);
+    localStorage.setItem('userInfo',JSON.stringify(decodedUserInfo));
     response.data.loginid = payload.loginid;
 
     return thunkApi.fulfillWithValue(response.data);
@@ -109,12 +113,18 @@ const userSlice = createSlice({
       state.user.nickname = "";
       state.isLogin = false;
       removeCookie("token");
+      localStorage.removeItem('userInfo');
       alert("로그아웃 되었습니다.");
     },
     toggleIsLogin: (state, action) => {
       state.isLogin = !state.isLogin;
       console.log("state.isLogin : ", state.isLogin);
     },
+    initLoginStatus : (state, action) => {
+      state.isLogin = true;
+      state.user.loginid = action.payload.loginid;
+      state.user.nickname = action.payload.nickname;
+    }
   },
   extraReducers: {
     [__Join.pending]: (state, action) => {
@@ -138,9 +148,12 @@ const userSlice = createSlice({
       state.isLogin = true;
       state.isLoading = false;
       console.log(action.payload);
+      const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+      console.log('nickname: ', userInfo.nickname);
+
       state.user = {
-        loginid: action.payload.loginid,
-        nickname: action.payload.nickname,
+        loginid: userInfo.loginid,
+        nickname: userInfo.nickname,
       };
       alert(
         `${state.user.nickname}님, 서울컬쳐포트에 오신 것을 환영합니다! :D`
@@ -191,5 +204,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { logout, toggleIsLogin } = userSlice.actions;
+export const { logout, toggleIsLogin, initLoginStatus } = userSlice.actions;
 export default userSlice.reducer;

@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { removeCookie } from "../axios/cookies";
-import { logout, toggleIsLogin, __login } from "../redux/modules/userSlice";
+import { initLoginStatus, logout, toggleIsLogin, __login } from "../redux/modules/userSlice";
 import {
   ButtonSmall,
   FlexHorizontal,
@@ -35,6 +35,16 @@ function Header() {
     }
   `;
 
+  const localCheck = () => {
+    const local = JSON.parse(localStorage.getItem('userInfo'));
+    if (local) {
+      dispatch(initLoginStatus(local));
+    }
+  }
+  useEffect(() => {
+    localCheck();
+  },[]);
+
   const logoutClickHandler = () => {
     dispatch(logout());
     navigation("/");
@@ -65,7 +75,6 @@ function Header() {
           others="width:100%;"
         >
           <Logo />
-          <button onClick={() => removeCookie("token")}>토큰제거</button>
           {isLogin ? (
             <div>
               <FlexHorizontal gap="5px" alignItems="center">
