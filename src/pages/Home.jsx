@@ -31,6 +31,7 @@ function Home() {
     searchedPosts = posts.filter((item) => {
       return item.region === searchedRegion;
     })
+
   } else if (!searchedRegion && searchValue) {
     searchedPosts = posts.filter((item) => {
       return item.title.toLowerCase().includes(searchValue.toLowerCase()) || item.location.toLowerCase().includes(searchValue.toLowerCase())
@@ -61,6 +62,7 @@ function Home() {
   }
 
   return (
+
     <PageContainer>
       <HomeImg />
       <MainArea>
@@ -92,3 +94,4 @@ const HomeImg = () => {
     />
   );
 };
+

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { apis, apis_token } from "../../axios/api";
+import { getCookie } from "../../axios/cookies";
 
 const initialState = {
     comments: [],
@@ -16,11 +17,14 @@ export const __registryComment = createAsyncThunk(
             const sendData = {
                 comment: payload.comment,
             }
+            
+            console.log('쿠키:', getCookie('token'));
             const response = await apis_token.post(
                 `/api/comments/${payload.boardId}`,
                 sendData);
             response.data.comment = payload.comment;
             response.data.id = payload.boardId;
+            response.data.nickname = payload.nickname;
             return thunkApi.fulfillWithValue(response.data);
         } catch (error) {
             return thunkApi.rejectWithValue(error);
@@ -33,6 +37,7 @@ export const __eraseComment = createAsyncThunk(
     async (payload, thunkApi) => {
         try {
             const response = await apis_token.delete(`/api/comments/${payload.id}`);
+            response.data.id = payload.id;
             return thunkApi.fulfillWithValue(response.data);
         } catch (error) {
             return thunkApi.rejectWithValue(error);
@@ -47,7 +52,8 @@ export const __modifyComment = createAsyncThunk(
             const sendData = {
                 comment: payload.comment,
             };
-            const response = await apis_token.put(`/api/comments/${payload.id}`, sendData)
+            const response = await apis_token.put(`/api/comments/${payload.id}`, sendData);
+            
             return thunkApi.fulfillWithValue(response.data);
         } catch (error) {
             return thunkApi.rejectWithValue(error);
@@ -71,11 +77,10 @@ export const commentSlice = createSlice({
         },
         [__registryComment.fulfilled]: (state, action) => {
             console.log(action.payload);
-            state.comments = state.comments.map((element) => {
-                if (element.id === action.payload.id) {
-                    element.comment = action.payload.comment;
-                }
-                return element;
+            state.comments.unshift({
+                id: action.payload.id,
+                comment: action.payload.comment,
+                nickname: action.payload.nickname,
             })
             alert(action.payload.message);
         },
@@ -86,6 +91,7 @@ export const commentSlice = createSlice({
             console.log('서버에 댓글삭제 요청중입니다.');
         },
         [__eraseComment.fulfilled]: (state, action) => {
+            state.comments = state.comments.filter((element)=> element.id !== action.payload.id);
             alert(action.payload.message);
         },
         [__eraseComment.rejected]: (state, action) => {

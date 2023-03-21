@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Comments from "../components/Comments";
+import ContentBox from "../components/ContentBox";
 import { __getPostDetail } from "../redux/modules/postsSlice";
-import { BasicDiv, PageContainer } from "../variables/styleStore";
+import { BasicDiv, FlexHorizontal, FlexVertical, PageContainer } from "../variables/styleStore";
 import { ButtonSmall } from "../variables/styleStore";
 import { useBbsInput } from "../variables/useBbsInput";
 
@@ -19,64 +20,39 @@ function BbsDetail() {
     dispatch(__getPostDetail(params.id));
   }, []);
 
-  console.log(postDetail);
-
-
   return (
-    <PageContainer>
+    <PageContainer others='padding: 100px 0px'>
+      <FlexVertical alignItems='center' justifyContent='center'>
+        <BoxWrapper>
+          <FlexVertical alignItems='center' justifyContent='center' gap='20px'>
+            <PhotoArea>
+              <img src={postDetail.image} alt="" />
+            </PhotoArea>
+            <FlexHorizontal alignItems='center' justifyContent='space-between'>
+              <ContentBox title='행사명'>{postDetail.title}</ContentBox>
+              <ContentBox title='분류'>{postDetail.classify}</ContentBox>
+            </FlexHorizontal>
+            <FlexHorizontal alignItems='center' justifyContent='space-between'>
+              <ContentBox title='자치구'>{postDetail.region}</ContentBox>
+              <ContentBox title='장소'>{postDetail.location}</ContentBox>
+            </FlexHorizontal>
+            <FlexHorizontal alignItems='center' justifyContent='space-between'>
+              <ContentBox title='시작일'>{postDetail.startDate}</ContentBox>
+              <ContentBox title='종료일'>{postDetail.endDate}</ContentBox>
+            </FlexHorizontal>
+            <FlexHorizontal alignItems='center' justifyContent='left'>
+              <ContentBox title='URL'>{postDetail.pageUrl}</ContentBox>
+            </FlexHorizontal>
+          </FlexVertical>
+        </BoxWrapper>
+      </FlexVertical>
       <DetailArea>
-        <PhotoArea>
-          <img src={postDetail.image} alt="" />
-        </PhotoArea>
-        <InfoArea>
-          <span>{postDetail.classify}</span>
-          <span>{postDetail.title}</span>
-        </InfoArea>
-        <InfoArea>
-          <span>{postDetail.region}</span>
-          <span>{postDetail.location}</span>
-        </InfoArea>
-        <div>
-          <span>
-            {postDetail.startDate} ~ {postDetail.endDate}
-          </span>
-        </div>
-
-        <Contents>
-          <a href={postDetail.pageUrl} target="_blank" rel="noreferrer">
-            행사 홈페이지로 가기
-          </a>
-        </Contents>
-        <BasicDiv>
-          <Comments boardId={params.id}>{postDetail.commentList}</Comments>
-        </BasicDiv>
         <CommentsArea>
           <p>{postDetail.contents}</p>
         </CommentsArea>
-        <CommentsArea>
-          <CommentsInput
-            type="text"
-            placeholder="댓글을 입력하세요"
-            value={comment}
-            onChange={commentHandler}
-          />
-          <ButtonSmall>댓글 달기</ButtonSmall>
-        </CommentsArea>
-
-        {/* <CommentsList>
-          <CommentBox>
-            <Comment>댓글</Comment>
-            <CommentNickname>댓글 작성자 닉네임</CommentNickname>
-          </CommentBox>
-          <CommentBox>
-            <Comment>댓글</Comment>
-            <CommentNickname>댓글 작성자 닉네임</CommentNickname>
-          </CommentBox>
-          <CommentBox>
-            <Comment>댓글</Comment>
-            <CommentNickname>댓글 작성자 닉네임</CommentNickname>
-          </CommentBox>
-        </CommentsList> */}
+        <BasicDiv>
+          <Comments boardId={params.id}>{postDetail.commentList}</Comments>
+        </BasicDiv>
         <Test>
           {" "}
           <ButtonMiddle onClick={() => navigate(`/bbs/modify/${params.id}`)}>
@@ -88,6 +64,15 @@ function BbsDetail() {
     </PageContainer>
   );
 }
+
+export default BbsDetail;
+
+
+
+const BoxWrapper = styled.div`
+  width:1100px;
+  height: fit-content;
+`
 
 const DetailArea = styled.div`
   background-color: aqua;
@@ -105,8 +90,8 @@ const DetailArea = styled.div`
 
 const PhotoArea = styled.div`
   background-color: beige;
-  width: 70%;
-  height: 500px;
+  width: 100%;
+  height: 600px;
 `;
 
 const InfoArea = styled.div`
@@ -134,39 +119,6 @@ const CommentsArea = styled.div`
 
   display: flex;
   justify-content: space-between;
-`;
-
-const CommentsInput = styled.input`
-  width: 70%;
-`;
-
-const CommentsList = styled.div`
-  background-color: beige;
-  width: 60%;
-  height: 500px;
-  display: flex;
-  flex-direction: column;
-`;
-
-const CommentBox = styled.div`
-  width: 100%;
-  height: 20px;
-
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Comment = styled.div`
-  background-color: #76ff8b;
-  width: 75%;
-  height: 20px;
-`;
-
-const CommentNickname = styled.div`
-  background-color: #76ff8b;
-  width: 20%;
-  height: 20px;
 `;
 
 const Test = styled.div`
@@ -204,5 +156,3 @@ const ButtonMiddle = styled.button`
   }
   ${({ others }) => others};
 `;
-
-export default BbsDetail;

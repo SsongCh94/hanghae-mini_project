@@ -22,6 +22,8 @@ export const PageContainer = styled.div`
   /*  배경색을 특정해야할 경우, backgroundColor라는 이름의 prop을 넘겨준다.
         사용예시 : <PageContainer backgroundColor='black' />                */
   background-color: ${({ backgroundColor }) => backgroundColor};
+
+  ${({others}) => others};
 `;
 export const HeaderContainer = styled.div`
   height: ${HEADER_HEIGHT};
