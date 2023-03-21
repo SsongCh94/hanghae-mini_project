@@ -31,7 +31,8 @@ export const HeaderContainer = styled.div`
 `;
 export const FooterContainer = styled.div`
   height: ${FOOTER_HEIGHT};
-  background-color: gray;
+  color : white;
+  background-color: ${COLOR_THEME.COLOR_1};
 `;
 
 export const ButtonSmall = styled.button`

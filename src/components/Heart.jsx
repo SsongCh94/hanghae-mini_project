@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 function Heart({children}) {
     return (
-        <div>
+        <div style={{margin:'80px'}}>
             <ButtonHeart>
                 <TextContainer>
                     <CountText>{children}</CountText>

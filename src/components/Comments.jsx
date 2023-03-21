@@ -64,7 +64,7 @@ function Comments({ boardId, children }) {
                             </ButtonBox>
                         </FlexHorizontal>
                     </StForm>
-                    <FlexVertical alignItems='center' gap='5px'>
+                    <FlexVertical alignItems='center' gap='15px'>
                         {comments?.map((element) => <EachComment key={uuid()} dataObj={element} />)}
                     </FlexVertical>
                 </FlexVertical>

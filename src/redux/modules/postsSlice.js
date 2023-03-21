@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { async } from "q";
 import { useNavigate } from 'react-router-dom';
+import thunk from "redux-thunk";
 import { apis, apis_token } from "../../axios/api";
 
 const initialState = {
@@ -62,6 +64,18 @@ export const __revisePost = createAsyncThunk(
     }
   }
 );
+
+export const __thumbsUp = createAsyncThunk(
+  "thumbsUp",
+  async (payload, thunkApi) => {
+    try {
+      const response = await apis_token.post(`/api/board/${payload.boardId}/thumbsup`);
+      return thunkApi.fulfillWithValue(response.data);
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+)
 
 export const postslice = createSlice({
   name: "posts",
@@ -127,6 +141,15 @@ export const postslice = createSlice({
       state.isLoading = false;
       state.isError = true;
       state.error = action.payload;
+    },
+    [__thumbsUp.pending]: (state,action) => {
+
+    },
+    [__thumbsUp.fulfiled]: (state,action) => {
+      state.postDetail.thumbsUpCount++;
+    },
+    [__thumbsUp.rejected]: (state,action) => {
+
     },
   },
 });

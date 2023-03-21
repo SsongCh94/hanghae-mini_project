@@ -20,56 +20,66 @@ function BbsDetail() {
   const [comment, commentHandler] = useBbsInput("");
   const { postDetail } = useSelector((state) => state.posts);
 
+
   useEffect(() => {
     dispatch(__getPostDetail(params.id));
   }, []);
 
   return (
-    <PageContainer others='padding: 100px 0px'>
+    <PageContainer backgroundColor={`${COLOR_THEME.COLOR_4}`} others='padding: 100px 0px'>
+
       <FlexVertical alignItems='center' justifyContent='center'>
-        <BoxWrapper>
-          <FlexHorizontal alignItems='center' justifyContent='right'>
-            <div>
-              <span>작성자: </span>
-              <span>{postDetail.username}</span>
-            </div>
-          </FlexHorizontal>
-          <FlexVertical alignItems='center' justifyContent='center' gap='20px'>
-            <LineBold />
-            <div style={{ fontWeight: '700', fontSize: '24px' }}>{postDetail.title}</div>
-            <LineBold />
-            <PhotoArea>
-              <Image src={postDetail.image} alt="" />
-            </PhotoArea>
-            <Line />
-            <EventDetails />
-            <Line />
-            <BoxTitleContainer>
-              <BoxTitle>소개글</BoxTitle>
-            </BoxTitleContainer>
-            <TextBox>
-              {postDetail.contents}
-            </TextBox>
-            <Heart>{postDetail.thumbsUpCount}</Heart>
-            <Line />
-            <BoxTitleContainer>
-              <FlexHorizontal alignItems='center' justifyContent='space-between'>
-                <BoxTitle>코멘트</BoxTitle>
-                <BoxTitle>
-                  <span style={{ color: COLOR_THEME.COLOR_4 }}>{postDetail.cmtCount}</span> 개
-                </BoxTitle>
+        <Wrap>
+        <FlexVertical alignItems='center' justifyContent='center'>
+          <BoxWrapper>
+            <FlexVertical alignItems='center' justifyContent='center' gap='20px'>
+
+              <LineBold />
+              <div style={{ fontWeight: '700', fontSize: '24px' }}>
+                <span>{postDetail.title}</span>
+              </div>
+              <LineBold />
+
+              <PhotoArea>
+                <Image src={postDetail.image} alt="" />
+              </PhotoArea>
+
+              <Line />
+              <EventDetails />
+
+              <Line />
+              <BoxTitleContainer>
+                <FlexHorizontal alignItems='center' justifyContent='space-between'>
+                <BoxTitle>소개글</BoxTitle>
+                <BoxTitle><span style={{ color: COLOR_THEME.COLOR_4 }}>{postDetail.nickname}</span> 님</BoxTitle>
+                </FlexHorizontal>
+              </BoxTitleContainer>
+              <TextBox>
+                {postDetail.contents}
+              </TextBox>
+              <Heart onClick={() => { }}>{postDetail.thumbsUpCount}</Heart>
+
+              <Line />
+              <BoxTitleContainer>
+                <FlexHorizontal alignItems='center' justifyContent='space-between'>
+                  <BoxTitle>코멘트</BoxTitle>
+                  <BoxTitle>
+                    <span style={{ color: COLOR_THEME.COLOR_4 }}>{postDetail.cmtCount}</span> 개
+                  </BoxTitle>
+                </FlexHorizontal>
+              </BoxTitleContainer>
+              <Comments boardId={params.id}>{postDetail.commentList}</Comments>
+              <LineBold />
+              <FlexHorizontal alignItems='center' justifyContent='right' gap='10px'>
+                <ButtonMiddle onClick={() => navigate(`/bbs/modify/${params.id}`)}>
+                  수정하기
+                </ButtonMiddle>
+                <ButtonMiddle onClick={() => navigate("/")}>뒤로가기</ButtonMiddle>
               </FlexHorizontal>
-            </BoxTitleContainer>
-            <Comments boardId={params.id}>{postDetail.commentList}</Comments>
-            <LineBold />
-            <FlexHorizontal alignItems='center' justifyContent='right' gap='10px'>
-              <ButtonMiddle onClick={() => navigate(`/bbs/modify/${params.id}`)}>
-                수정하기
-              </ButtonMiddle>
-              <ButtonMiddle onClick={() => navigate("/")}>뒤로가기</ButtonMiddle>
-            </FlexHorizontal>
+            </FlexVertical>
+          </BoxWrapper>
           </FlexVertical>
-        </BoxWrapper>
+        </Wrap>
       </FlexVertical>
     </PageContainer>
   );
@@ -77,10 +87,18 @@ function BbsDetail() {
 
 export default BbsDetail;
 
+const Wrap = styled.div`
+  width: 1200px;
+  padding: 50px 50px;
+  background-color: white;
+  border : none;
+  border-radius: 50px;
+`
+
 const BoxTitle = styled.div`
   font-size : 36px;
   font-weight: 900;
-  color: ${COLOR_THEME.COLOR_1};
+  color: ${({color})=> color? color : COLOR_THEME.COLOR_1};
 `
 
 const BoxTitleContainer = styled.div`
