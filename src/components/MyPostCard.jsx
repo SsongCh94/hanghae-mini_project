@@ -28,17 +28,17 @@ function MyPostCard({ children }) {
                     </Picture>
                   </FlexVertical>
                   <FlexVertical alignItems='center' justifyContent='center'>
-                    <FlexVertical width='95%' height='95%'>
+                    <FlexVertical width='90%' height='88%'>
                       <FlexHorizontal justifyContent='space-between'>
-                        <div>행사: </div>
-                        <div style={{textAlign:'center'}}>{item.title}</div>
+                        <h3 style={{ textAlign: 'center' }}>{item.title}</h3>
                       </FlexHorizontal>
                       <div><span>내용: </span><span>{item.contents}</span></div>
                       <div><span>댓글 수: </span><span>{item.cmtCount}</span></div>
-                      <div>
-                        <ButtonSmall onClick={()=>navigate(`/bbs/detail/${item.id}`)}>상세보기</ButtonSmall>
-                        <ButtonSmall onClick={()=>onDeleteBtnClickHandler(item.id)}>삭제</ButtonSmall>
-                      </div>
+                      <div><span>작성일: </span><span>{item.createdat}</span></div>
+                      <ButtonBox>
+                        <ButtonSmall onClick={() => navigate(`/bbs/detail/${item.id}`)}>상세보기</ButtonSmall>
+                        <ButtonSmall onClick={() => onDeleteBtnClickHandler(item.id)}>삭제</ButtonSmall>
+                      </ButtonBox>
                     </FlexVertical>
                   </FlexVertical>
                 </FlexHorizontal>
@@ -74,4 +74,9 @@ const PostingCard = styled.div`
     &:hover{
       box-shadow: 0px 0px 10px ${COLOR_THEME.COLOR_1};
     }
+`
+
+const ButtonBox = styled.div`
+  align-self: flex-end;
+  margin-top: 10px;
 `
