@@ -143,10 +143,6 @@ const ButtonArea = styled.div`
   gap: 20px;
 `;
 
-const RegionSelect = styled.select`
-  width: 70%;
-`;
-
 const LocationDiv = styled.div`
   /* background-color: azure; */
   width: 100%;
