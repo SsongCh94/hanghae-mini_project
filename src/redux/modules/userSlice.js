@@ -28,10 +28,7 @@ export const __login = createAsyncThunk("login", async (payload, thunkApi) => {
   try {
     const response = await apis.post("/api/user/login", payload);
     const token = response.headers.authorization;
-    setCookie("token", token, {
-      path: '/',
-      expires: Math.floor((60 * 58) * 1000), // 58분뒤에 삭제
-    });
+    setCookie("token", token);
 
     const decodedUserInfo = jwt_decode(token);
     localStorage.setItem('userInfo',JSON.stringify(decodedUserInfo));
