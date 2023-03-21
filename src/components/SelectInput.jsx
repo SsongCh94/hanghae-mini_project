@@ -7,6 +7,7 @@ function SelectInput({ defaultValue, setDefaultValue, Arr, children }) {
 
   const handleOnChangeSelectValue = (e) => {
     setDefaultValue(e.target.getAttribute("value"));
+    console.log(e.target.getAttribute("value"));
   };
   return (
     <StDiv>
@@ -32,8 +33,6 @@ function SelectInput({ defaultValue, setDefaultValue, Arr, children }) {
 }
 
 const StDiv = styled.div`
-  /* background-color: aliceblue; */
-
   width: 60%;
   margin-right: auto;
 
@@ -42,7 +41,6 @@ const StDiv = styled.div`
 `
 
 const TopBox = styled.span`
-/* background-color: aqua; */
   color: black;
   margin-bottom: 10px;
 `
@@ -53,7 +51,7 @@ const SelectBox = styled.div`
   padding: 8px;
   margin-right: 20px;
   border-radius: 12px;
-  background-color: ${COLOR_THEME.COLOR_3};
+  background-color: #EBBFC6;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
   &::before {
@@ -61,7 +59,7 @@ const SelectBox = styled.div`
     position: absolute;
     top: 1px;
     right: 8px;
-    color: #49c181;
+    color: ${COLOR_THEME.COLOR_4};
     font-size: 20px;
   }
 `;
@@ -80,7 +78,7 @@ const SelectOptions = styled.ul`
   display: ${(props) => (props.show ? 'block' : "none")};
   padding: 0;
   border-radius: 8px;
-  background-color: ${COLOR_THEME.COLOR_4};
+  background-color: #e9aeb8;
   color: #fefefe;
   z-index: 99;
 `;
@@ -89,7 +87,7 @@ const Option = styled.li`
   padding: 6px 8px;
   transition: background-color 0.2s ease-in;
   &:hover {
-    background-color: ${COLOR_THEME.COLOR_3};
+    background-color: ${COLOR_THEME.COLOR_4};
   }
   z-index: 100;
 `;

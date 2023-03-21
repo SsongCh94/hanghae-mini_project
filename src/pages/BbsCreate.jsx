@@ -39,7 +39,7 @@ function BbsCreate() {
   };
 
   return (
-    <PageContainer>
+    <PageContainer backgroundColor='#f5e0e383'>
       <InputArea>
         <SelectInput defaultValue={selectedCategory} setDefaultValue={selectedCategoryHandler} Arr={category}>카테고리</SelectInput>
         <CreateInput title={'제목'} type={"text"} placeholder={"제목을 입력하세요."} defaultValue={inputTitle} onChange={inputTitleHandler} max={20}></CreateInput>

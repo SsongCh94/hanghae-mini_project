@@ -150,16 +150,18 @@ export const InputBox = styled.label`
 `;
 
 export const InputArea = styled.form`
-background-color: beige;
 width: 50%;
 height: auto;
 
-margin: 0 auto 0 auto;
+margin: 20px auto 20px auto;
 
 display: flex;
 flex-direction: column;
-align-items: flex-end;
+align-items: center;
 
+border: 2px solid ${COLOR_THEME.COLOR_4};
+border-radius: 25px;
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 gap: 20px;
 
 padding: 20px;
@@ -194,6 +196,7 @@ export const ButtonArea = styled.div`
   width: 50%;
   height: 10%;
 
+  align-self: flex-end;
   display: flex;
   justify-content: flex-end;
   gap: 20px;

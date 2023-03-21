@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import CreateInput from '../components/CreateInput';
@@ -12,12 +12,9 @@ function BbsModify() {
   const { region, category } = useSelector((state) => state.selects);
   const [inputTitle, inputTitleHandler] = useBbsInput(`${postDetail.title}`);
   const [inputURL, inputURLHandler] = useBbsInput(`${postDetail.image}`);
-  const [selectedCategory, selectedCategoryHandler] = useBbsInput(
-    `${postDetail.classify}`
-  );
-  const [selectedRegion, selectedRegionHandler] = useBbsInput(
-    `${postDetail.region}`
-  );
+  const [selectedCategory, selectedCategoryHandler] = useState(`${postDetail.classify}`);
+  const [selectedRegion, selectedRegionHandler] = useState(`${postDetail.region}`);
+
   const [location, locationHandler] = useBbsInput(`${postDetail.location}`);
   const [startDate, startDateHandler] = useBbsInput(`${postDetail.startDate}`);
   const [endDate, endDateHandler] = useBbsInput(`${postDetail.endDate}`);
