@@ -5,7 +5,7 @@ import styled from "styled-components";
 import CreateInput from '../components/CreateInput';
 import SelectInput from '../components/SelectInput';
 import { __postPosts } from "../redux/modules/postsSlice";
-import { ButtonMiddle, PageContainer } from "../variables/styleStore";
+import { ButtonMiddle, FlexHorizontal, PageContainer } from "../variables/styleStore";
 import { useBbsInput } from "../variables/useBbsInput";
 
 function BbsCreate() {
@@ -47,17 +47,22 @@ function BbsCreate() {
     <PageContainer>
       <InputArea>
         <SelectInput divStyle={'longInput'} defaultValue={selectedCategory} onChange={selectedCategoryHandler} Arr={category}>카테고리 : </SelectInput>
-        <CreateInput divStyle={'longInput'} type={"text"} placeholder={"제목을 입력하세요."} defaultValue={inputTitle} onChange={inputTitleHandler} >제목 : </CreateInput>
-        <CreateInput divStyle={'longInput'} type={"text"} placeholder={"이미지 URL을 입력하세요."} defaultValue={inputURL} onChange={inputURLHandler} >이미지 URL : </CreateInput>
-        <CreateInput divStyle={'longInput'} type={"url"} placeholder={"행사 홈 URL을 입력하세요."} defaultValue={pageUrl} onChange={pageUrlHandler} >행사 홈페이지 URL : </CreateInput>
+        <CreateInput title={'제목'} type={"text"} placeholder={"제목을 입력하세요."} defaultValue={inputTitle} onChange={inputTitleHandler} ></CreateInput>
+        <CreateInput title={'이미지 URL'} type={"text"} placeholder={"이미지 URL을 입력하세요."} defaultValue={inputURL} onChange={inputURLHandler} ></CreateInput>
+        <CreateInput title={'행사 홈페이지'} type={"url"} placeholder={"행사 홈 URL을 입력하세요."} defaultValue={pageUrl} onChange={pageUrlHandler} ></CreateInput>
+
         <LocationDiv>
           <SelectInput divStyle={'shortInput'} defaultValue={selectedRegion} onChange={selectedRegionHandler} Arr={region}>구 : </SelectInput>
-          <CreateInput divStyle={'shortInput'} type={"text"} placeholder={"장소를 입력하세요."} defaultValue={location} onChange={locationHandler} >장소 : </CreateInput>
+          <CreateInput title={'장소'} type={"text"} placeholder={"장소를 입력하세요."} defaultValue={location} onChange={locationHandler} ></CreateInput>
+
         </LocationDiv>
-        <LocationDiv>
-          <CreateInput divStyle={'shortInput'} type={"date"} defaultValue={startDate} onChange={startDateHandler} >시작 날짜 : </CreateInput>
-          <CreateInput divStyle={'shortInput'} type={"date"} defaultValue={endDate} onChange={endDateHandler} >끝나는 날짜 : </CreateInput>
-        </LocationDiv>
+        {/* <LocationDiv> */}
+        <FlexHorizontal alignItems='center' justifyContent='space-between'>
+          <CreateInput title={'시작일'} type={"date"} defaultValue={startDate} onChange={startDateHandler} ></CreateInput>
+          <CreateInput title={'종료일'} type={"date"} defaultValue={endDate} onChange={endDateHandler} ></CreateInput>
+        </FlexHorizontal>
+
+        {/* </LocationDiv> */}
 
         <CommentArea>
           <Span>후기 : </Span>

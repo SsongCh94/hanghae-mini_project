@@ -23,7 +23,7 @@ export const PageContainer = styled.div`
         사용예시 : <PageContainer backgroundColor='black' />                */
   background-color: ${({ backgroundColor }) => backgroundColor};
 
-  ${({others}) => others};
+  ${({ others }) => others};
 `;
 export const HeaderContainer = styled.div`
   height: ${HEADER_HEIGHT};
@@ -143,7 +143,10 @@ justify-content: flex-end;
 }
 
 export const InputBox = styled.label`
-  ${(props) => props.stDiv}
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 export const Span = styled.span`
