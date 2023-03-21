@@ -143,6 +143,8 @@ justify-content: flex-end;
 }
 
 export const InputBox = styled.label`
+background-color: aqua;
+
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -151,6 +153,5 @@ export const InputBox = styled.label`
 
 export const Span = styled.span`
   width: auto;
-  margin-left: 10px;
-  font-size: 20px;
+  font-size: 15px;
 `;
