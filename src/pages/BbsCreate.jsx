@@ -1,29 +1,24 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import CreateInput from '../components/CreateInput';
 import SelectInput from '../components/SelectInput';
 import { __postPosts } from "../redux/modules/postsSlice";
-import { ButtonMiddle, FlexHorizontal, PageContainer } from "../variables/styleStore";
-import { COLOR_THEME } from '../variables/uiVariables';
+import { ButtonArea, ButtonMiddle, CommentArea, FlexHorizontal, InputArea, LocationDiv, PageContainer, Span, TextArea } from "../variables/styleStore";
 import { useBbsInput } from "../variables/useBbsInput";
 
 function BbsCreate() {
   const navigate = useNavigate();
   const { region, category } = useSelector((state) => state.selects);
+  const [selectedCategory, selectedCategoryHandler] = useState(category[0]);
   const [inputTitle, inputTitleHandler] = useBbsInput("");
   const [inputURL, inputURLHandler] = useBbsInput("");
-
+  const [pageUrl, pageUrlHandler] = useBbsInput("");
   const [selectedRegion, selectedRegionHandler] = useState(region[0]);
-  const [selectedCategory, selectedCategoryHandler] = useState(category[0]);
-
-
   const [location, locationHandler] = useBbsInput("");
   const [startDate, startDateHandler] = useBbsInput("");
   const [endDate, endDateHandler] = useBbsInput("");
   const [contents, contentsHandler] = useBbsInput("");
-  const [pageUrl, pageUrlHandler] = useBbsInput("");
 
   const dispatch = useDispatch();
 
@@ -82,61 +77,4 @@ function BbsCreate() {
   );
 }
 
-const InputArea = styled.form`
-  background-color: beige;
-  width: 50%;
-  // FIXME: ???????? height 잘 안먹음
-  height: auto;
-
-  margin: 0 auto 0 auto;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-
-  gap: 20px;
-
-  padding: 20px;
-`;
-
-const Span = styled.span`
-  width: auto;
-  margin-left: 10px;
-  font-size: 20px;
-`;
-
-const CommentArea = styled.label`
-  /* background-color: aqua; */
-  width: 100%;
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
-const TextArea = styled.textarea`
-  width: 100%;
-			height: 200px;
-			padding: 10px;
-			box-sizing: border-box;
-			border: solid 2px ${COLOR_THEME.COLOR_4};
-			border-radius: 5px;
-			font-size: 16px;
-`;
-
-const ButtonArea = styled.div`
-  width: 50%;
-  height: 10%;
-
-  display: flex;
-  justify-content: flex-end;
-  gap: 20px;
-`;
-
-const LocationDiv = styled.div`
-  width: 100%;
-
-  display: flex;
-  justify-content: flex-end;
-`;
 export default BbsCreate;

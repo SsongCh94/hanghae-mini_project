@@ -149,7 +149,59 @@ export const InputBox = styled.label`
   gap: 10px;
 `;
 
+export const InputArea = styled.form`
+background-color: beige;
+width: 50%;
+height: auto;
+
+margin: 0 auto 0 auto;
+
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+
+gap: 20px;
+
+padding: 20px;
+`;
+
+
 export const Span = styled.span`
   width: auto;
-  font-size: 15px;
+  margin-left: 10px;
+  font-size: 20px;
+`;
+
+export const CommentArea = styled.label`
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+export const TextArea = styled.textarea`
+  width: 100%;
+			height: 200px;
+			padding: 10px;
+			box-sizing: border-box;
+			border: solid 2px ${COLOR_THEME.COLOR_4};
+			border-radius: 5px;
+			font-size: 16px;
+`;
+
+export const ButtonArea = styled.div`
+  width: 50%;
+  height: 10%;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+`;
+
+export const LocationDiv = styled.div`
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-end;
 `;
