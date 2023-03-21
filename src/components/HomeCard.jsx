@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 function HomeCard({ children }) {
   const navigate = useNavigate()
-  console.log('렌더링도미');
 
   return (
     children.map((item) => {

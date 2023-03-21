@@ -1,7 +1,7 @@
 /* 
     공통적으로 사용되는 Styled-Components 모음 
 */
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import {
   MIN_PAGE_HEIGHT,
   HEADER_HEIGHT,
@@ -125,3 +125,27 @@ export const BasicDiv = styled.div`
 `
 
 /*  송철환 스타일 컴포넌트  */
+
+export const DIV = {
+  longInput: css`
+  width: 100%;
+display: flex;
+justify-content: flex-end;
+gap: 50px;
+`,
+  shortInput: css`
+  width: 41%;
+display: flex;
+justify-content: flex-end;
+`
+}
+
+export const InputBox = styled.label`
+  ${(props) => props.stDiv}
+`;
+
+export const Span = styled.span`
+  width: auto;
+  margin-left: 10px;
+  font-size: 20px;
+`;

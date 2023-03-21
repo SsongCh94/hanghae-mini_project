@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import CreateInput from '../components/CreateInput';
+import SelectInput from '../components/SelectInput';
 import { __postPosts } from "../redux/modules/postsSlice";
 import { ButtonMiddle, PageContainer } from "../variables/styleStore";
 import { useBbsInput } from "../variables/useBbsInput";
@@ -44,76 +46,18 @@ function BbsCreate() {
   return (
     <PageContainer>
       <InputArea>
-        <Label>
-          {" "}
-          <Span>카테고리 : </Span>
-          <RegionSelect
-            defaultValue={selectedCategory}
-            onChange={selectedCategoryHandler}
-          >
-            {category.map((item, idx) => {
-              return (
-                <option defaultValue={item} key={idx}>
-                  {item}
-                </option>
-              );
-            })}
-          </RegionSelect>
-        </Label>
-        <Label>
-          <Span>제목 : </Span>
-          <Input
-            type={"text"}
-            placeholder={"제목을 입력하세요"}
-            defaultValue={inputTitle}
-            onChange={inputTitleHandler}
-          />
-        </Label>
-        <Label>
-          <Span>이미지 URL : </Span>
-          <Input
-            type={"text"}
-            placeholder={"이미지 URL을 입력하세요"}
-            defaultValue={inputURL}
-            onChange={inputURLHandler}
-          />
-        </Label>
-        <Label>
-          <Span>행사 홈페이지 URL : </Span>
-          <Input
-            type={"text"}
-            placeholder={"행사 홈 URL을 입력하세요"}
-            defaultValue={pageUrl}
-            onChange={pageUrlHandler}
-          />
-        </Label>
+        <SelectInput divStyle={'longInput'} defaultValue={selectedCategory} onChange={selectedCategoryHandler} Arr={category}>카테고리 : </SelectInput>
+        <CreateInput divStyle={'longInput'} type={"text"} placeholder={"제목을 입력하세요."} defaultValue={inputTitle} onChange={inputTitleHandler} >제목 : </CreateInput>
+        <CreateInput divStyle={'longInput'} type={"text"} placeholder={"이미지 URL을 입력하세요."} defaultValue={inputURL} onChange={inputURLHandler} >이미지 URL : </CreateInput>
+        <CreateInput divStyle={'longInput'} type={"url"} placeholder={"행사 홈 URL을 입력하세요."} defaultValue={pageUrl} onChange={pageUrlHandler} >행사 홈페이지 URL : </CreateInput>
+        {/* ////FIXME: 장소 div */}
         <LocationDiv>
-          <LocationLabel>
-            <Span>구 : </Span>
-            <RegionSelect
-              defaultValue={selectedRegion}
-              onChange={selectedRegionHandler}
-            >
-              {/* <option selected>"지역구를 선택해주세요."</option> */}
-              {region.map((item, idx) => {
-                return (
-                  <option defaultValue={item} key={idx}>
-                    {item}
-                  </option>
-                );
-              })}
-            </RegionSelect>
-          </LocationLabel>
-          <LocationLabel>
-            <Span>장소 : </Span>
-            <LocationInput
-              type="text"
-              placeholder="장소를 입력하세요"
-              defaultValue={location}
-              onChange={locationHandler}
-            />
-          </LocationLabel>
+          <SelectInput divStyle={'shortInput'} defaultValue={selectedRegion} onChange={selectedRegionHandler} Arr={region}>구 : </SelectInput>
+          <CreateInput divStyle={'shortInput'} type={"text"} placeholder={"장소를 입력하세요."} defaultValue={location} onChange={locationHandler} >장소 : </CreateInput>
         </LocationDiv>
+        {/* ////FIXME: 장소 div */}
+
+        {/* ////FIXME: 장소 div */}
         <LocationDiv>
           <LocationLabel>
             <Span>시작 날짜 : </Span>
@@ -132,6 +76,8 @@ function BbsCreate() {
             />
           </LocationLabel>
         </LocationDiv>
+        {/* ////FIXME: 장소 div */}
+
         <CommentArea>
           <Span>후기 : </Span>
           <TextArea
@@ -167,18 +113,6 @@ const InputArea = styled.form`
   gap: 20px;
 
   padding: 50px 50px 50px 50px;
-`;
-
-const Input = styled.input`
-  width: 70%;
-`;
-
-const Label = styled.label`
-  /* background-color: aqua; */
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  gap: 50px;
 `;
 
 const Span = styled.span`
