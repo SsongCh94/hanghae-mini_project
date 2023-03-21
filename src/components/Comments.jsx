@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import uuid from 'react-uuid';
 import styled from 'styled-components';
@@ -23,7 +23,7 @@ function Comments({ boardId, children }) {
     const nickname = useSelector((state) => state.user.user.nickname);
     
     
-    const [newComment, newCommentChangeHandler] = useLoginInput('');
+    const [newComment, setNewComment] = useState('');
 
     useEffect(() => {
         dispatch(setCommentState(children));
@@ -37,6 +37,7 @@ function Comments({ boardId, children }) {
             nickname,
         }
         dispatch(__registryComment(payload));
+        setNewComment('');
     }
 
     return (
@@ -52,7 +53,7 @@ function Comments({ boardId, children }) {
                         >
                             <StInput
                                 value={newComment}
-                                onChange={newCommentChangeHandler}
+                                onChange={(e)=>setNewComment((e.target.value))}
                                 placeholder='댓글을 적어주세요.'
                                 others='width:100%'
                             />
