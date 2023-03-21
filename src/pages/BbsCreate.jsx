@@ -50,33 +50,14 @@ function BbsCreate() {
         <CreateInput divStyle={'longInput'} type={"text"} placeholder={"제목을 입력하세요."} defaultValue={inputTitle} onChange={inputTitleHandler} >제목 : </CreateInput>
         <CreateInput divStyle={'longInput'} type={"text"} placeholder={"이미지 URL을 입력하세요."} defaultValue={inputURL} onChange={inputURLHandler} >이미지 URL : </CreateInput>
         <CreateInput divStyle={'longInput'} type={"url"} placeholder={"행사 홈 URL을 입력하세요."} defaultValue={pageUrl} onChange={pageUrlHandler} >행사 홈페이지 URL : </CreateInput>
-        {/* ////FIXME: 장소 div */}
         <LocationDiv>
           <SelectInput divStyle={'shortInput'} defaultValue={selectedRegion} onChange={selectedRegionHandler} Arr={region}>구 : </SelectInput>
           <CreateInput divStyle={'shortInput'} type={"text"} placeholder={"장소를 입력하세요."} defaultValue={location} onChange={locationHandler} >장소 : </CreateInput>
         </LocationDiv>
-        {/* ////FIXME: 장소 div */}
-
-        {/* ////FIXME: 장소 div */}
         <LocationDiv>
-          <LocationLabel>
-            <Span>시작 날짜 : </Span>
-            <LocationInput
-              type="date"
-              defaultValue={startDate}
-              onChange={startDateHandler}
-            />
-          </LocationLabel>
-          <LocationLabel>
-            <Span>끝나는 날짜 : </Span>
-            <LocationInput
-              type="date"
-              defaultValue={endDate}
-              onChange={endDateHandler}
-            />
-          </LocationLabel>
+          <CreateInput divStyle={'shortInput'} type={"date"} defaultValue={startDate} onChange={startDateHandler} >시작 날짜 : </CreateInput>
+          <CreateInput divStyle={'shortInput'} type={"date"} defaultValue={endDate} onChange={endDateHandler} >끝나는 날짜 : </CreateInput>
         </LocationDiv>
-        {/* ////FIXME: 장소 div */}
 
         <CommentArea>
           <Span>후기 : </Span>
@@ -94,7 +75,7 @@ function BbsCreate() {
           <ButtonMiddle type='button' onClick={() => navigate("/")}>뒤로가기</ButtonMiddle>
         </ButtonArea>
       </InputArea>
-    </PageContainer>
+    </PageContainer >
   );
 }
 
@@ -144,20 +125,9 @@ const ButtonArea = styled.div`
 `;
 
 const LocationDiv = styled.div`
-  /* background-color: azure; */
   width: 100%;
 
   display: flex;
   justify-content: flex-end;
 `;
-const LocationLabel = styled.label`
-  /* background-color: aqua; */
-  width: 41%;
-  display: flex;
-  justify-content: flex-end;
-`;
-const LocationInput = styled.input`
-  width: 70%;
-`;
-
 export default BbsCreate;

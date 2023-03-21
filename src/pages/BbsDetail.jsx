@@ -15,6 +15,7 @@ function BbsDetail() {
   const dispatch = useDispatch();
   const [comment, commentHandler] = useBbsInput("");
   const { postDetail } = useSelector((state) => state.posts);
+  const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(__getPostDetail(params.id));
@@ -55,9 +56,9 @@ function BbsDetail() {
         </BasicDiv>
         <Test>
           {" "}
-          <ButtonMiddle onClick={() => navigate(`/bbs/modify/${params.id}`)}>
+          {user.loginid === postDetail.username ? <ButtonMiddle onClick={() => navigate(`/bbs/modify/${params.id}`)}>
             수정하기
-          </ButtonMiddle>
+          </ButtonMiddle> : null}
           <ButtonMiddle onClick={() => navigate("/")}>뒤로가기</ButtonMiddle>
         </Test>
       </DetailArea>
