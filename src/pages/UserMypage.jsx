@@ -7,7 +7,6 @@ import MyPostCard from "../components/MyPostCard";
 import { __getMyPost } from '../redux/modules/userSlice';
 import {
     ButtonLarge,
-    ButtonMiddle,
     ButtonSmall,
     FlexHorizontal,
     FlexVertical,
@@ -92,4 +91,3 @@ const WrapGroup = styled.div`
   height: fit-content;
   margin-bottom: 50px;
 `;
-const CardContainer = styled.div``;
