@@ -143,8 +143,6 @@ justify-content: flex-end;
 }
 
 export const InputBox = styled.label`
-background-color: aqua;
-
   width: 100%;
   display: flex;
   flex-direction: column;

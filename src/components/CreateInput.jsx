@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components';
-import { DIV, InputBox, Span } from '../variables/styleStore';
+import { InputBox } from '../variables/styleStore';
 import { COLOR_THEME } from '../variables/uiVariables';
 
-function CreateInput({ title, divStyle, children, placeholder, defaultValue, onChange, type, }) {
-  const stDiv = DIV[divStyle]
+function CreateInput({ title, placeholder, defaultValue, onChange, type, max }) {
+
 
   return (
     <InputBox>
@@ -14,6 +14,7 @@ function CreateInput({ title, divStyle, children, placeholder, defaultValue, onC
         placeholder={placeholder}
         defaultValue={defaultValue}
         onChange={onChange}
+        maxLength={max}
       />
     </InputBox>
   )
@@ -21,13 +22,9 @@ function CreateInput({ title, divStyle, children, placeholder, defaultValue, onC
 
 const TopBox = styled.div`
   width: 100%;
-  color: black
+  color: black;
 `
 
-// const BottomBox = styled.div`
-//   background-color: azure;
-//   width: 70%;
-// `
 
 const Input = styled.input`
 background-color: transparent;
