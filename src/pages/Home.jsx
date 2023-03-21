@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getPosts } from "../redux/modules/postsSlice";
 import { useBbsInput } from '../variables/useBbsInput';
 import HomeCard from '../components/HomeCard';
-import HomeSearch from '../components/HomeSearch';
+import HomeSearch from '../components/HomeSearch'
 
 function Home() {
   const dispatch = useDispatch();
