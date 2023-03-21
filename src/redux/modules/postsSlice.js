@@ -66,7 +66,11 @@ export const __revisePost = createAsyncThunk(
 export const postslice = createSlice({
   name: "posts",
   initialState,
-  reducers: {},
+  reducers: {
+    cmtCountUp : (state, action) => {
+      state.postDetail.cmtCount++;
+    }
+  },
   extraReducers: {
     [__postPosts.fulfilled]: (state, action) => {
       state.isLoading = false;
@@ -127,4 +131,5 @@ export const postslice = createSlice({
   },
 });
 
+export const { cmtCountUp } = postslice.actions;
 export default postslice.reducer;

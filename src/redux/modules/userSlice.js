@@ -119,7 +119,7 @@ const userSlice = createSlice({
     },
     initLoginStatus : (state, action) => {
       state.isLogin = true;
-      state.user.loginid = action.payload.loginid;
+      state.user.loginid = action.payload.sub;
       state.user.nickname = action.payload.nickname;
     }
   },
@@ -149,7 +149,7 @@ const userSlice = createSlice({
       console.log('nickname: ', userInfo.nickname);
 
       state.user = {
-        loginid: userInfo.loginid,
+        loginid: userInfo.sub,
         nickname: userInfo.nickname,
       };
       alert(

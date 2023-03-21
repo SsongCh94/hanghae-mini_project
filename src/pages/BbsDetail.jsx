@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Comments from "../components/Comments";
-import ContentBox from "../components/ContentBox";
+import TextBox from "../components/TextBox";
 import { __getPostDetail } from "../redux/modules/postsSlice";
 import { BasicDiv, FlexHorizontal, FlexVertical, PageContainer } from "../variables/styleStore";
-import { ButtonSmall } from "../variables/styleStore";
+import { COLOR_THEME } from "../variables/uiVariables";
 import { useBbsInput } from "../variables/useBbsInput";
+import Heart from "../components/Heart";
+import EventDetails from "../components/EventDetails";
+import { ButtonMiddle } from "../variables/styleStore";
+
 
 function BbsDetail() {
   const navigate = useNavigate();
@@ -24,50 +28,81 @@ function BbsDetail() {
     <PageContainer others='padding: 100px 0px'>
       <FlexVertical alignItems='center' justifyContent='center'>
         <BoxWrapper>
+          <FlexHorizontal alignItems='center' justifyContent='right'>
+            <div>
+              <span>작성자: </span>
+              <span>{postDetail.username}</span>
+            </div>
+          </FlexHorizontal>
           <FlexVertical alignItems='center' justifyContent='center' gap='20px'>
+            <LineBold />
+            <div style={{ fontWeight: '700', fontSize: '24px' }}>{postDetail.title}</div>
+            <LineBold />
             <PhotoArea>
-              <img src={postDetail.image} alt="" />
+              <Image src={postDetail.image} alt="" />
             </PhotoArea>
-            <FlexHorizontal alignItems='center' justifyContent='space-between'>
-              <ContentBox title='행사명'>{postDetail.title}</ContentBox>
-              <ContentBox title='분류'>{postDetail.classify}</ContentBox>
-            </FlexHorizontal>
-            <FlexHorizontal alignItems='center' justifyContent='space-between'>
-              <ContentBox title='자치구'>{postDetail.region}</ContentBox>
-              <ContentBox title='장소'>{postDetail.location}</ContentBox>
-            </FlexHorizontal>
-            <FlexHorizontal alignItems='center' justifyContent='space-between'>
-              <ContentBox title='시작일'>{postDetail.startDate}</ContentBox>
-              <ContentBox title='종료일'>{postDetail.endDate}</ContentBox>
-            </FlexHorizontal>
-            <FlexHorizontal alignItems='center' justifyContent='left'>
-              <ContentBox title='URL'>{postDetail.pageUrl}</ContentBox>
+            <Line />
+            <EventDetails />
+            <Line />
+            <BoxTitleContainer>
+              <BoxTitle>소개글</BoxTitle>
+            </BoxTitleContainer>
+            <TextBox>
+              {postDetail.contents}
+            </TextBox>
+            <Heart>{postDetail.thumbsUpCount}</Heart>
+            <Line />
+            <BoxTitleContainer>
+              <FlexHorizontal alignItems='center' justifyContent='space-between'>
+                <BoxTitle>코멘트</BoxTitle>
+                <BoxTitle>
+                  <span style={{ color: COLOR_THEME.COLOR_4 }}>{postDetail.cmtCount}</span> 개
+                </BoxTitle>
+              </FlexHorizontal>
+            </BoxTitleContainer>
+            <Comments boardId={params.id}>{postDetail.commentList}</Comments>
+            <LineBold />
+            <FlexHorizontal alignItems='center' justifyContent='right' gap='10px'>
+              <ButtonMiddle onClick={() => navigate(`/bbs/modify/${params.id}`)}>
+                수정하기
+              </ButtonMiddle>
+              <ButtonMiddle onClick={() => navigate("/")}>뒤로가기</ButtonMiddle>
             </FlexHorizontal>
           </FlexVertical>
         </BoxWrapper>
       </FlexVertical>
-      <DetailArea>
-        <CommentsArea>
-          <p>{postDetail.contents}</p>
-        </CommentsArea>
-        <BasicDiv>
-          <Comments boardId={params.id}>{postDetail.commentList}</Comments>
-        </BasicDiv>
-        <Test>
-          {" "}
-          <ButtonMiddle onClick={() => navigate(`/bbs/modify/${params.id}`)}>
-            수정하기
-          </ButtonMiddle>
-          <ButtonMiddle onClick={() => navigate("/")}>뒤로가기</ButtonMiddle>
-        </Test>
-      </DetailArea>
     </PageContainer>
   );
 }
 
 export default BbsDetail;
 
+const BoxTitle = styled.div`
+  font-size : 36px;
+  font-weight: 900;
+  color: ${COLOR_THEME.COLOR_1};
+`
 
+const BoxTitleContainer = styled.div`
+  width: 100%;
+  height: fit-content;
+  padding : 10px 0px;
+`
+const Image = styled.img`
+  object-fit: cover;
+  width:100%;
+  height:100%;
+`
+const LineBold = styled.div`
+  width: 100%;
+  height: 2px;
+  background-color: ${COLOR_THEME.COLOR_1};
+`
+const Line = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: ${COLOR_THEME.COLOR_1};
+`
 
 const BoxWrapper = styled.div`
   width:1100px;
@@ -89,7 +124,7 @@ const DetailArea = styled.div`
 `;
 
 const PhotoArea = styled.div`
-  background-color: beige;
+  /* background-color: beige; */
   width: 100%;
   height: 600px;
 `;
@@ -132,27 +167,4 @@ const Test = styled.div`
 
   right: 50px;
   bottom: 100px;
-`;
-
-// TODO: 버튼 가져왔음!
-
-const COLOR_1 = "37306B";
-const COLOR_2 = "66347F";
-const COLOR_3 = "9E4784";
-const COLOR_4 = "D27685";
-
-const ButtonMiddle = styled.button`
-  cursor: pointer;
-  padding: 10px 20px;
-  width: auto;
-  height: auto;
-  color: #${COLOR_4};
-  border: 1px solid #${COLOR_4};
-  background-color: #${COLOR_1};
-  &:hover {
-    color: #${COLOR_3};
-    border: 1px solid #${COLOR_3};
-    background-color: #${COLOR_2};
-  }
-  ${({ others }) => others};
 `;

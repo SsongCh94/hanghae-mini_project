@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import uuid from 'react-uuid';
 import styled from 'styled-components';
 import { setCommentState, __eraseComment, __modifyComment, __registryComment } from '../redux/modules/commentSlice';
+import { cmtCountUp } from '../redux/modules/postsSlice';
 import { ButtonSmall, FlexHorizontal, FlexVertical, StInput } from '../variables/styleStore';
 import useLoginInput from '../variables/useLoginInput';
 import EachComment from './EachComment';
@@ -37,6 +38,7 @@ function Comments({ boardId, children }) {
             nickname,
         }
         dispatch(__registryComment(payload));
+        dispatch(cmtCountUp());
         setNewComment('');
     }
 
