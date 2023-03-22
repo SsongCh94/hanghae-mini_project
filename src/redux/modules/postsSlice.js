@@ -39,8 +39,8 @@ export const __postPosts = createAsyncThunk(
   "postPosts",
   async (payload, thunkAPI) => {
     try {
-      await apis_token.post("/api/board/", payload);
-      return thunkAPI.fulfillWithValue();
+      const data = await apis_token.post("/api/board/", payload);
+      return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       alert(error.response.data.message)
       return thunkAPI.rejectWithValue(error);
@@ -52,11 +52,10 @@ export const __revisePost = createAsyncThunk(
   "revisePost",
   async (payload, thunkAPI) => {
     try {
-      await apis_token.put(`/api/board/${payload.id}`, payload.revisedPost);
-      return thunkAPI.fulfillWithValue();
+      const data = await apis_token.put(`/api/board/${payload.id}`, payload.revisedPost);
+      return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       alert(error.response.data.message)
-      console.log('error======', error.response.data.message);
       return thunkAPI.rejectWithValue(error);
     }
   }

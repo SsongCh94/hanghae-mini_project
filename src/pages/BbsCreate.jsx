@@ -22,8 +22,13 @@ function BbsCreate() {
 
   const dispatch = useDispatch();
 
-  const requestPost = (payload) => {
-    dispatch(__postPosts(payload));
+  const requestPost = async (payload) => {
+    dispatch(__postPosts(payload))
+      .then(response => {
+        if (response.payload.data.message === 'success') {
+          navigate('/')
+        }
+      })
   };
 
   const newPost = {

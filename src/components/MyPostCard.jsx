@@ -10,9 +10,11 @@ function MyPostCard({ children }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const onDeleteBtnClickHandler = (id) => {
-    dispatch(__deleteMyPost(id))
+  const onDeleteBtnClickHandler = async (id) => {
+    const answer = prompt(`삭제하시려면 '삭제' 를 입력해주세요`)
+    answer === '삭제' ? dispatch(__deleteMyPost(id)) : alert('삭제되지 않았습니다.');
   }
+
 
   return (
     <>
@@ -103,5 +105,7 @@ const PostingCard = styled.div`
 
 const ButtonBox = styled.div`
   align-self: flex-end;
+  display: flex;
   margin-top: 4px;
+  gap: 5px;
 `

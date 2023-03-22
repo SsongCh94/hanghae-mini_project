@@ -44,8 +44,12 @@ function BbsModify() {
   };
 
   const reviseBtnHandler = async (payload) => {
-    await dispatch(__revisePost(payload));
-    // navigate(`/bbs/detail/${params.id}`);
+    dispatch(__revisePost(payload))
+      .then(response => {
+        if (response.payload.data.message === 'success') {
+          navigate(`/bbs/detail/${params.id}`);
+        }
+      })
   };
 
   return (
