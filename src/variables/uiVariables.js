@@ -1,4 +1,4 @@
-// 전역 상수COLOR_1
+// 전역 상수
 
 export const HEADER_HEIGHT = "5vh";
 export const FOOTER_HEIGHT = "10vh";

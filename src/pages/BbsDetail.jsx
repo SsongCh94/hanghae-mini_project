@@ -27,7 +27,6 @@ function BbsDetail() {
 
   return (
     <PageContainer backgroundColor={`${COLOR_THEME.COLOR_4}`} others='padding: 100px 0px'>
-
       <FlexVertical alignItems='center' justifyContent='center'>
         <Wrap>
         <FlexVertical alignItems='center' justifyContent='center'>
@@ -57,8 +56,7 @@ function BbsDetail() {
               <TextBox>
                 {postDetail.contents}
               </TextBox>
-              <Heart onClick={() => { }}>{postDetail.thumbsUpCount}</Heart>
-
+              <Heart>{postDetail.thumbsUpCount}</Heart>
               <Line />
               <BoxTitleContainer>
                 <FlexHorizontal alignItems='center' justifyContent='space-between'>
@@ -93,6 +91,7 @@ const Wrap = styled.div`
   background-color: white;
   border : none;
   border-radius: 50px;
+  box-shadow: 0px 0px 25px black;
 `
 
 const BoxTitle = styled.div`
@@ -107,7 +106,7 @@ const BoxTitleContainer = styled.div`
   padding : 10px 0px;
 `
 const Image = styled.img`
-  object-fit: cover;
+  object-fit: contain;
   width:100%;
   height:100%;
 `

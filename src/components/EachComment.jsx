@@ -6,17 +6,24 @@ import useLoginInput from '../variables/useLoginInput';
 import styled from 'styled-components';
 import { BiLike } from "react-icons/bi"
 import { COLOR_THEME } from '../variables/uiVariables';
+import { __commentThumbsUp } from '../redux/modules/postsSlice';
 
-function EachComment({ dataObj }) {
+function EachComment({ boardId,dataObj }) {
     const [mode, setMode] = useState(true);
 
     const dispatch = useDispatch();
-    const { id, comment, nickname } = { ...dataObj };
+    const {
+        id, 
+        comment, 
+        nickname,  
+        thumbsUpCount,
+        commentThumbsupStatus,
+    } = { ...dataObj };
     const [commentState, commentChangeHandler] = useLoginInput(comment);
     const myNickname = useSelector((state) => state.user.user.nickname);
+    
 
     const eraseCommentHandler = (id) => {
-        console.log("이레이즈 id : ", id);
         const payload = {
             id,
         }
@@ -28,9 +35,18 @@ function EachComment({ dataObj }) {
         const payload = {
             id: id,
             comment: commentState,
+            commentThumbsupStatus,
         }
         dispatch(__modifyComment(payload));
         setMode((prev) => !prev);
+    }
+
+    const thumbsUpHandler = () => {
+        const payload = {
+            boardId,
+            commentId:id,
+        }
+        dispatch(__commentThumbsUp(payload));
     }
 
     return (
@@ -39,10 +55,10 @@ function EachComment({ dataObj }) {
                 <FlexVertical gap='15px'>
                     <FlexHorizontal alignItems='center' justifyContent='space-between'>
                         <NicknameBox>
-                            {dataObj.nickname}
+                            {nickname}
                         </NicknameBox>
                         <FlexHorizontal alignItems='center' justifyContent='right' width='500px'>
-                            {myNickname === dataObj.nickname
+                            {myNickname === nickname
                                 ? (mode
                                     ? (
                                         <>
@@ -68,11 +84,10 @@ function EachComment({ dataObj }) {
                                 )
                                 : null
                             }
-                            <ButtonNoBorder type='button'>
-                                <BiLike style={{margin:'0px 5px'}}/>
-                                <span>{dataObj.thumbsUpCount}</span>
-                                </ButtonNoBorder>
-                            
+                            <ButtonNoBorder type='button' onClick={thumbsUpHandler}>
+                                <BiLike style={{ margin: '0px 5px' }} />
+                                <span>{thumbsUpCount}</span>
+                            </ButtonNoBorder>
                         </FlexHorizontal>
                     </FlexHorizontal>
                     <FlexHorizontal alignItems='center' justifyContent='left'>
@@ -82,13 +97,11 @@ function EachComment({ dataObj }) {
                                 : <input
                                     value={commentState}
                                     onChange={commentChangeHandler}
-                                    style={{width:'100%'}}
+                                    style={{ width: '100%' }}
                                     required
                                 />}
                         </CommentBox>
-
                     </FlexHorizontal>
-
                 </FlexVertical>
             </Wrap>
         </StForm>

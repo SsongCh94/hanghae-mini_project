@@ -1,7 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { async } from "q";
-import { useNavigate } from 'react-router-dom';
-import thunk from "redux-thunk";
 import { apis, apis_token } from "../../axios/api";
 
 const initialState = {
@@ -29,7 +26,7 @@ export const __getPostDetail = createAsyncThunk(
   "getPostDetail",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await apis.get(`/api/board/detail/${payload}`);
+      const { data } = await apis_token.get(`/api/board/detail/${payload}`);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       console.log("error-->", error);
@@ -69,19 +66,34 @@ export const __thumbsUp = createAsyncThunk(
   "thumbsUp",
   async (payload, thunkApi) => {
     try {
-      const response = await apis_token.post(`/api/board/${payload.boardId}/thumbsup`);
+      const response = await apis_token.post(`/api/board/${payload.id}/thumbsup`, null);
+
       return thunkApi.fulfillWithValue(response.data);
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
   }
-)
+);
+
+export const __commentThumbsUp = createAsyncThunk(
+  "commentThumbsUp",
+  async (payload, thunkApi) => {
+    try {
+      const response = await apis_token.post(
+        `/api/boards/${payload.boardId}/comments/${payload.commentId}`, null);
+      response.data.payload = payload;
+      return thunkApi.fulfillWithValue(response.data);
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
 
 export const postslice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    cmtCountUp : (state, action) => {
+    cmtCountUp: (state, action) => {
       state.postDetail.cmtCount++;
     }
   },
@@ -142,13 +154,40 @@ export const postslice = createSlice({
       state.isError = true;
       state.error = action.payload;
     },
-    [__thumbsUp.pending]: (state,action) => {
+    [__thumbsUp.pending]: (state, action) => {
 
     },
-    [__thumbsUp.fulfiled]: (state,action) => {
-      state.postDetail.thumbsUpCount++;
+    [__thumbsUp.fulfilled]: (state, action) => {
+      state.postDetail.boardThumbsupStatus = !state.postDetail.boardThumbsupStatus;
+      state.postDetail.thumbsUpCount = state.postDetail.boardThumbsupStatus
+        ? state.postDetail.thumbsUpCount + 1
+        : state.postDetail.thumbsUpCount - 1;
+      // console.log('따봉 수:', state.postDetail.thumbsUpCount);
     },
-    [__thumbsUp.rejected]: (state,action) => {
+    [__thumbsUp.rejected]: (state, action) => {
+
+    },
+    [__commentThumbsUp.pending]: (state, action) => {
+
+    },
+    [__commentThumbsUp.fulfilled]: (state, action) => {
+      console.log(action.payload.payload);
+      console.log('state: ', state.postDetail);
+      const target = action.payload.payload;
+      state.postDetail.commentList = state.postDetail.commentList
+        .map((element) => {
+          if(element.id === target.commentId){
+            if(element.commentThumbsupStatus){
+              --element.thumbsUpCount;
+            } else {
+              ++element.thumbsUpCount;
+            }
+            element.commentThumbsupStatus = !element.commentThumbsupStatus;
+          }
+          return element;
+        })
+    },
+    [__commentThumbsUp.rejected]: (state, action) => {
 
     },
   },

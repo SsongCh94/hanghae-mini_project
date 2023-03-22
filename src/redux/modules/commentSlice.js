@@ -66,7 +66,6 @@ export const commentSlice = createSlice({
     initialState,
     reducers: {
         setCommentState: (state, action) => {
-            console.log('들어왔음');
             state.comments = [];
             state.comments = action.payload;
         },
@@ -82,17 +81,15 @@ export const commentSlice = createSlice({
                 comment: action.payload.comment,
                 nickname: action.payload.nickname,
             })
-            alert(action.payload.message);
         },
         [__registryComment.rejected]: (state, action) => {
-            // alert(action.payload)
+            alert(action.payload)
         },
         [__eraseComment.pending]: (state, action) => {
             console.log('서버에 댓글삭제 요청중입니다.');
         },
         [__eraseComment.fulfilled]: (state, action) => {
             state.comments = state.comments.filter((element)=> element.id !== action.payload.id);
-            alert(action.payload.message);
         },
         [__eraseComment.rejected]: (state, action) => {
         },
@@ -100,8 +97,6 @@ export const commentSlice = createSlice({
             console.log('서버에 댓글수정 요청중입니다.');
         },
         [__modifyComment.fulfilled]: (state, action) => {
-            alert(action.payload.message);
-
         },
         [__modifyComment.rejected]: () => {
         },
