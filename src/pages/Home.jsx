@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { PageContainer } from "../variables/styleStore";
+import { FlexVertical, PageContainer } from "../variables/styleStore";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { __getPosts } from "../redux/modules/postsSlice";
 import { useBbsInput } from '../variables/useBbsInput';
 import HomeCard from '../components/HomeCard';
-import HomeSearch from '../components/HomeSearch';
+import HomeSearch from '../components/HomeSearch'
+import { COLOR_THEME } from "../variables/uiVariables";
+import CardInHome from "../components/CardInHome";
 
 function Home() {
   const dispatch = useDispatch();
@@ -64,34 +66,56 @@ function Home() {
   return (
 
     <PageContainer>
-      <HomeImg />
-      <MainArea>
-        <HomeSearch {...props} />
-        <HomeCard>{search ? searchedPosts : posts}</HomeCard>
-      </MainArea>
+      <HomeImg>
+        <Image src="img/SCP_background.jpg" />
+      </HomeImg>
+      <Wrap>
+        <FlexVertical alignItems='center' justifyContent='center'>
+          <MainContainer>
+            <MainArea>
+              <FlexVertical alignItems='center' justifyContent='center' gap='50px'>
+                <HomeSearch {...props} />
+                <HomeCard eachCard={search ? searchedPosts : posts} />
+              </FlexVertical>
+            </MainArea>
+          </MainContainer>
+        </FlexVertical>
+      </Wrap>
     </PageContainer>
   );
 }
 
 export default Home;
 
+const Wrap = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 100px 0px;
+  background-color: ${COLOR_THEME.COLOR_4};
+`
+const MainContainer = styled.div`
+  width: 1200px;
+  padding: 50px;
+  border: none;
+  border-radius: 25px;
+  background-color: white;
+  box-shadow: 0px 0px 25px black;
+`
 const MainArea = styled.div`
-  background-color: azure;
-  width: 80%;
+  
+  width: 100%;
   height: auto;
   margin: 20px auto 0 auto;
 `;
 
-const HomeImg = () => {
-  return (
-    <img
-      style={{
-        width: "100%",
-        height: "400px",
-      }}
-      src="img/HomeImg2.jpeg"
-      alt=" 이미지가 읽어지지 않네요.. ㅠㅠ"
-    />
-  );
-};
+// "img/HomeImg2.jpeg"
+const HomeImg = styled.div`
+  width: 100%;
+  height: 600px;
+`
 
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`
