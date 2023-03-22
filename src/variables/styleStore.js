@@ -153,7 +153,7 @@ export const InputArea = styled.form`
 width: 50%;
 height: auto;
 
-margin: 20px auto 20px auto;
+margin: 0px auto;
 
 display: flex;
 flex-direction: column;

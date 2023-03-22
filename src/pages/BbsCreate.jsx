@@ -44,7 +44,7 @@ function BbsCreate() {
   };
 
   return (
-    <PageContainer backgroundColor='#f5e0e383'>
+    <PageContainer backgroundColor='#f5e0e383' others='padding : 50px 0px'>
       <InputArea>
         <SelectInput defaultValue={selectedCategory} setDefaultValue={selectedCategoryHandler} Arr={category}>카테고리</SelectInput>
         <CreateInput title={'제목'} type={"text"} placeholder={"제목을 입력하세요."} defaultValue={inputTitle} onChange={inputTitleHandler} max={20}></CreateInput>
@@ -78,8 +78,11 @@ function BbsCreate() {
           <ButtonMiddle type='button' onClick={() => navigate("/")}>뒤로가기</ButtonMiddle>
         </ButtonArea>
       </InputArea>
+
     </PageContainer >
   );
 }
+
+
 
 export default BbsCreate;

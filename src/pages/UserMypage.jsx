@@ -30,7 +30,7 @@ function UserMypage() {
 
   useEffect(() => {
     dispatch(__getMyPost())
-  }, [])
+  }, [dispatch])
 
   return (
     <PageContainer>
