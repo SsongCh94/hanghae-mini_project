@@ -8,7 +8,7 @@ function SelectInput({ defaultValue, setDefaultValue, Arr, children }) {
 
   const handleOnChangeSelectValue = (e) => {
     setDefaultValue(e.target.getAttribute("value"));
-    console.log(e.target.getAttribute("value"));
+    console.log(e.target);
   };
   return (
     <FlexVertical gap='10px'>
