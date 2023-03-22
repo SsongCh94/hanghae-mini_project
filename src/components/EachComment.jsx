@@ -1,27 +1,27 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { __eraseComment, __modifyComment } from '../redux/modules/commentSlice';
-import { ButtonSmall, FlexHorizontal, FlexVertical } from '../variables/styleStore'
+import { FlexHorizontal, FlexVertical } from '../variables/styleStore'
 import useLoginInput from '../variables/useLoginInput';
 import styled from 'styled-components';
 import { BiLike } from "react-icons/bi"
 import { COLOR_THEME } from '../variables/uiVariables';
 import { __commentThumbsUp } from '../redux/modules/postsSlice';
 
-function EachComment({ boardId,dataObj }) {
+function EachComment({ boardId, dataObj }) {
     const [mode, setMode] = useState(true);
 
     const dispatch = useDispatch();
     const {
-        id, 
-        comment, 
-        nickname,  
+        id,
+        comment,
+        nickname,
         thumbsUpCount,
         commentThumbsupStatus,
     } = { ...dataObj };
     const [commentState, commentChangeHandler] = useLoginInput(comment);
     const myNickname = useSelector((state) => state.user.user.nickname);
-    
+
 
     const eraseCommentHandler = (id) => {
         const payload = {
@@ -44,7 +44,7 @@ function EachComment({ boardId,dataObj }) {
     const thumbsUpHandler = () => {
         const payload = {
             boardId,
-            commentId:id,
+            commentId: id,
         }
         dispatch(__commentThumbsUp(payload));
     }
@@ -119,11 +119,7 @@ const CommentBox = styled.div`
     width: fit-content;
     min-width: 99%;
 `
-const ButtonBox = styled.div`
 
-    text-align: right;
-    width: fit-content;
-`
 const StForm = styled.form`
     width: 100%;
 `

@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { removeCookie } from "../axios/cookies";
-import { initLoginStatus, logout, toggleIsLogin, __login } from "../redux/modules/userSlice";
+import { initLoginStatus, logout, __login } from "../redux/modules/userSlice";
 import {
   ButtonSmall,
   FlexHorizontal,
@@ -19,7 +18,7 @@ function Header() {
   const navigation = useNavigate();
   const dispatch = useDispatch();
   // const [isLogin, setIsLogin] = useState(false);
-  const { user, isLogin, isLoading, error } = useSelector(
+  const { user, isLogin } = useSelector(
     (state) => state.user
   );
   const [id, onIdChangeHandler] = useLoginInput("");
@@ -43,7 +42,7 @@ function Header() {
   }
   useEffect(() => {
     localCheck();
-  },[]);
+  }, []);
 
   const logoutClickHandler = () => {
     dispatch(logout());
@@ -57,9 +56,6 @@ function Header() {
     };
     dispatch(__login(logInUser));
     console.log("isLogin: ", isLogin);
-  };
-  const toggle = () => {
-    dispatch(toggleIsLogin());
   };
 
   return (

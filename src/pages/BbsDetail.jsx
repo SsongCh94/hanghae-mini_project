@@ -5,9 +5,8 @@ import styled from "styled-components";
 import Comments from "../components/Comments";
 import TextBox from "../components/TextBox";
 import { __getPostDetail } from "../redux/modules/postsSlice";
-import { BasicDiv, FlexHorizontal, FlexVertical, PageContainer } from "../variables/styleStore";
+import { FlexHorizontal, FlexVertical, PageContainer } from "../variables/styleStore";
 import { COLOR_THEME } from "../variables/uiVariables";
-import { useBbsInput } from "../variables/useBbsInput";
 import Heart from "../components/Heart";
 import EventDetails from "../components/EventDetails";
 import { ButtonMiddle } from "../variables/styleStore";
@@ -17,7 +16,6 @@ function BbsDetail() {
   const navigate = useNavigate();
   const params = useParams();
   const dispatch = useDispatch();
-  const [comment, commentHandler] = useBbsInput("");
   const { postDetail } = useSelector((state) => state.posts);
 
 
@@ -126,62 +124,8 @@ const BoxWrapper = styled.div`
   height: fit-content;
 `
 
-const DetailArea = styled.div`
-  background-color: aqua;
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-
-  overflow-y: scroll;
-`;
-
 const PhotoArea = styled.div`
   /* background-color: beige; */
   width: 100%;
   height: 600px;
-`;
-
-const InfoArea = styled.div`
-  background-color: azure;
-  width: 70%;
-  height: 40px;
-
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-
-  box-sizing: border-box;
-`;
-
-const Contents = styled.div`
-  background-color: beige;
-  width: 70%;
-  height: 200px;
-`;
-
-const CommentsArea = styled.div`
-  background-color: beige;
-  width: 60%;
-  height: 5%;
-
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Test = styled.div`
-  gap: 20px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  position: fixed;
-
-  right: 50px;
-  bottom: 100px;
 `;

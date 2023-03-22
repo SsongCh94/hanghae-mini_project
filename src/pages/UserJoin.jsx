@@ -11,7 +11,6 @@ import {
   PageContainer,
   StInput,
 } from "../variables/styleStore";
-import { MIN_PAGE_HEIGHT } from "../variables/uiVariables";
 import useLoginInput from "../variables/useLoginInput";
 
 function UserJoin() {

@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import uuid from 'react-uuid';
 import styled from 'styled-components';
-import { setCommentState, __eraseComment, __modifyComment, __registryComment } from '../redux/modules/commentSlice';
+import { setCommentState, __registryComment } from '../redux/modules/commentSlice';
 import { cmtCountUp } from '../redux/modules/postsSlice';
 import { ButtonSmall, FlexHorizontal, FlexVertical, StInput } from '../variables/styleStore';
-import useLoginInput from '../variables/useLoginInput';
 import EachComment from './EachComment';
 
 function Comments({ boardId, children }) {
@@ -22,8 +21,8 @@ function Comments({ boardId, children }) {
     const dispatch = useDispatch();
     const comments = useSelector((state) => state.comment.comments);
     const nickname = useSelector((state) => state.user.user.nickname);
-    
-    
+
+
     const [newComment, setNewComment] = useState('');
 
     useEffect(() => {
@@ -55,7 +54,7 @@ function Comments({ boardId, children }) {
                         >
                             <StInput
                                 value={newComment}
-                                onChange={(e)=>setNewComment((e.target.value))}
+                                onChange={(e) => setNewComment((e.target.value))}
                                 placeholder='댓글을 적어주세요.'
                                 others='width:100%'
                             />

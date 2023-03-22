@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { apis, apis_token } from "../../axios/api";
+import { apis_token } from "../../axios/api";
 import { getCookie } from "../../axios/cookies";
 
 const initialState = {
@@ -17,7 +17,7 @@ export const __registryComment = createAsyncThunk(
             const sendData = {
                 comment: payload.comment,
             }
-            
+
             console.log('쿠키:', getCookie('token'));
             const response = await apis_token.post(
                 `/api/comments/${payload.boardId}`,
@@ -53,7 +53,7 @@ export const __modifyComment = createAsyncThunk(
                 comment: payload.comment,
             };
             const response = await apis_token.put(`/api/comments/${payload.id}`, sendData);
-            
+
             return thunkApi.fulfillWithValue(response.data);
         } catch (error) {
             return thunkApi.rejectWithValue(error);
@@ -89,7 +89,7 @@ export const commentSlice = createSlice({
             console.log('서버에 댓글삭제 요청중입니다.');
         },
         [__eraseComment.fulfilled]: (state, action) => {
-            state.comments = state.comments.filter((element)=> element.id !== action.payload.id);
+            state.comments = state.comments.filter((element) => element.id !== action.payload.id);
         },
         [__eraseComment.rejected]: (state, action) => {
         },

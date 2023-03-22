@@ -33,7 +33,7 @@ function HomeCard({ eachCard }) {
           <FlexHorizontal
             alignItems='center'
             justifyContent='space-between'
-            gap = '50px'
+            gap='50px'
           >
             <PictureFrame>
               <FlexVertical others={pictureFrame}>
@@ -48,7 +48,7 @@ function HomeCard({ eachCard }) {
                   width='fit-content'
                   height='fit-content'
                   gap='20px'
-                  >
+                >
                   <FlexHorizontal alignItems='center' width='fit-content'>
                     <FcLike style={{ marginRight: '5px', fontSize: '24px' }} />
                     <span style={{
@@ -73,24 +73,14 @@ function HomeCard({ eachCard }) {
           </FlexHorizontal>
         </Card >
       );
-})
+    })
   )
 }
 
-const RightAlign = styled.div`
-  text-align : right;
-`
 const PictureFrame = styled.div`
 border : none;
 border-radius : 25px;
 overflow: hidden;
-`
-const FrameForBorder = styled.div`
-  border-radius: 25px;
-  width: 400px;
-  height: 100%;
-  overflow: hidden;
-  background-color: green;
 `
 
 const CardTitle = styled.span`
@@ -106,30 +96,11 @@ const Card = styled.div`
   border-radius: 25px;
   box-shadow: 0px 0px 10px black;
 `;
-const ImageContainer = styled.div`
-  width: 100%;
-  height: 100%;
-`
 const CardImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
 `;
 
-const CardInfo = styled.div`
-  width: 100%;
-  height: 250px;
-
-  margin: 25px 25px 25px 0;
-  padding-left: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-`;
-
-const CommentCnt = styled.span`
-width: 100px;
-height: 150px;
-`
 
 export default memo(HomeCard)

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { ButtonLarge, ButtonMiddle, ButtonSmall, FlexHorizontal, FlexVertical, StInput } from '../variables/styleStore';
+import { ButtonMiddle, FlexHorizontal, FlexVertical } from '../variables/styleStore';
 import useLoginInput from '../variables/useLoginInput';
 import ModalInputSet from './ModalInputSet';
 

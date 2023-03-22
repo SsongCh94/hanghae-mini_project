@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { __thumbsUp } from '../redux/modules/postsSlice';
 
 function Heart({ children }) {
-    const {id,thumbsUpCount,boardThumbsupStatus} = useSelector((state) => state.posts.postDetail);
+    const { id, boardThumbsupStatus } = useSelector((state) => state.posts.postDetail);
     const isLogin = localStorage.getItem('userInfo') ? true : false;
     const dispatch = useDispatch();
 
@@ -19,10 +19,10 @@ function Heart({ children }) {
     }
     return (
         <div style={{ margin: '80px' }}>
-            <ButtonHeart 
-            isClicked={boardThumbsupStatus} 
-            disabled={!isLogin} 
-            onClick={changeThumbsUpHandler}
+            <ButtonHeart
+                isClicked={boardThumbsupStatus}
+                disabled={!isLogin}
+                onClick={changeThumbsUpHandler}
             >
                 <TextContainer>
                     <CountText>{children}</CountText>
@@ -43,9 +43,9 @@ const ButtonHeart = styled.button`
     width : fit-content;
     height : fit-content;
     padding : 0px;
-    filter : ${({isClicked}) => isClicked? 'grayscale(0%)' : 'grayscale(100%)'};
+    filter : ${({ isClicked }) => isClicked ? 'grayscale(0%)' : 'grayscale(100%)'};
     &:hover{
-        filter : ${({isClicked}) => isClicked? 'grayscale(100%)' : 'grayscale(0%)'};
+        filter : ${({ isClicked }) => isClicked ? 'grayscale(100%)' : 'grayscale(0%)'};
     }
 `;
 

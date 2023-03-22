@@ -7,7 +7,6 @@ import { useBbsInput } from '../variables/useBbsInput';
 import HomeCard from '../components/HomeCard';
 import HomeSearch from '../components/HomeSearch'
 import { COLOR_THEME } from "../variables/uiVariables";
-import CardInHome from "../components/CardInHome";
 
 function Home() {
   const dispatch = useDispatch();
