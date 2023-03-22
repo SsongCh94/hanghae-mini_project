@@ -2,7 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { ButtonMiddle } from '../variables/styleStore';
+import { ButtonMiddle, FlexHorizontal, StInput } from '../variables/styleStore';
+import { COLOR_THEME } from '../variables/uiVariables';
 
 function HomeSearch({ searchedRegion, setSearchedRegion, searchValue, SearchValueHandler, onSearchBtnClickHandler }) {
   const { region } = useSelector((state) => state.selects);
@@ -13,9 +14,13 @@ function HomeSearch({ searchedRegion, setSearchedRegion, searchValue, SearchValu
     user.loginid ? navigate("/bbs/create") : alert('로그인 후 이용해주세요')
   }
 
+  const otherInputStyle = `
+    width: 100%;
+    height: 40px;
+  `
   return (
-    <SearchArea>
-      <select
+    <FlexHorizontal alignItems='center' justifyContent='space-between' gap='20px' width='1100px'>
+      <Select
         defaultValue={searchedRegion}
         onChange={setSearchedRegion}
       >
@@ -26,24 +31,35 @@ function HomeSearch({ searchedRegion, setSearchedRegion, searchValue, SearchValu
             </option>
           );
         })}
-      </select>
-      <Input type="text" value={searchValue} onChange={SearchValueHandler} placeholder={'행사 이름 또는 지역을 입력하세요'} />
-      <ButtonMiddle onClick={onSearchBtnClickHandler}>검색</ButtonMiddle>
-      <ButtonMiddle onClick={onWriteBtnClickHandler}>
-        글쓰기
-      </ButtonMiddle>
-    </SearchArea>
+      </Select>
+      <StInput
+        type="text"
+        value={searchValue}
+        onChange={SearchValueHandler}
+        placeholder='행사 이름 또는 지역을 입력하세요'
+        others={otherInputStyle}
+      />
+      <FlexHorizontal gap='5px' justifyContent='right' width='fit-content'>
+        <ButtonMiddle
+          onClick={onSearchBtnClickHandler}
+          others='width:80px;'
+        >검색</ButtonMiddle>
+        <ButtonMiddle
+          onClick={onWriteBtnClickHandler}
+          others='width:80px;'>
+          글쓰기
+        </ButtonMiddle>
+      </FlexHorizontal>
+    </FlexHorizontal>
   )
 }
 
-const SearchArea = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`;
+export default HomeSearch;
 
-const Input = styled.input`
-  width: 60%;
-`;
-
-export default HomeSearch
+const Select = styled.select`
+  width: 200px;
+  height : 40px;
+  padding : 5px 15px;
+  border-radius: 20px;
+  border : 1px solid ${COLOR_THEME.COLOR_1};
+`

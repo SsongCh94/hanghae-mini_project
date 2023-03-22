@@ -31,7 +31,8 @@ export const HeaderContainer = styled.div`
 `;
 export const FooterContainer = styled.div`
   height: ${FOOTER_HEIGHT};
-  background-color: gray;
+  color : white;
+  background-color: ${COLOR_THEME.COLOR_1};
 `;
 
 export const ButtonSmall = styled.button`
@@ -42,6 +43,7 @@ export const ButtonSmall = styled.button`
   color: ${COLOR_THEME.COLOR_4};
   border: 1px solid ${COLOR_THEME.COLOR_4};
   background-color: ${COLOR_THEME.COLOR_1};
+  border-radius: 25px;
   &:hover {
     /* color : #${COLOR_THEME.COLOR_3}; */
     color: white;
@@ -58,6 +60,7 @@ export const ButtonMiddle = styled.button`
   color: ${COLOR_THEME.COLOR_4};
   border: 1px solid ${COLOR_THEME.COLOR_4};
   background-color: ${COLOR_THEME.COLOR_1};
+  border-radius: 25px;
   &:hover {
     /* color : #${COLOR_THEME.COLOR_3}; */
     color: white;
@@ -73,6 +76,7 @@ export const ButtonLarge = styled.button`
   height: fit-content;
   color: ${COLOR_THEME.COLOR_4};
   border: 1px solid ${COLOR_THEME.COLOR_4};
+  border-radius: 25px;
   background-color: ${COLOR_THEME.COLOR_1};
   &:hover {
     /* color : ${COLOR_THEME.COLOR_3}; */

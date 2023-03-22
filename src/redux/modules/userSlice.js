@@ -28,10 +28,7 @@ export const __login = createAsyncThunk("login", async (payload, thunkApi) => {
   try {
     const response = await apis.post("/api/user/login", payload);
     const token = response.headers.authorization;
-    setCookie("token", token, {
-      path: '/',
-      expires: Math.floor((60 * 58) * 1000), // 58분뒤에 삭제
-    });
+    setCookie("token", token);
 
     const decodedUserInfo = jwt_decode(token);
     localStorage.setItem('userInfo',JSON.stringify(decodedUserInfo));
@@ -81,6 +78,18 @@ export const __isUserIdExist = createAsyncThunk(
   }
 );
 
+export const __isNicknameExist = createAsyncThunk(
+  "isNicknameExist",
+  async(payload,thunkApi) => {
+    try {
+      const response = await apis.post('/api/user/checknick', payload);
+      return thunkApi.fulfillWithValue(response.data);
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+)
+
 export const __getMyPost = createAsyncThunk(
   'getMyPost',
   async (payload, thunkApi) => {
@@ -122,7 +131,7 @@ const userSlice = createSlice({
     },
     initLoginStatus : (state, action) => {
       state.isLogin = true;
-      state.user.loginid = action.payload.loginid;
+      state.user.loginid = action.payload.sub;
       state.user.nickname = action.payload.nickname;
     }
   },
@@ -144,15 +153,12 @@ const userSlice = createSlice({
       console.log("서버와 연결 시도 중");
     },
     [__login.fulfilled]: (state, action) => {
-      // console.log("fulfilled action : ", action.payload);
       state.isLogin = true;
       state.isLoading = false;
-      console.log(action.payload);
       const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-      console.log('nickname: ', userInfo.nickname);
 
       state.user = {
-        loginid: userInfo.loginid,
+        loginid: userInfo.sub,
         nickname: userInfo.nickname,
       };
       alert(
@@ -161,7 +167,7 @@ const userSlice = createSlice({
     },
     [__login.rejected]: (state, action) => {
       state.isLoading = false;
-      alert(action.payload);
+      alert(action.payload.response.data.message);
       // console.log(action.payload.message);
     },
     [__isUserIdExist.pending]: (state, action) => { },
@@ -170,6 +176,13 @@ const userSlice = createSlice({
     },
     [__isUserIdExist.rejected]: (state, action) => {
       alert("사용중인 ID입니다.");
+    },
+    [__isNicknameExist.pending]: (state, action) => { },
+    [__isNicknameExist.fulfilled]: (state, action) => {
+      alert("중복된 닉네임이 없습니다. 사용하셔도 좋습니다!");
+    },
+    [__isNicknameExist.rejected]: (state, action) => {
+      alert("사용중인 닉네임입니다.");
     },
     [__changePassword.pending]: () => { },
     [__changePassword.fulfilled]: (state, action) => {

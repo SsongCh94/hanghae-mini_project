@@ -4,11 +4,13 @@ import { FlexHorizontal } from '../variables/styleStore';
 import { COLOR_THEME } from '../variables/uiVariables';
 
 function ContentBox({ title, children }) {
+    const containerLength = title ==='URL' ? '100%' : '500px';
+    const boxLength = title === 'URL' ? '1000px' : '400px';
     return (
-        <BoxContainer>
+        <BoxContainer length={containerLength}>
             <FlexHorizontal alignItems='center' justifyContent='space-between'>
                 <LeftBox>{title}</LeftBox>
-                <RightBox>{children}</RightBox>
+                <RightBox length={boxLength}>{children}</RightBox>
             </FlexHorizontal>
         </BoxContainer>
     )
@@ -19,12 +21,12 @@ export default ContentBox;
 const BoxContainer = styled.div`
     /* border-radius: 25px; */
     /* border : 2px solid ${COLOR_THEME.COLOR_4}; */
-    width: 500px;
+    width: ${({length}) => length};
     height: fit-content;
     overflow: hidden;
 `
 const LeftBox = styled.div`
-    width: 10%;
+    width: 60px;
     text-align: center;
     border-right: 1px solid ${COLOR_THEME.COLOR_1};
     background-color: ${COLOR_THEME.COLOR_1};
@@ -37,11 +39,12 @@ const LeftBox = styled.div`
 `
 const RightBox = styled.div`
     text-align: right;
-    width:80%;
+    width: ${({length})=>length};
     padding: 10px 25px 10px 0px;
     border : 2px solid ${COLOR_THEME.COLOR_1};
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
     font-weight: 600;
-    color : ${COLOR_THEME.COLOR_1}
+    color : ${COLOR_THEME.COLOR_1};
+    overflow: hidden;
 `

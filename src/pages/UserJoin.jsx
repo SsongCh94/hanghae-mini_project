@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { __isUserIdExist, __Join } from "../redux/modules/userSlice";
+import { __isNicknameExist, __isUserIdExist, __Join } from "../redux/modules/userSlice";
 import {
   ButtonSmall,
   FlexHorizontal,
@@ -42,6 +42,13 @@ function UserJoin() {
     dispatch(__isUserIdExist(idPayload));
   };
 
+  const nicknameCheckHandler = () => {
+    const payload = {
+      nickname,
+    };
+    dispatch(__isNicknameExist(payload));
+  }
+
   useEffect(() => {
     console.log("useEffect : ", isLogin);
     if (isLogin) {
@@ -56,7 +63,7 @@ function UserJoin() {
         : <MinimumHeightContainer>
           <FlexVertical alignItems='center' justifyContent='center'>
             <StForm onSubmit={onSubmitHandler}>
-              <FlexVertical alignItems="center" width='auto' justifyContent="center" gap="30px">
+              <FlexVertical alignItems="center" justifyContent="center" gap="30px">
                 <Warp>
                   <FlexHorizontal width='350px;' justifyContent='space-between' height="auto">
                     <StInput
@@ -84,7 +91,7 @@ function UserJoin() {
                   </FlexHorizontal>
                 </Warp>
                 <Warp>
-                  <FlexHorizontal width='350px;' justifyContent='left' height="auto">
+                  <FlexHorizontal width='350px;' justifyContent='space-between' height="auto">
                     <StInput
                       placeholder="닉네임을 입력하세요"
                       value={nickname}
@@ -93,6 +100,7 @@ function UserJoin() {
                       maxLength={8}
                       required
                     />
+                    <ButtonSmall type="button" onClick={nicknameCheckHandler}>닉네임 중복조회</ButtonSmall>
                   </FlexHorizontal>
                 </Warp>
                 <Warp>
