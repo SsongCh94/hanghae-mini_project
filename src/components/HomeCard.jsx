@@ -11,18 +11,9 @@ function HomeCard({ eachCard }) {
   const navigate = useNavigate();
 
   const pictureFrame = `
-    width: 500px;
-    height: 250px;
     align-items: center;
     justify-content : center;
   `
-  // <h2>{item.region}</h2>
-  // <h3>{item.location}</h3>
-  // <h3>
-  //   {item.startDate} ~ {item.endDate}
-  // </h3>
-  // <h3>작성일 : {item.createdat}</h3>
-  // <span>작성자 : {item.nickname}</span>
   return (
     eachCard.map((item) => {
       return (
@@ -40,7 +31,7 @@ function HomeCard({ eachCard }) {
                 <CardImg src={item.image} art="" />
               </FlexVertical>
             </PictureFrame>
-            <FlexVertical height='250px'>
+            <FlexVertical height='250px' gap='30px'>
               <FlexHorizontal alignItems='top' justifyContent='space-between'>
                 <CardTitle>{item.title}</CardTitle>
                 <FlexHorizontal
@@ -81,6 +72,8 @@ const PictureFrame = styled.div`
 border : none;
 border-radius : 25px;
 overflow: hidden;
+width: 500px;
+    height: 250px;
 `
 
 const CardTitle = styled.span`
@@ -99,7 +92,7 @@ const Card = styled.div`
 const CardImg = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: fill;
 `;
 
 

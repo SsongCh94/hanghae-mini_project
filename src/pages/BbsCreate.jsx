@@ -63,10 +63,10 @@ function BbsCreate() {
             <CreateInput title={'종료일'} type={"date"} defaultValue={endDate} onChange={endDateHandler} ></CreateInput>
           </FlexHorizontal>
 
-          <BasicDiv>후기 : </BasicDiv>
+          <BasicDiv>소개글 : </BasicDiv>
           <TextArea
             type="text"
-            placeholder="후기를 입력하세요"
+            placeholder="소개글을 입력하세요"
             defaultValue={contents}
             onChange={contentsHandler}
             maxLength={500}

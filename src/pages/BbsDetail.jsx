@@ -30,20 +30,16 @@ function BbsDetail() {
           <FlexVertical alignItems='center' justifyContent='center'>
             <BoxWrapper>
               <FlexVertical alignItems='center' justifyContent='center' gap='20px'>
-
                 <LineBold />
                 <div style={{ fontWeight: '700', fontSize: '24px' }}>
                   <span>{postDetail.title}</span>
                 </div>
                 <LineBold />
-
                 <PhotoArea>
                   <Image src={postDetail.image} alt="" />
                 </PhotoArea>
-
                 <Line />
                 <EventDetails />
-
                 <Line />
                 <BoxTitleContainer>
                   <FlexHorizontal alignItems='center' justifyContent='space-between'>

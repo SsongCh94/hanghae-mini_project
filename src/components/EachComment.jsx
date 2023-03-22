@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { BiLike } from "react-icons/bi"
 import { COLOR_THEME } from '../variables/uiVariables';
 import { __commentThumbsUp } from '../redux/modules/postsSlice';
+import { timeCalc } from '../variables/timeCalc';
 
 function EachComment({ boardId, dataObj }) {
     const [mode, setMode] = useState(true);
@@ -18,6 +19,7 @@ function EachComment({ boardId, dataObj }) {
         nickname,
         thumbsUpCount,
         commentThumbsupStatus,
+        createdat,
     } = { ...dataObj };
     const [commentState, commentChangeHandler] = useLoginInput(comment);
     const myNickname = useSelector((state) => state.user.user.nickname);
@@ -48,6 +50,7 @@ function EachComment({ boardId, dataObj }) {
         }
         dispatch(__commentThumbsUp(payload));
     }
+
 
     return (
         <StForm onSubmit={modifyCommentHandler}>
@@ -90,7 +93,7 @@ function EachComment({ boardId, dataObj }) {
                             </ButtonNoBorder>
                         </FlexHorizontal>
                     </FlexHorizontal>
-                    <FlexHorizontal alignItems='center' justifyContent='left'>
+                    <FlexHorizontal alignItems='center' justifyContent='space-between'>
                         <CommentBox>
                             {mode
                                 ? commentState
@@ -101,6 +104,7 @@ function EachComment({ boardId, dataObj }) {
                                     required
                                 />}
                         </CommentBox>
+                        <div style={{width:'70px',textAlign:'right'}}><span>{timeCalc(createdat)}</span></div>
                     </FlexHorizontal>
                 </FlexVertical>
             </Wrap>
@@ -116,8 +120,7 @@ const NicknameBox = styled.div`
     font-weight: 700;
 `
 const CommentBox = styled.div`
-    width: fit-content;
-    min-width: 99%;
+    width: 100%;
 `
 
 const StForm = styled.form`

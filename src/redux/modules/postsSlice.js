@@ -94,6 +94,9 @@ export const postslice = createSlice({
   reducers: {
     cmtCountUp: (state, action) => {
       state.postDetail.cmtCount++;
+    },
+    cmtRefresh : (state, action) => {
+      state.postDetail.commentList.push(action.payload)
     }
   },
   extraReducers: {
@@ -192,5 +195,5 @@ export const postslice = createSlice({
   },
 });
 
-export const { cmtCountUp } = postslice.actions;
+export const { cmtCountUp,cmtRefresh } = postslice.actions;
 export default postslice.reducer;
