@@ -30,18 +30,21 @@ function MyPostCard({ children }) {
                     </Picture>
                   </FlexVertical>
                   <FlexVertical alignItems='center' justifyContent='center'>
-                    <FlexVertical width='90%' height='88%'>
-                      <FlexHorizontal justifyContent='space-between'>
-                        <CardTitle>{item.title}</CardTitle>
-                      </FlexHorizontal>
+
+                    <FlexVertical gap='5px' others='padding : 10px; box-sizing : border-box'>
+
+                      <CardTitle>{item.title}</CardTitle>
                       <div><CardContent> <BoldSpan>내용 : </BoldSpan>  {item.contents}</CardContent></div>
                       <div><BoldSpan>댓글 수: </BoldSpan><span>{item.cmtCount}</span></div>
                       <div><BoldSpan>작성일: </BoldSpan><span>{item.createdat}</span></div>
+
                       <ButtonBox>
                         <ButtonSmall onClick={() => navigate(`/bbs/detail/${item.id}`)}>상세보기</ButtonSmall>
                         <ButtonSmall onClick={() => onDeleteBtnClickHandler(item.id)}>삭제</ButtonSmall>
                       </ButtonBox>
+
                     </FlexVertical>
+
                   </FlexVertical>
                 </FlexHorizontal>
               </FlexVertical>
@@ -60,10 +63,11 @@ const CardTitle = styled.h3`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
+  margin-bottom: 4px;
 `
 
 const CardContent = styled.span`
-  margin: 5px 10px 5px 0;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -106,6 +110,6 @@ const PostingCard = styled.div`
 const ButtonBox = styled.div`
   align-self: flex-end;
   display: flex;
-  margin-top: 4px;
+  margin-top: auto;
   gap: 5px;
 `

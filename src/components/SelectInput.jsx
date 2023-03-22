@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
+import { FlexVertical } from '../variables/styleStore';
 import { COLOR_THEME } from '../variables/uiVariables';
 
 function SelectInput({ defaultValue, setDefaultValue, Arr, children }) {
@@ -10,11 +11,11 @@ function SelectInput({ defaultValue, setDefaultValue, Arr, children }) {
     console.log(e.target.getAttribute("value"));
   };
   return (
-    <StDiv>
-      <TopBox>{children}</TopBox>
+    <FlexVertical gap='10px'>
+      <div>{children}</div>
       <SelectBox onClick={() => setIsOpen((prev) => !prev)}>
         <Label>{defaultValue}</Label>
-        <SelectOptions show={isOpen}>
+        <SelectOptions open={isOpen}>
           {Arr.map((item, index) => (
             <Option
               key={index}
@@ -26,28 +27,13 @@ function SelectInput({ defaultValue, setDefaultValue, Arr, children }) {
           ))}
         </SelectOptions>
       </SelectBox>
-    </StDiv>
-
+    </FlexVertical>
   );
-
 }
-
-const StDiv = styled.div`
-  width: 60%;
-  margin-right: auto;
-
-  display: flex;
-  flex-direction: column;
-`
-
-const TopBox = styled.span`
-  color: black;
-  margin-bottom: 10px;
-`
 
 const SelectBox = styled.div`
   position: relative;
-  width: 300px;
+  width: 400px;
   padding: 8px;
   margin-right: 20px;
   border-radius: 12px;
@@ -75,7 +61,7 @@ const SelectOptions = styled.ul`
   width: 100%;
   overflow: auto;
   height: 200px;
-  display: ${(props) => (props.show ? 'block' : "none")};
+  display: ${(props) => (props.open ? 'block' : "none")};
   padding: 0;
   border-radius: 8px;
   background-color: #e9aeb8;

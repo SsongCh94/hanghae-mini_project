@@ -1,5 +1,7 @@
 import React from 'react'
-import { FlexVertical, Input } from '../variables/styleStore';
+import styled from 'styled-components';
+import { FlexVertical } from '../variables/styleStore';
+import { COLOR_THEME } from '../variables/uiVariables';
 
 function CreateInput({ title, placeholder, defaultValue, onChange, type, max }) {
 
@@ -17,5 +19,14 @@ function CreateInput({ title, placeholder, defaultValue, onChange, type, max }) 
     </FlexVertical>
   )
 }
+
+const Input = styled.input`
+background-color: transparent;
+  border: none;
+  height: 30px;
+  font-size: 15px;
+  border-bottom: 2px solid ${COLOR_THEME.COLOR_4};
+  padding-bottom: 5px;
+`
 
 export default CreateInput

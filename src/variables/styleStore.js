@@ -155,12 +155,3 @@ export const TextArea = styled.textarea`
 			border-radius: 5px;
 			font-size: 16px;
 `;
-
-export const Input = styled.input`
-background-color: transparent;
-  border: none;
-  height: 30px;
-  font-size: 15px;
-  border-bottom: 2px solid ${COLOR_THEME.COLOR_4};
-  padding-bottom: 5px;
-`

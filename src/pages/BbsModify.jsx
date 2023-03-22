@@ -81,7 +81,7 @@ function BbsModify() {
             maxLength={500}
           />
 
-          <FlexHorizontal width='193px' gap='20px' others='align-self : flex-end'>
+          <FlexHorizontal width='fit-content' gap='20px' others='align-self : flex-end'>
             <ButtonMiddle
               type="button"
               onClick={() => reviseBtnHandler(revisePost)}
