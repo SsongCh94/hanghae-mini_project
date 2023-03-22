@@ -1,7 +1,7 @@
 /* 
     공통적으로 사용되는 Styled-Components 모음 
 */
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import {
   MIN_PAGE_HEIGHT,
   HEADER_HEIGHT,
@@ -128,28 +128,7 @@ export const BasicDiv = styled.div`
 
 /*  송철환 스타일 컴포넌트  */
 
-export const DIV = {
-  longInput: css`
-  width: 100%;
-display: flex;
-justify-content: flex-end;
-gap: 50px;
-`,
-  shortInput: css`
-  width: 41%;
-display: flex;
-justify-content: flex-end;
-`
-}
-
-export const InputBox = styled.label`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
-export const InputArea = styled.form`
+export const FormArea = styled.form`
 width: 50%;
 height: auto;
 
@@ -167,46 +146,14 @@ gap: 20px;
 padding: 20px;
 `;
 
-
-export const Span = styled.span`
-  width: auto;
-  margin-left: 10px;
-  font-size: 20px;
-`;
-
-export const CommentArea = styled.label`
-  width: 100%;
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
 export const TextArea = styled.textarea`
   width: 100%;
-			height: 200px;
+			height: 160px;
 			padding: 10px;
 			box-sizing: border-box;
 			border: solid 2px ${COLOR_THEME.COLOR_4};
 			border-radius: 5px;
 			font-size: 16px;
-`;
-
-export const ButtonArea = styled.div`
-  width: 193px;
-  height: 10%;
-
-  align-self: flex-end;
-  display: flex;
-  /* justify-content: flex-end; */
-  gap: 20px;
-`;
-
-export const LocationDiv = styled.div`
-  width: 100%;
-
-  display: flex;
-  justify-content: flex-end;
 `;
 
 export const Input = styled.input`

@@ -1,12 +1,12 @@
 import React from 'react'
-import { Input, InputBox } from '../variables/styleStore';
+import { FlexVertical, Input } from '../variables/styleStore';
 
 function CreateInput({ title, placeholder, defaultValue, onChange, type, max }) {
 
 
   return (
-    <InputBox>
-      <div>{title}</div>
+    <FlexVertical gap='4px'>
+      <div style={{ marginTop: '10px' }}>{title}</div>
       <Input
         type={type}
         placeholder={placeholder}
@@ -14,11 +14,8 @@ function CreateInput({ title, placeholder, defaultValue, onChange, type, max }) 
         onChange={onChange}
         maxLength={max}
       />
-    </InputBox>
+    </FlexVertical>
   )
 }
-
-
-
 
 export default CreateInput
