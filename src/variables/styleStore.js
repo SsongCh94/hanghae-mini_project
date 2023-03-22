@@ -193,12 +193,12 @@ export const TextArea = styled.textarea`
 `;
 
 export const ButtonArea = styled.div`
-  width: 50%;
+  width: 193px;
   height: 10%;
 
   align-self: flex-end;
   display: flex;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
   gap: 20px;
 `;
 
@@ -208,3 +208,12 @@ export const LocationDiv = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+
+export const Input = styled.input`
+background-color: transparent;
+  border: none;
+  height: 30px;
+  font-size: 15px;
+  border-bottom: 2px solid ${COLOR_THEME.COLOR_4};
+  padding-bottom: 5px;
+`
